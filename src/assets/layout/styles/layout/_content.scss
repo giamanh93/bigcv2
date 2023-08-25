@@ -169,11 +169,17 @@ input {
             color: white;
             font-size: 16px !important;
             font-family: Inter;
-            font-weight: 700;
+            font-weight: 400;
             line-height: 25.60px;
             word-wrap: break-word;
             cursor: pointer;
+            &:hover,
+            &.active {
+              color: #ffffff !important;
+              font-weight: 700;
+            }
           }
+
         }
       }
     }
@@ -455,7 +461,7 @@ input {
         display: flex;
         gap: 16px;
         justify-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
       }
     }
 
@@ -518,7 +524,8 @@ input {
     }
 
     input {
-      padding: 8px 16px;
+      font-family: "Inter";
+      padding: 8px 32px;;
       border-radius: 8px;
       border: 1px solid rgba(51, 51, 51, 0.05);
       background: #FFF;
@@ -603,4 +610,11 @@ section {
       width: 100%;
     }
   }
+}
+
+.bg-dang-nhap {
+  background: #FED500 !important;
+  color: #495057;
+  font-size: 18px;
+  font-weight: 700;
 }

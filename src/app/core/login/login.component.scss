@@ -86,11 +86,12 @@
         margin-top: 10px;
         border-radius: 10px;
         background: #021126;
+        display: flex;
         //background: url('/assets/images/bg-login.jpg');
         //background-repeat: no-repeat;
         //background-size: cover;
         //background-position: center;
-        padding: 240px 120px;
+        //padding: 240px 120px;
         //text-align: right;
         //position: relative;
         //img {
@@ -110,7 +111,7 @@
 
         .heading {
           position: absolute;
-          top: 200px;
+          top: 150px;
           left: 64px;
           gap: 20px;
           @media screen and (max-width: 1500px) {
@@ -148,67 +149,85 @@
 
         .banner {
           display: flex;
+          height: 405px;
+          width: calc(100% - 87px);
+          margin: auto;
+          margin-top: calc(1vw + 255px);
           //padding-top: 118px;
-          justify-content: center;
-          padding-top: calc(1vw + 83px);
-          top: 0;
-          left: 0;
+          //justify-content: center;
+          //padding-top: calc(1vw + 83px);
+          //top: 0;
+          //left: 0;
+          @media screen and (max-width: 1300px) {
+            margin-top: calc(1vw + 244px);
+          }
+
+          @media screen and (min-width: 1310px) and (max-width: 1400px) {
+            margin-top: calc(1vw + 255px);
+          }
+
+          @media screen and (min-width: 1410px) and (max-width: 1500px) {
+            margin-top: calc(1vw + 255px);
+          }
+
+
+
           .bg-a {
             top: 365px;
             left: 64px;
             width: 100%;
             //width: 569px;
-            height: 405px;
             border-radius: 16px;
+            margin-right: 40px;
             z-index: 1;
             display: flex;
             justify-content: end;
             align-items: center;
             //position: relative;
-            @media screen and (max-width: 1300px) {
-              top: 280px;
-              width: 380px;
-              height: 300px;
-            }
+            //@media screen and (max-width: 1300px) {
+            //  top: 280px;
+            //  width: 380px;
+            //  height: 300px;
+            //}
 
-            @media screen and (min-width: 1310px) and (max-width: 1400px) {
-              top: 280px;
-              width: 430px;
-              height: 320px;
-            }
-
-            @media screen and (min-width: 1410px) and (max-width: 1500px) {
-
-              top: 280px;
-              width: 470px;
-              height: 330px;
-            }
-
-            @media screen and (min-width: 1510px) and (max-width: 1600px) {
-              top: 328px;
-              width: 470px;
-              height: 330px;
-            }
-            @media screen and (min-width: 1610px) and (max-width: 1900px) {
-              top: 336px;
-              width: 500px;
-              height: 330px;
-            }
+            //@media screen and (min-width: 1310px) and (max-width: 1400px) {
+            //  top: 280px;
+            //  width: 430px;
+            //  height: 320px;
+            //}
+            //
+            //@media screen and (min-width: 1410px) and (max-width: 1500px) {
+            //
+            //  top: 280px;
+            //  width: 470px;
+            //  height: 330px;
+            //}
+            //
+            //@media screen and (min-width: 1510px) and (max-width: 1600px) {
+            //  top: 328px;
+            //  width: 470px;
+            //  height: 330px;
+            //}
+            //@media screen and (min-width: 1610px) and (max-width: 1900px) {
+            //  top: 336px;
+            //  width: 500px;
+            //  height: 330px;
+            //}
           }
 
           .bg-b {
             width: 295px;
             height: 211px;
             left: 361px;
+            margin-right: -40px;
             top: 463px;
-            margin-right: -32px;
             border-radius: 16px;
             z-index: 2;
-            @media screen and (max-width: 1300px) {
-              width: 255px;
-              margin-right: -21px;
-              height: 190px;
-            }
+            //@media screen and (max-width: 1300px) {
+            //  width: 255px;
+            //  margin-right: -21px;
+            //  height: 190px;
+            //}
           }
 
         }
@@ -218,10 +237,10 @@
 
     .right {
       background: #fff;
-
       .form-box {
+        position: relative;
         h3 {
-          position: relative;
+          position: absolute;
           top: -208px;
           font-weight: 500;
           font-size: 36px;
@@ -329,6 +348,9 @@
 
           .checkbox-login {
             .p-field {
+              label {
+                font-family: "Inter" !important;
+              }
               display: flex;
               gap: 6px;
               flex-direction: row-reverse;
