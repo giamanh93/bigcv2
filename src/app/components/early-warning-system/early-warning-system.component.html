@@ -1,0 +1,47 @@
+<div class="main-grid">
+    <section class="bread-crumb" >
+        <div class="flex bet middle">
+            <div class="col-12 p-0">
+                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+            </div>
+        </div>
+    </section>
+    
+
+    <div class="card ">
+        <p-tabView>
+            <p-tabPanel header="Sản phẩm không đạt biên độ lợi nhuận">
+                <p-table [value]="products"  [resizableColumns]="true" responsiveLayout="stack" [breakpoint]="'960px'" [tableStyle]="{'min-width': '50rem'}" styleClass="p-datatable-gridlines p-datatable-sm">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-columns="columns">
+                        <tr>
+                            <td><span class="p-column-title">Code</span>{{product.code}}</td>
+                            <td><span class="p-column-title">Name</span>{{product.name}}</td>
+                            <td><span class="p-column-title">Category</span>{{product.category}}</td>
+                            <td><span class="p-column-title">Quantity</span>{{product.quantity}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+            
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm có tỷ lệ hỏng hủy vượt định mức">
+                Content 2
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm không có lãi">
+                Content 3
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm không phát sinh giao dịch theo chu kỳ">
+                Content 3
+            </p-tabPanel>
+        </p-tabView>
+
+        </div>
+</div>

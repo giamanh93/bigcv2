@@ -1,0 +1,55 @@
+<div class="section">
+  <ag-grid-angular
+  [style.height]="domLayout === '' ? height + 'px' : ''"
+  [excelStyles]="excelStyles"
+  [getContextMenuItems]="getContextMenuItems"
+   #agGrid style="width: 100% "
+   id="{{idGrid}}"
+  class="ag-theme-material"
+  [rowSelection]="'multiple'"
+  [singleClickEdit]="true"
+  [pinnedBottomRowData]="isShowTotalBottom ? pinnedBottomData : []"
+  [debounceVerticalScrollbar]="true"
+  [rowData]="listsData"
+  [masterDetail]="masterDetail"
+  [suppressDragLeaveHidesColumns]="false"
+  [groupDisplayType]="groupDisplayType"
+  [rowClassRules]="rowClassRules"
+  [floatingFiltersHeight]="floatingFiltersHeight"
+  [autoGroupColumnDef]="autoGroupColumnDef"
+  [columnDefs]="columnDefs"
+  [detailCellRendererParams]="detailCellRendererParams"
+  [headerHeight]="headerHeight"
+  [groupDefaultExpanded]="groupDefaultExpanded"
+  [stopEditingWhenCellsLoseFocus]="true"
+  [groupDisplayType]="'groupRows'"
+  [overlayNoRowsTemplate]="noRowsTemplate"
+  [tooltipShowDelay]="tooltipShowDelay"
+  (gridReady)="onGridReady($event)"
+  [defaultColDef]="defaultColDef"
+  [enableCellTextSelection]="true"
+  [getRowId]="getRowId"
+  [suppressCopyRowsToClipboard]="true"
+  [suppressRowClickSelection]="true"
+  [enableRangeSelection]="true"
+  [rowDragManaged]="rowDragManaged"
+  [suppressRowHoverHighlight]="true"
+  (rowGroupOpened)="rowGroupOpened($event)"
+  (rowSelected)="onRowSelected($event)"
+  (cellClicked)="CellClicked($event)"
+  (bodyScroll)="handleScroll($event)"
+  (cellValueChanged)="fnCellValueChanged($event)"
+  (cellEditingStopped)="FncellEditingStopped($event)"
+  (firstDataRendered)="onFirstDataRendered($event)"
+  [animateRows]= "true"
+  [getRowHeight]="getRowHeight"
+  [components]="components"
+  [columnTypes]="columnTypes"
+  >
+  </ag-grid-angular>
+</div>
+
+<!-- (onGridSizeChanged)="onGridSizeChanged" -->
+
+<!-- [groupIncludeFooter]="groupIncludeFooter" -->
+<!-- [groupIncludeTotalFooter]="groupIncludeTotalFooter" -->

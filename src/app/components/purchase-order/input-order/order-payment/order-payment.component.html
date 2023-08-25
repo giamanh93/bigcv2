@@ -1,0 +1,51 @@
+
+<p-dialog header="Số tiền cần thanh toán" [position]="'top'" [modal]="true" (onHide)="onClear()"  [(visible)]="visiblePayment" [style]="{width: '30vw'}">
+  <div class="card">
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-2 md:mb-0">Thanh toán</label>
+      <div class="col-12 md:col-10">
+        <p-inputNumber inputId="decimal" [ngClass]="{'ng-invalid ng-dirty': isErrorAmount}" [style]="{'width': '100%'}" (onBlur)="onChageAmount()" [(ngModel)]="modelpayment.debtAmount"  [showButtons]="false"
+                       [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color text-right focus:border-primary w-full text-right"></p-inputNumber>
+      </div>
+    </div>
+
+    <div class="field grid gap-2 justify-content-center">
+      <p-button label="Tiền mặt" (onClick)="modelpayment.method = 'Cash';onClickTypePayment()"
+                styleClass="p-button-rounded p-button-secondary {{modelpayment.method === 'Cash' ? 'p-button-success' : ''}}" [style]="{'width': '130px'}"></p-button>
+      <p-button label="Thẻ" (onClick)="modelpayment.method = 'Card'; onClickTypePayment()"
+                 styleClass="p-button-rounded p-button-secondary {{modelpayment.method === 'Card' ? 'p-button-success' : ''}}" [style]="{'width': '130px'}"></p-button>
+      <p-button label="Chuyển khoản" (onClick)="modelpayment.method = 'Transfer'; onClickTypePayment()"
+                styleClass="p-button-rounded p-button-secondary {{modelpayment.method === 'Transfer' ? 'p-button-success' : ''}}" [style]="{'width': '130px'}"></p-button>
+    </div>
+    <div class="field grid gap-2 justify-content-between" style="border-top: 1px solid #ccc;
+    padding: 16px 8px 8px 8px;margin-bottom: 0 ;margin-top: 10px">
+      <div>Cần trả nhà cung cấp</div>
+      <div>{{model.haveToPayedAmount | number}}</div>
+    </div>
+    <div class="field grid gap-2 justify-content-between" style="border-top: 1px solid #ccc;
+    padding: 16px 8px 8px 8px;margin-bottom: 0" *ngIf="modelpayment.method === 'Card' || modelpayment.method === 'Transfer'">
+      <div class="col-8 p-0">
+        <div class="field grid">
+          <label for="firstname4" class="col-12 mb-2 md:col-4 md:mb-0">Chuyển khoản</label>
+          <div class="col-12 md:col-8">
+            <p-dropdown [options]="accounts" styleClass="w-full" [autoDisplayFirst]="false" [(ngModel)]="modelpayment.accountId" optionLabel="accountName" optionValue="accountId" [appendTo]="'body'" [filter]="true" filterBy="accountName"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div>{{modelpayment.amount | number}}</div>
+    </div>
+    <div class="field grid gap-2 justify-content-between">
+      <div style="font-weight: bold">Tiền nhà cung cấp</div>
+      <div style="font-weight: bold">{{modelpayment.amount | number}}</div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex grid justify-content-end gap-2" style="width: 100%">
+      <button type="button" pButton pRipple icon="pi pi-plus" label="Lưu" (click)="onSave()" class="p-button-secondary p-button-sm"></button>
+      <button type="button" pButton pRipple icon="pi pi-trash" label="Xóa" (click)="delete()" class="p-button-secondary p-button-sm"></button>
+      <!--              <p-button  style="cursor: pointer" styleClass="p-button-secondary" (click)="reloadTotal()" label="Tính lại tổng tiền"></p-button>-->
+      <!--        <button type="button" pButton pRipple icon="pi pi-check" label="Xác nhận" (click)="xacnhan()" class="p-button-secondary p-button-sm"></button>-->
+      <!--        <button type="button" pButton pRipple icon="pi pi-trash" *ngIf="listDataSelect.length > 0" label="Xóa" (click)="deleteRow()" class="p-button-secondary p-button-sm"></button>-->
+    </div>
+  </ng-template>
+</p-dialog>

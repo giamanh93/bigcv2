@@ -1,0 +1,46 @@
+<div class="main-grid">
+    <section class="bread-crumb" >
+        <div class="flex bet middle">
+            <div class="md:col-8 sm:col-12 p-0">
+                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+            </div>
+            <div class="md:col-4 p-0 flex justify-content-end align-items-center dropdown-branch">
+                <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+            </div>
+        </div>
+    </section>
+    <!-- this.organizeInfoService.setStocks(e.value); -->
+    
+    <div class="card ">
+        <p-tabView [(activeIndex)]="indexTab" (onChange)="handleChange($event.index)">
+            <p-tabPanel header="Sản phẩm không đạt biên độ lợi nhuận">
+                <div class="table-default" #container >
+                    <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'"
+                        [listsData]="listDatas" [height]="heightGrid" 
+                        [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems"></app-list-grid-angular >
+                        <app-loading-grid *ngIf="isLoading" [cols]="cols" [lists]="20"></app-loading-grid>
+                    <div class="paginator flex justify-content-end align-items-center" style="background-color: #fff;
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    left: 0;">
+                        <span>Từ {{ countRecord.currentRecordStart }} đến {{ countRecord.currentRecordEnd }} trên tổng số {{ countRecord.totalRecord }} kết quả</span>
+                        <p-paginator [rows]="query.size" [totalRecords]="countRecord.totalRecord" [first]="first"
+                            (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,40,60,100,200,{ showAll: 'ALL' }]">
+                        </p-paginator>
+                    </div>
+                    </div>
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm có tỷ lệ hỏng hủy vượt định mức">
+                Content 2
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm không có lãi">
+                Content 3
+            </p-tabPanel>
+            <p-tabPanel header="Sản phẩm không phát sinh giao dịch theo chu kỳ">
+                Content 3
+            </p-tabPanel>
+        </p-tabView>
+
+        </div>
+</div>

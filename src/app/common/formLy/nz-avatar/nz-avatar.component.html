@@ -1,0 +1,9 @@
+<div class="field avatar">
+    <ng-container *ngIf="isLinkUrl; else imagebase64">
+        <p-image [src]="field.defaultValue" height="265" alt="Image" width="200" [preview]="false"></p-image>
+    </ng-container>
+    <ng-template #imagebase64>
+        <p-image [src]="model.Photo ? 'data:image/png;base64,' + model.Photo : '/assets/images/no-image.jpg'" height="265" alt="Image" width="250"></p-image>
+    </ng-template>
+
+</div>

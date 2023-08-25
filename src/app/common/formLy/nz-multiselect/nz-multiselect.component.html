@@ -1,0 +1,18 @@
+<div class="field">
+            <p-multiSelect
+            [options]="listOptions"
+            (onChange)="to.change && to.change(field, $event)"
+            [formControl]="formControl"
+            [formlyAttributes]="field"
+            optionValue="value"
+            optionLabel="name"
+            [appendTo]="'body'"
+            [filter]="true"
+            filterBy="name"
+            [styleClass]="((formControl.touched || options.formState.submitted) && formControl.getError('required'))
+            ? 'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched w-full text-base text-color surface-overlay  surface-border border-round outline-none focus:border-primary'
+            : 'w-full text-base text-color surface-overlay border-1 border-solid surface-border border-round outline-none focus:border-primary'">
+            </p-multiSelect>
+
+</div>
+

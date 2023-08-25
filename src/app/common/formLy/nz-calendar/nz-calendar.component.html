@@ -1,0 +1,12 @@
+<div class="field">
+    <p-calendar [dateFormat]="to['columnType'] === 'datefulltime' ? 'dd/mm/yy' : 'dd/mm/yy'" panelStyleClass="datepicker-default"
+     [placeholder]="to['columnType'] === 'datefulltime' ? 'DD/MM/YYYY hh:mm' : 'DD/MM/YYYY'" [showTime]="to['columnType'] === 'datefulltime' ? true : false" [hourFormat]="'24'" [formControl]="formControl" 
+    (onSelect)="to.change && to.change(field, $event)"
+    [formlyAttributes]="field"
+    [appendTo]="'body'" [baseZIndex]="101" [monthNavigator]="true"
+    [styleClass]="((formControl.touched || options.formState.submitted) && formControl.getError('required'))
+     ? 'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched w-full text-base text-color surface-overlay  surface-border border-round outline-none'
+     : 'w-full text-base text-color surface-overlay border-1 border-solid surface-border border-round outline-none focus:border-primary'"
+    [yearNavigator]="true" yearRange="2010:2030" inputId="navigators" dateFormat="dd/mm/yy"
+   ></p-calendar>
+</div>

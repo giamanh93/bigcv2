@@ -1,0 +1,49 @@
+<p-sidebar [(visible)]="displayEdit" (onHide)="close()" [fullScreen]="true">
+    <ng-template pTemplate="header">
+        <div class="flex grid justify-content-center" style="width: 100%">
+           <div><h4>Lấy dữ liệu từ ảnh</h4></div>
+        </div>
+    </ng-template>
+    <div class="grid flex" >
+      <div class="col-5">
+        <ng-container *ngIf="product.supplierName">
+          <input id="firstname5" disabled [(ngModel)]="product.supplierName"  type="text" class="w-full border-solid surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Tên nhà cung cấp">
+        </ng-container>
+      </div>
+        <div class="col-7 flex justify-content-end gap-2">
+          <p-chip icon="pi pi-file" *ngIf="contentItems.length >0 && isUploadFile" label="{{contentItems[0].contentFile}}"></p-chip>
+          <p-fileUpload mode="basic" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onSelect)="onUpload($event)"></p-fileUpload>
+          <p-button *ngIf="contentItems.length >0" style="cursor: pointer" styleClass="p-button-secondary" (click)="rotate()" label="Quay ảnh"></p-button>
+        </div>
+
+    </div>
+  <div class="grid">
+    <div class="md:col-7 sm:col-12 xs:col-12">
+      <app-list-grid-angular  [idGrid]="'my-table2'" *ngIf="listDatas.length >0" [isShowTotalBottom]="true"
+                              [columnsWithAggregation]="fieldsTotal" (callbackGridReady)="onGridReady($event)" (callback)="getSelectedRows($event)"
+                              [listsData]="listDatas" [height]="heightGrid" [rowDragManaged]="true"
+                              [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" ></app-list-grid-angular>
+    </div>
+    <div class="md:col-5 sm:col-12 xs:col-12" *ngIf="contentItems.length >0">
+      <div style="overflow:hidden; height: 100%"  [style.height.px]="heightGrid"  >
+        <pan-zoom [config]="panzoomConfig">
+          <div
+            class="bg noselect items"
+            style="position: relative;"
+            [style.width.px]="2400"
+          >
+            <tile *ngFor="let item of contentItems" [state]="state" [content]="item"> </tile>
+          </div>
+        </pan-zoom>
+      </div>
+    </div>
+  </div>
+          <ng-template pTemplate="footer">
+            <div class="flex grid justify-content-end gap-2" style="width: 100%">
+              <button type="button" pButton pRipple icon="pi pi-plus" label="Thêm" (click)="addRow()" class="p-button-secondary p-button-sm"></button>
+<!--              <p-button  style="cursor: pointer" styleClass="p-button-secondary" (click)="reloadTotal()" label="Tính lại tổng tiền"></p-button>-->
+              <button type="button" pButton pRipple icon="pi pi-check" label="Xác nhận" (click)="xacnhan()" class="p-button-secondary p-button-sm"></button>
+                <button type="button" pButton pRipple icon="pi pi-trash" *ngIf="listDataSelect.length > 0" label="Xóa" (click)="deleteRow()" class="p-button-secondary p-button-sm"></button>
+            </div>
+        </ng-template>
+</p-sidebar>

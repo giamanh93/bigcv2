@@ -1,0 +1,54 @@
+.list-food{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    .food{
+        width: 226px;
+        height: 226px;
+        border-radius: 20px;
+        border: 1px solid rgba(51, 51, 51, 0.1);
+        background: #FFF;
+        padding: 24px;
+        position: relative;
+        cursor: pointer;
+        img{
+            position: absolute;
+            object-fit: cover;
+            left: 24px;
+            top: 24px;
+            height: calc(100% - 48px);
+            width: calc(100% - 48px);
+        }
+        &::before{
+            content: "";
+            padding-top: 100%;
+            display: block;
+        }
+        &:nth-child(6) {
+            clear: both;
+        }
+        &:nth-child(10) {
+            clear: both;
+        }
+    }
+}
+.about{
+    background: url('../../../assets/images/bg-about1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 50px 120px 100px;
+    .log{
+        margin-bottom: 100px;
+    }
+    button{
+        margin-top: 30px;
+    }
+    h3{
+        margin-bottom: 8px;
+        margin-top: 0px;
+    }
+}

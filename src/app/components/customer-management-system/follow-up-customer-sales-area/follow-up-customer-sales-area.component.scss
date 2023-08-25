@@ -1,0 +1,21 @@
+
+
+    :host ::ng-deep  {
+        table{
+            tr{
+                td{
+                    button{
+                       &.td-button-dropdown{
+                        padding: 3px 5px;
+                        width: auto;
+                        height: auto !important;
+                        outline: none;
+                        box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+    

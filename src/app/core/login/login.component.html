@@ -1,0 +1,89 @@
+<!--<p-dialog [(visible)]="displayLogin"-->
+<!--          styleClas="dialog-login"-->
+<!--          (onHide)="displayLogin = false"-->
+<!--          [blockScroll]="true"-->
+<!--          [modal]="true" [style]="{width: '500px'}"-->
+<!--          [maximizable]="true" [closeOnEscape]="false"-->
+<!--          [draggable]="false" [resizable]="false">-->
+<!--  <div class="login_right">-->
+<!--    <div class="login_right&#45;&#45;content">-->
+<!--      <div class="card">-->
+<!--        <div class="login_right&#45;&#45;title text-center">-->
+<!--          <img class="logo" src="../../../assets/images/logo3.png">-->
+<!--          <h2 class="text-center">Đăng nhập</h2>-->
+<!--        </div>-->
+<!--        <form [formGroup]="form"  *ngIf="fields.length > 0" (ngSubmit)="handleLogin()">-->
+<!--          <formly-form-->
+<!--            [form]="form"-->
+<!--            [model]="model"-->
+<!--            [fields]="fields">-->
+<!--          </formly-form>-->
+
+<!--          <div class="flex gap-2 justify-content-end">-->
+<!--            <button nz-button nzType="primary" style="background: #8aa847;-->
+<!--    border-color: #8aa847;-->
+<!--    border: none;-->
+<!--    color: #fff;" type="submit" class="button-submit">-->
+<!--              Đăng nhập-->
+<!--            </button>-->
+<!--            <button nz-button  type="reset" class="button-forget">-->
+<!--              Quên mật khẩu?-->
+<!--            </button>-->
+<!--            <button nz-button type="reset" class="button-forget" (click)="close()">-->
+<!--             <span class="pi pi-times"></span> Đóng-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </form>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</p-dialog>-->
+
+
+<div class="login  flex justify-content-around">
+  <div class="md:col-12 lg:col-12 xl:col-12 p-0">
+    <div class="grid">
+      <div class="col-6 left">
+        <div class="backgroup-login">
+          <div class="logo">
+            <img src="/assets/images/logo-login.png" alt="">
+          </div>
+
+          <div class="heading page">
+            <h3>Sử dụng công nghệ thông minh</h3>
+            <p class="heading-small">để tối ưu hoá công việc kinh doanh của bạn</p>
+            <div class="hr-title" style="margin: 0"></div>
+          </div>
+          <div class="banner">
+            <div class="p-10 bg-a" style="background: #EAF2FE">
+              <div class="p-4 bg-b" style="background: #D8E7FE"></div>
+            </div>
+          </div>
+          <div class="vector">
+            <img src="/assets/images/vector-login.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-6 right flex justify-content-center align-items-center">
+        <div class="col-10 form-box">
+          <h3>Đăng nhập</h3>
+          <form [formGroup]="form" *ngIf="fields.length > 0" (ngSubmit)="handleLogin()">
+            <formly-form
+              [form]="form"
+              [model]="model"
+              [fields]="fields">
+            </formly-form>
+
+            <button nz-button nzType="primary"  type="submit" class="button-submit">
+              Đăng nhập
+            </button>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

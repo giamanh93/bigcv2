@@ -1,0 +1,14 @@
+<div class="field">
+    <p-calendar 
+        [timeOnly]="true"
+        [placeholder]="'hh:mm'" 
+        [formControl]="formControl" 
+        [formlyAttributes]="field"
+        hourFormat="24"
+        [inline]="false"
+        [styleClass]="((formControl.touched || options.formState.submitted) && formControl.getError('required'))
+        ? 'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched w-full text-base text-color surface-overlay  surface-border border-round outline-none'
+        : 'w-full text-base text-color surface-overlay border-1 border-solid surface-border border-round outline-none focus:border-primary'"
+        inputId="navigators" 
+   ></p-calendar>
+</div>

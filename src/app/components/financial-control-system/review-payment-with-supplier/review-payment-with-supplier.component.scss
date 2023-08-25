@@ -1,0 +1,27 @@
+
+
+    :host ::ng-deep  {
+        table{
+            tr{
+                td{
+                    button{
+                       &.td-button-dropdown{
+                        padding: 3px 5px;
+                        width: auto;
+                        height: auto !important;
+                        outline: none;
+                        box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+        .ag-floating-bottom-viewport {
+            .ag-cell-value {
+                color: red;
+                // font-weight: bold;
+            }
+        }
+    
+    }
+    

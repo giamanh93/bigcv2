@@ -1,0 +1,12 @@
+<router-outlet>
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "small" color = "#fff" type = "line-scale-pulse-out" [fullScreen] = "false"><p style="color: white" > Loading... </p></ngx-spinner>
+
+  <!-- <ngx-spinner [zIndex]="9999999999999"></ngx-spinner> -->
+  <p-confirmDialog #cd header="Thông báo"  [baseZIndex]="9999999999"  maskStyleClass="confirm-top-zindex" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
+      <p-footer>
+          <button type="button" pButton icon="pi pi-check" label="Đồng ý" (click)="cd.accept()"></button>
+          <button type="button" class="p-button-secondary btn-cancel" pButton icon="pi pi-times" label="Hủy bỏ" (click)="cd.reject()"></button>
+      </p-footer>
+  </p-confirmDialog>
+  <p-toast position="top-center"  [baseZIndex]="999999999999"></p-toast> 
+</router-outlet>

@@ -1,0 +1,243 @@
+<div class="home-page page">
+  <section class="navigator">
+    <div
+      style="justify-content: space-between;align-items: center;display: flex;width: 100%;">
+        <div class="logo">
+          <img src="/assets/images/home-page/logo.png" alt="">
+        </div>
+      <div class="group">
+        <div class="nav-heading">
+          <div class="menu-item">
+            <div class="menu-title" routerLink="/home-page">Trang chủ</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-title" routerLink="/our-customer">Khách hàng</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-title" routerLink="/about-us">Về chúng tôi</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-title">Liên hệ</div>
+          </div>
+        </div>
+        <div style="justify-content: flex-start; align-items: flex-start; gap: 14px; display: flex">
+          <p-button label="Đăng nhập" styleClass="p-button-sm p-button-warning" (onClick)="displayLogin = true"></p-button>
+        </div>
+      </div>
+      </div>
+  </section>
+  <section class="slider">
+    <p-galleria
+    [value]="images"
+    [showIndicators]="true"
+    [showThumbnails]="false" >
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+            <div class="slider-frame38">
+              <div class="lable-frame">{{ item.title }}</div>
+              <div class="lable-frame">{{ item.alt }}</div>
+              <div class="timhieuthem">
+                <div class="ad02" >Đăng ký tư vấn</div>
+              </div>
+            </div>
+        </ng-template>
+    </p-galleria>
+  </section>
+  <section class="about-info">
+    <div class="content">
+      <img class="log" src="../../../assets/images/logo3.png">
+      <h3 class="font-normal">Công ty tư vấn, cung cấp dịch vụ giải pháp về phân tích, xử lý dữ liệu<br>& triển khai IoT dân dụng, công nghiệp</h3>
+      <div class="hr-title" style="margin-left: 0;"></div>
+      <p><b>Bigcv</b> là công ty cung cấp dịch vụ tư vấn lộ trình chuyển đổi số giúp, doanh nghiệp từng bước xây dựng nguồn lực, ứng dụng công nghệ để Chuyển đổi số và giải quyết các bài toán doanh nghiệp cụ thể, gắn liền với định hướng phát triển doanh nghiệp, hướng tới sự tối ưu và cải tiến, tạo ra những giá trị mới.</p>
+    </div>
+    <img src="../../../assets/images/about/about1.png">
+    <div class="content">
+      <b style="font-size: 24px">Các thành viên trong đội ngũ tư vấn của Bigcv, ở mỗi vị trí, đều là những chuyên gia tư vấn cấp cao chuyên ngành, sở hữu nhiều năm kinh nghiệm chuyên sâu về công nghệ trong các ngành nghề.</b>
+      <p>Các chuyên gia tư vấn Chuyển đổi số đã có bề dày kinh nghiệm thực tiễn thực hiện thành công nhiều dự án Chuyển đổi số cho các tập đoàn, doanh nghiệp hàng đầu trong và ngoài nước.</p>
+      <div class="grid"><div class="col-4"></div><div class="col-8"><hr></div></div>
+      <div class="grid">
+        <div class="col-4"><h2>Nhiệm vụ</h2></div>
+        <div class="col-8">
+          <p><b style="font-size: 24px">Bigcv truyền động lực giúp doanh nghiệp khách hàng chủ động trong việc định hình tương lai và trở nên đột phá trên thị trường.</b></p><br>
+          <p>Bigcv chúng tôi đồng hành cùng khách hàng trong việc xác định các cơ hội số, khám phá các giá trị mới và tạo ra các mô hình kinh doanh mới, thông qua tận dụng những tiềm năng từ công nghệ.</p>
+        </div>
+      </div>
+      <div class="grid"><div class="col-4"></div><div class="col-8"><hr></div></div>
+      <div class="grid">
+        <div class="col-4"><h2>Văn hoá<br>doanh nghiệp</h2></div>
+        <div class="col-8">
+          <p><b style="font-size: 24px">Bigcv hướng tới những giá trị về đổi mới, trao quyền và cộng tác, hình thành văn hóa doanh nghiệp của Bigcv từ trong nội bộ cũng như khi làm việc cùng các đối tác và khách hàng.</b></p><br>
+        </div>
+      </div>
+    </div>
+    <img src="../../../assets/images/about/about2.png">
+    <div class="content">
+      <div class="grid mb-6">
+        <div class="col-4"><h2>Dịch vụ <br>cung cấp</h2></div>
+        <div class="col-8">
+          <p><b style="font-size: 24px">Bigcv cung cấp các dịch vụ Tư vấn chuyển đổi số nổi trội sau đây</b></p><br>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-4"><p><b>1. Tư vấn chuyển đổi số tổng thể cho doanh nghiệp</b></p></div>
+        <div class="col-8">
+          <ul>
+            <li>
+              Tư vấn tự động hóa và tối ưu hóa vận hành, thúc đẩy tăng năng suất
+            </li>
+            <li>
+              Tư vấn xây dựng trải nghiệm khách hàng vượt trội
+            </li>
+            <li>
+              Tư vấn đổi mới mô hình kinh doanh thời đại số vận hành, năng suất
+            </li>
+            <li>
+              Tư vấn chuyển đổi hạ tầng CNTT và an ninh mạng
+            </li>
+            <li>
+              Đào tạo văn hóa số và mô hình tổ chức chuyển đổi số cho doanh nghiệp
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="col-4"><p><b>2. Tư vấn cho các tỉnh thành</b></p></div>
+        <div class="col-8">
+          <ul>
+            <li>
+              Tư vấn tự động hóa và tối ưu hóa vận hành, thúc đẩy tăng năng suất
+            </li>
+            <li>
+              Tư vấn xây dựng trải nghiệm khách hàng vượt trội
+            </li>
+            <li>
+              Tư vấn đổi mới mô hình kinh doanh thời đại số vận hành, năng suất
+            </li>
+            <li>
+              Tư vấn chuyển đổi hạ tầng CNTT và an ninh mạng
+            </li>
+            <li>
+              Đào tạo văn hóa số và mô hình tổ chức chuyển đổi số cho doanh nghiệp
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid"><div class="col-4"></div><div class="col-8"><hr></div></div>
+      <div class="grid mb-3">
+        <div class="col-4"><h2>Đội ngũ
+          <br>của chúng tôi</h2></div>
+        <div class="col-8">
+          <p><b style="font-size: 24px">Khởi đầu từ 3 Founder, nay công ty chúng tôi đã phát triển abcxyz</b></p><br>
+        </div>
+      </div>
+      <div class="grid about-human mb-2">
+        <div class="col-4">
+          <img src="../../../assets/images/about/about-h1.png">
+          <p>Ông <b>Nguyễn Văn A</b></p>
+          <hr>
+          <p>Giám đốc ABC</p>
+        </div>
+        <div class="col-4">
+          <img src="../../../assets/images/about/about-h1.png">
+          <p>Ông <b>Nguyễn Văn A</b></p>
+          <hr>
+          <p>Giám đốc ABC</p>
+        </div>
+        <div class="col-4">
+          <img src="../../../assets/images/about/about-h1.png">
+          <p>Ông <b>Nguyễn Văn A</b></p>
+          <hr>
+          <p>Giám đốc ABC</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="footer">
+    <div class="grid">
+      <div class="col-6">
+        <img class="logo" src="/assets/images/home-page/logo.png">
+        <p>Công ty cổ phẩn giải pháp abcdef, cung cấp dịch vụ blah blah blah trong các lĩnh vực siêu thị, ngành hàng bán lẻ, chuỗi thực phẩm....</p>
+        <ul class="info">
+          <li>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.64192e-05 15.975C0.012536 7.14869 7.18625 -0.0125032 16.0125 1.63905e-05C24.8513 0.012536 32.0251 7.19877 32 16.0376C31.975 24.8639 24.7887 32.0251 15.975 32C7.13617 31.9875 -0.0125031 24.8138 1.64192e-05 15.975ZM16 26.4038C16.1252 26.2661 16.2254 26.1659 16.313 26.0532C17.5024 24.6135 18.7168 23.1988 19.856 21.7215C21.133 20.0689 22.2848 18.3412 23.1487 16.4257C23.662 15.2864 24.0251 14.1221 23.8999 12.8326C23.5243 8.82631 20.3193 5.7465 16.288 5.59626C11.9061 5.44603 8.21285 8.88891 8.07513 13.2708C8.03758 14.3975 8.40064 15.4241 8.85135 16.4257C9.6526 18.1909 10.7168 19.7934 11.856 21.3459C13.133 23.0986 14.5102 24.7637 16 26.4038Z" fill="white"/>
+              <path d="M19.0047 13.3834C19.0047 15.036 17.6526 16.3756 16 16.3756C14.3349 16.3756 12.9953 15.0235 12.9953 13.3459C13.0078 11.6933 14.3599 10.3662 16.0125 10.3662C17.6776 10.3787 19.0047 11.7308 19.0047 13.3834Z" fill="white"/>
+            </svg>
+            D16-107 Xuân La, phường Xuân La, quận Tây Hồ, TP. Hà Nội
+          </li>
+          <li>
+            <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 15.9875C0 7.16118 7.17371 0 16.0125 0C24.8513 0 32.025 7.18622 32.0125 16.025C32 24.8513 24.8138 32.0125 15.9875 32C7.14867 31.9875 0 24.8138 0 15.9875ZM6.69796 9.57746C6.67292 9.6025 6.6604 9.64006 6.63536 9.6651C6.723 9.72769 6.81064 9.77777 6.88576 9.85289C9.36463 12.3318 11.8435 14.7981 14.3099 17.277C14.6103 17.5775 14.8732 17.9906 15.2363 18.1408C15.6119 18.2911 16.1001 18.1909 16.5383 18.1784C16.676 18.1784 16.8513 18.1158 16.939 18.0156C19.7058 15.2613 22.4601 12.507 25.2144 9.75273C25.2645 9.70266 25.2895 9.65258 25.3521 9.57746C19.1048 9.57746 12.8951 9.57746 6.69796 9.57746ZM12.6322 17.0892C10.8169 18.9045 9.03912 20.6823 7.31142 22.41C13.0955 22.41 18.9546 22.41 24.8138 22.41C23.0235 20.6197 21.2457 18.8419 19.4429 17.0391C19.3803 17.0892 19.3052 17.1643 19.23 17.2394C18.6416 17.8153 18.0782 18.4163 17.4773 18.9796C17.3271 19.1174 17.0767 19.2175 16.8764 19.23C16.338 19.2676 15.7872 19.23 15.2488 19.2426C14.9233 19.2551 14.6729 19.1549 14.4476 18.917C13.8341 18.2786 13.1956 17.6651 12.6322 17.0892ZM5.87167 22.097C7.83724 20.1314 9.79029 18.1784 11.6933 16.2754C9.76525 14.3474 7.8122 12.3944 5.87167 10.4538C5.87167 14.3099 5.87167 18.2034 5.87167 22.097ZM26.1283 22.1346C26.1283 18.2034 26.1283 14.3099 26.1283 10.4789C24.2003 12.4069 22.2472 14.3599 20.2942 16.313C22.2097 18.216 24.1502 20.1565 26.1283 22.1346Z" fill="white"/>
+            </svg>
+            hotro@bigcv.vn
+          </li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <div class="grid">
+          <div class="col-6">
+            <div class="menu">
+              <h3>Doanh nghiệp</h3>
+              <ul>
+                <li>
+                  <a>Về <b>Bigcv</b></a>
+                </li>
+                <li>
+                  <a>Khách hàng</a>
+                </li>
+                <li>
+                  <a>Điều khoản sử dụng</a>
+                </li>
+                <li>
+                  <a>Chính sách bảo mật</a>
+                </li>
+              </ul>
+            </div>
+            <div class="menu">
+              <h3>Tư vấn bán hàng</h3>
+              <h1>1800 XXXX</h1>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="menu">
+              <h3>Chăm sóc khách hàng</h3>
+              <h1>1800 XXXX</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="copyright">
+    <div class="grid">
+      © Copyright 2023 Bigcv | All rights reserved
+      <ul class="social">
+        <li>
+          <a>
+            <svg width="39" height="38" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.2857 37.5036C15.6622 37.5036 11.5964 37.2834 7.53056 36.843C4.58029 36.5201 1.98229 33.9075 1.65937 30.9719C1.14565 26.1722 0.925476 21.3578 1.01354 16.5434C1.08693 13.1968 1.29242 9.86495 1.65937 6.53305C1.98229 3.59746 4.55093 0.999456 7.5012 0.67654C12.4477 0.133456 17.4088 -0.0867138 22.37 0.0307099C25.5845 0.1041 28.7843 0.309591 31.9694 0.661862C34.9196 0.984778 37.5176 3.58278 37.8406 6.53305C38.3543 11.2887 38.5745 16.0444 38.4864 20.8147C38.4277 24.2053 38.2075 27.5959 37.8406 30.9719C37.5176 33.9221 34.9196 36.5201 31.9694 36.843C29.9291 37.0632 27.8889 37.2393 25.834 37.3421C23.8084 37.4595 21.7829 37.5182 20.2857 37.5036ZM19.4931 27.3317C22.2085 27.317 24.6891 27.1849 27.155 26.9501C27.9916 26.8767 28.7843 26.6272 29.4888 26.1722C30.1787 25.7171 30.7511 25.1447 30.9419 24.3081C31.1914 23.1779 31.3235 22.0183 31.4116 20.8734C31.5877 18.613 31.4556 16.3673 31.118 14.1216C30.9859 13.2849 30.8098 12.4923 30.164 11.8905C29.4301 11.186 28.5494 10.7603 27.5366 10.6282C25.4817 10.364 23.3974 10.2613 21.3278 10.2172C18.3482 10.1291 15.3539 10.2759 12.3743 10.5695C11.523 10.6429 10.7304 10.8924 10.0111 11.3621C9.32127 11.8171 8.74883 12.4042 8.5727 13.2262C8.32317 14.3417 8.20575 15.4866 8.11768 16.6315C7.94154 18.9066 8.07364 21.167 8.41124 23.4127C8.54334 24.264 8.73415 25.0566 9.40934 25.6731C10.1432 26.3483 10.9946 26.774 11.978 26.8914C14.5466 27.1996 17.1299 27.3024 19.4931 27.3317Z" fill="#D32C1F"/>
+              <path d="M19.4931 27.3315C17.13 27.3022 14.532 27.2141 11.9486 26.8912C10.9652 26.7738 10.1139 26.3481 9.37999 25.6729C8.71948 25.0564 8.51399 24.2638 8.38189 23.4125C8.04429 21.1668 7.91219 18.9064 8.08833 16.6313C8.17639 15.4864 8.3085 14.3415 8.54334 13.226C8.71948 12.404 9.29192 11.8169 9.98178 11.3619C10.701 10.8922 11.4936 10.6574 12.3449 10.5693C15.3246 10.2904 18.3042 10.1436 21.2985 10.217C23.3681 10.2757 25.4377 10.3638 27.5073 10.628C28.5054 10.7601 29.3861 11.1858 30.1346 11.8903C30.7805 12.5068 30.9566 13.2994 31.0887 14.1214C31.4263 16.3671 31.5437 18.6128 31.3823 20.8732C31.2942 22.0328 31.1768 23.1777 30.9126 24.3079C30.7217 25.1298 30.164 25.717 29.4594 26.172C28.7549 26.6417 27.9623 26.8765 27.1256 26.9499C24.6891 27.1847 22.2085 27.3168 19.4931 27.3315ZM16.9685 23.2511C19.405 21.7539 21.8269 20.2714 24.2781 18.7596C21.8269 17.2478 19.405 15.7653 16.9685 14.2681C16.9685 17.2771 16.9685 20.2274 16.9685 23.2511Z" fill="#FEFDFD"/>
+              <path d="M16.9685 23.251C16.9685 20.242 16.9685 17.2917 16.9685 14.2681C19.405 15.7652 21.8269 17.2477 24.2781 18.7595C21.8122 20.2714 19.405 21.7391 16.9685 23.251Z" fill="#D32C1F"/>
+              </svg>
+
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="38" height="38" rx="6" fill="white"/>
+              <path d="M24.837 24.4456C25.8793 24.4456 26.877 24.4456 27.8746 24.4456C28.3809 24.4456 28.8871 24.4456 29.3934 24.4456C29.9146 24.4456 30.2422 24.1778 30.3017 23.657C30.4655 22.4518 30.5995 21.2318 30.7484 20.0117C30.7782 19.7737 30.8229 19.5208 30.8229 19.2678C30.8378 18.7768 30.54 18.4197 30.0486 18.3453C29.8997 18.3156 29.7508 18.3156 29.6019 18.3156C28.1426 18.3156 26.6834 18.3007 25.2241 18.3156C24.8519 18.3156 24.7625 18.1966 24.7625 17.8543C24.7923 16.7087 24.7625 15.5482 24.7923 14.4025C24.837 12.7361 25.5964 12.007 27.2641 11.9624C28.0384 11.9327 28.7978 11.9624 29.5721 11.9475C30.3166 11.9475 30.6591 11.6053 30.674 10.8614C30.6889 9.77525 30.6889 8.68912 30.674 7.5881C30.674 6.84417 30.3166 6.48708 29.5721 6.50196C28.1575 6.51684 26.7429 6.50196 25.3433 6.56147C22.0823 6.71026 19.5807 8.85278 19 12.0517C18.8213 12.989 18.8064 13.971 18.7766 14.9233C18.7469 15.9201 18.7618 16.9319 18.7766 17.9287C18.7766 18.2114 18.7022 18.3156 18.4044 18.3156C17.4812 18.3007 16.5431 18.3007 15.6199 18.3156C14.7265 18.3156 14.4138 18.6429 14.4287 19.5356C14.4287 20.8449 14.4436 22.1543 14.4585 23.4785C14.4585 24.1034 14.7861 24.4456 15.4263 24.4456C16.4091 24.4456 17.377 24.4605 18.3597 24.4456C18.7171 24.4307 18.8213 24.5497 18.8213 24.9068C18.8064 28.2247 18.7915 31.5427 18.7915 34.8606C18.7915 35.8872 18.7915 36.9139 18.7915 37.9851C18.6277 38 18.5086 38 18.3746 38C14.0118 38 9.6489 38 5.30094 38C2.69514 38 0.670063 36.3634 0.148903 33.8489C0.0744514 33.4769 0.0446709 33.0901 0.0446709 32.7032C0 23.5529 0 14.4174 0 5.28191C0 2.67815 1.62304 0.639781 4.1395 0.119029C4.51176 0.0297572 4.91379 0 5.31583 0C14.4436 0 23.5713 0 32.6991 0C35.3346 0 37.3597 1.62177 37.8958 4.15114C37.9702 4.5231 38 4.90995 38 5.29679C38 14.4323 38 23.5677 38 32.7032C38 35.3218 36.377 37.3453 33.8754 37.8661C33.518 37.9405 33.1458 37.9702 32.7735 37.9702C30.2422 37.9851 27.7257 37.9702 25.1944 37.9851C24.8817 37.9851 24.7923 37.8959 24.7923 37.5983C24.8072 33.3281 24.8072 29.0579 24.8221 24.7878C24.8221 24.6836 24.8221 24.5944 24.837 24.4456Z" fill="#4467E6"/>
+              </svg>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <img src="../../../assets/images/zalo.png">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!--<app-login *ngIf="displayLogin" [displayLogin]="displayLogin" (callback)="onBackLogin()"></app-login>-->

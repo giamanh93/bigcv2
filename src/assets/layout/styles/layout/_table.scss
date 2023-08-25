@@ -1,0 +1,112 @@
+@media screen and (max-width: 960px) {
+    .table-row{
+        &.p-datatable{
+            .p-datatable-tbody {
+                &> tr{
+                    & > td{
+                        padding: 3px 10px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+.ag-row-footer.ag-row-level-0  {
+    .ag-cell-range-right {
+        font-weight: 600;
+    }
+}
+.ag-row-footer.ag-row-level--1  {
+    .ag-cell-range-right {
+        font-weight: 600;
+        color: red;
+    }
+}
+
+.ag-row-group .ag-row-selected::before {
+    background-color: none !important
+}
+.ag-row-group-expanded {
+    .ag-group-value, .ag-group-child-count {
+        // font-weight: 600;
+    }
+}
+
+.ag-body-viewport{
+    .ag-row-level-1{
+
+        .ag-details-row-fixed-height{
+            padding: 5px 20px !important;
+            .ag-details-grid-fixed-height{
+                .ag-root-wrapper{
+                    background-color: var(--primary-color-text) !important;
+                }
+
+                .ag-header-cell-text {
+                  color: #495057 !important;;
+                }
+
+                .ag-cell-value {
+                    font-family: "Graphik Webfont","-apple-system","Helvetica Neue","Droid Sans",Arial,sans-serif;
+                    color: #495057 !important;
+                }
+            }
+            &>div{
+                &:first-child{
+                    height: auto !important;
+                    padding: 7px 0px !important;
+                }
+            }
+
+        }
+    }
+
+
+}
+
+.ag-tabs-header {
+    display: flex;
+    [aria-label="general"] {
+        order: 2 !important;
+    }
+    [aria-label="filter"] {
+        order: 1 !important;
+    }
+    [aria-label="columns"] {
+        order: 3 !important;
+    }
+
+
+}
+
+p-sidebar {
+    .p-button-secondary {
+        background-color: #ebebeb !important;
+        color: #495057 !important;
+    }
+}
+
+ag-grid-angular{
+    .cell-dropdown{
+        padding-left: 0px;
+        padding-right: 0px;
+        .p-dropdown{
+            width: 100%;
+        }
+    }
+  .ag-cell-inline-editing{
+    height: auto !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    box-shadow: none !important;
+  }
+}
+
+.w-39rem{
+    width: 39rem !important ;
+}
+
+
+// .ag-theme-material .ag-row-hover{
+//     background-color: unset !important;
+// }

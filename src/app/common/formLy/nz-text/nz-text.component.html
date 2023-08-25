@@ -1,0 +1,46 @@
+<div class="field-row" *ngFor="let field of field.fieldGroup; let i = index">
+    <formly-field class="flex-1"  [field]="field"></formly-field>
+  <div class="delete-button">
+    <button
+      style="margin: 15px 20px;"
+      nz-button
+      type="button"
+      (click)="remove(i)"
+    >
+      remove
+    </button>
+  </div>
+</div>
+<div style="margin: 8px 20px;">
+  <button nz-button type="button" nzType="default" (click)="add()" [disabled]="to.disabledAddButton">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>{{ to.addText }}</button>
+</div>
+
+<!-- <div class="field-row" *ngFor="let field of field.fieldGroup; let i = index">
+  <div class="flex-1">
+    <formly-group
+      [model]="model[i]"
+      [field]="field"
+      [options]="options"
+      [form]="formControl"
+      class="form-inline"
+    >
+    </formly-group>
+    <div class="delete-button">
+      <button
+        style="margin: 15px 20px;"
+        nz-button
+        type="button"
+        nzType="danger"
+        (click)="remove(i)"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div style="margin: 8px 20px;">
+  <button nz-button type="button" nzType="default" (click)="add()" [disabled]="to.disabledAddButton">
+    <i nz-icon nzType="plus" nzTheme="outline"></i>{{ to.addText }}
+  </button>
+</div> -->

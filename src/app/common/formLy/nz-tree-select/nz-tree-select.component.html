@@ -1,0 +1,15 @@
+<div class="field">
+            <p-treeSelect
+            field="name"
+            [formControl]="formControl"
+            [style]="{'width':'100%'}"
+            [formlyAttributes]="field"
+            [options]="listOptions || []"
+            [metaKeySelection]="false"
+            selectionMode="multiple"
+            placeholder="Select Item"
+            [containerStyleClass]="((formControl.touched || options.formState.submitted) && formControl.getError('required'))
+            ? 'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched w-full text-base text-color surface-overlay  outline-none focus:border-primary'
+            : 'w-full text-base text-color surface-overlay  border-round outline-none focus:border-primary'"
+            (onNodeSelect)="to.change && to.change(field, $event)">
+</p-treeSelect> </div>

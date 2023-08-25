@@ -1,0 +1,23 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <!-- <img class="logo" [routerLink]="['/home']" src="./assets/images/logo.png"> -->
+    <!-- <span style="font-style: oblique 40deg;">Sunshine SHRM</span> -->
+    <!-- routerLink="/home"  -->
+    <a (click)="goToHome()" class="go-to-home">
+      <img src="../../../assets/images/ai-logo.png" alt="">
+    </a>
+  </div>
+  <div class="flex gap12 end col-6 middle p-0 justify-content-end">
+    <div class="p-toolbar-group-right profile">
+        <div class="card flex align-items-center" >
+          <p-avatar class="img-avatar" image="../../../assets/images/walter.png"   severity="danger" [style]="{'z-index': 9999}" shape="circle" ></p-avatar>
+          <span  class="ml-12 mr-15 text-color name"> {{userName}}</span>
+          <p-menu #menu [popup]="true" [model]="items" styleClass="my-account-menu"></p-menu>
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.59 0.294922L6 4.87492L1.41 0.294922L0 1.70492L6 7.70492L12 1.70492L10.59 0.294922Z" fill="white" fill-opacity="0.6"/>
+          </svg>
+      </div>
+    </div>
+  </div>
+</p-toolbar>
+

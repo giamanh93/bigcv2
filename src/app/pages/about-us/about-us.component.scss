@@ -1,0 +1,39 @@
+.about-info{
+    .log{
+        width: auto;
+    }
+    img{
+        width: 100%;
+    }
+    li{
+        list-style: disc;
+    }
+    hr{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border: none;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.20);
+    }
+    .about-human{
+        img{
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        hr{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+}
+.page {
+    .slider{
+        .slider-frame38{
+          right: 100px;
+          text-align: right;
+          left: auto;
+          align-items: flex-end;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+    }
+}

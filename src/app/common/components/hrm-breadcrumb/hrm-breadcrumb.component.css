@@ -1,0 +1,9 @@
+.title {
+    font-size: 20px;
+    color: #2F3E62;
+    font-family: 'SFProTextMedium';
+    font-weight: 500;
+}
+:host::ng-deep .breadcrumb .p-breadcrumb{
+        margin-bottom: 0;
+    }

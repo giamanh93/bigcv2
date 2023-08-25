@@ -1,0 +1,62 @@
+<p-dialog header="Quy đổi đơn vị tính: {{dataProductItem.productId.productName}}" [position]="'top'" (onHide)="onClear()" [modal]="true" [dismissableMask]="true" [(visible)]="visibleChangeUnit" [style]="{width: '30vw'}">
+  <div class="card">
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-3 md:mb-0">Sản phẩm quy đổi</label>
+      <div class="col-12 md:col-9">
+        <p-autoComplete
+          field="productName"
+          placeholder="Tìm kiếm sản phẩm"
+          [dropdownAriaLabel]="'sadasd'"
+          [(ngModel)]="modelUnitChange.exchangeProductId"
+          id="FullName"
+          [suggestions]="products"
+          [lazy]="true"
+          [showEmptyMessage]="true"
+          [emptyMessage]="'Không tìm thấy dữ liệu search'"
+          [showClear]="true"
+          [appendTo]="'body'"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}"
+          (onSelect)="changeProduct()"
+          (onClear)="onClear()"
+          (completeMethod)="getListproduct($event.query)"
+        ></p-autoComplete>
+      </div>
+    </div>
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-3 md:mb-0">Đơn vị tính</label>
+      <div class="col-12 md:col-9">
+        <input id="firstname4"  [(ngModel)]="modelUnitChange.exchangeUnit" disabled type="text" class=" text-right text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+      </div>
+    </div>
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-3 md:mb-0">Số lượng</label>
+      <div class="col-12 md:col-9">
+        <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageUnitQuantityChange()"  [(ngModel)]="modelUnitChange.exchangeQuantity"  [showButtons]="false"
+                       [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>
+      </div>
+    </div>
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-3 md:mb-0">Đơn giá</label>
+      <div class="col-12 md:col-9">
+        <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageUnitChange()"  [(ngModel)]="modelUnitChange.exchangePrice"  [showButtons]="false"
+                       [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>
+      </div>
+    </div>
+    <div class="field grid">
+      <label for="firstname4" class="col-12 mb-2 md:col-3 md:mb-0">Thành tiền</label>
+      <div class="col-12 md:col-9">
+        <p-inputNumber inputId="decimal" [style]="{'width': '100%'}"  [(ngModel)]="modelUnitChange.exchangeAmount"  [showButtons]="false"
+                       [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex grid justify-content-end gap-2" style="width: 100%">
+      <button type="button" pButton pRipple icon="pi pi-check" label="Lưu" (click)="saveUnitChange()" class="p-button-secondary p-button-sm"></button>
+      <button type="button" pButton pRipple icon="pi pi-trash" label="Xóa" (click)="delete()" class="p-button-secondary p-button-sm"></button>
+      <!--              <p-button  style="cursor: pointer" styleClass="p-button-secondary" (click)="reloadTotal()" label="Tính lại tổng tiền"></p-button>-->
+      <!--        <button type="button" pButton pRipple icon="pi pi-check" label="Xác nhận" (click)="xacnhan()" class="p-button-secondary p-button-sm"></button>-->
+    </div>
+  </ng-template>
+</p-dialog>

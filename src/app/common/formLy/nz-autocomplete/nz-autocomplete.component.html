@@ -1,0 +1,18 @@
+<div class="field">
+    <p-autoComplete 
+    field="name"
+    [dataKey]="'value'"
+    [formControl]="formControl" 
+    [formlyAttributes]="field" 
+    [forceSelection]="true"
+    [placeholder]="to.label ? to.label + ' ' + '( Nhấn enter để tìm kiếm )' : '( Nhấn enter để tìm kiếm )'"
+    [completeOnFocus]="true"
+    [dropdownAriaLabel]="'sadasd'"
+    [suggestions]="to['results']"
+    [showEmptyMessage]="true"
+    [emptyMessage]="'Không tìm thấy dữ liệu search'"
+    [style]="{'width':'100%'}" 
+    [inputStyle]="{'width':'100%'}"
+    (completeMethod)="to['searchObject'](to, $event, field)"
+    ></p-autoComplete>
+</div>

@@ -1,0 +1,47 @@
+<p-dialog header="Chi phí nhập trả nhà cung cấp" [position]="'top'" [modal]="true" (onHide)="onClear()" [(visible)]="visibleNCC" [style]="{width: '50vw'}">
+  <p-table [value]="listShips" [(selection)]="selectedShips" dataKey="code" [tableStyle]="{ 'min-width': '50rem' }" [styleClass]="'p-datatable-sm'">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem"></th>
+        <th>Mã chi phí</th>
+        <th>Tên chi phí</th>
+        <th>Mức chi</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="product"></p-tableCheckbox>
+        </td>
+        <td>{{ product.code }}</td>
+        <td>{{ product.name }}</td>
+        <td>
+          <p-inputNumber  *ngIf="modelShip.type === 1" (click)="Ship.toggle($event)" inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageShip()" [(ngModel)]="modelShip.amount" [showButtons]="false"
+                          [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>
+
+          <p-inputNumber *ngIf="modelShip.type === 2" (click)="Ship.toggle($event)" inputId="percent" [style]="{'width': '100%'}" prefix="%" (onBlur)="onChageShip()" [(ngModel)]="modelShip.ratio"  [showButtons]="false"
+                         styleClass="text-base text-color focus:border-primary w-full"></p-inputNumber>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-overlayPanel #Ship>
+    <div class="p-inputgroup " style="flex-direction: column">
+      <span class="p-inputgroup-addon">Giảm giá</span>
+      <p-inputNumber  inputId="integeronly" (onBlur)="onChageShip()" [(ngModel)]="modelShip.amount"
+                      styleClass="text-right {{modelShip.type === 2 ? 'hidden' : ''}}"></p-inputNumber>
+      <p-inputNumber   inputId="percent" prefix="%" (onBlur)="onChageShip()" [(ngModel)]="modelShip.ratio"
+                       styleClass="text-right  {{modelShip.type === 1 ? 'hidden' : ''}}"></p-inputNumber>
+      <p-selectButton styleClass="btn-2" [options]="stateOptions" (onChange)="onChageActionShip()" [(ngModel)]="modelShip.type" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
+  </p-overlayPanel>
+
+
+  <ng-template pTemplate="footer">
+    <div class="flex grid justify-content-end gap-2" style="width: 100%">
+      <button type="button" pButton pRipple icon="pi pi-plus" label="Lưu" (click)="onSave()" class="p-button-secondary p-button-sm"></button>
+      <button type="button" pButton pRipple icon="pi pi-trash" label="Xóa" (click)="delete()" class="p-button-secondary p-button-sm"></button>
+    </div>
+  </ng-template>
+</p-dialog>
