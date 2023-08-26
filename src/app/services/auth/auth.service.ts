@@ -78,8 +78,8 @@ export class AuthService {
     return true;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(AUTH_CONSTANT.TOKENBIGCV);
+  getToken(): string {
+    return localStorage.getItem(AUTH_CONSTANT.TOKENBIGCV) || '';
   }
 
   getRefreshToken(): string | null {
