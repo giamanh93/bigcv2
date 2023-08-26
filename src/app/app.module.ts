@@ -32,6 +32,7 @@ import { OurCustomerComponent } from './pages/our-customer/our-customer.componen
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { GalleriaModule } from 'primeng/galleria';
 import {LoginModule} from './core/login/login.module';
+import {DEFAULT_REFRESH_URL_BLACKLIST, REFRESH_URL_BLACKLIST } from './services/auth/url-blacklist';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,10 @@ import {LoginModule} from './core/login/login.module';
     AuthService,
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: REFRESH_URL_BLACKLIST,
+      useValue: DEFAULT_REFRESH_URL_BLACKLIST,
+    },
   ],
 
   bootstrap: [AppComponent]
