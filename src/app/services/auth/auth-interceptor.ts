@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error && error.status === 401) {
           return this.handle401Error(request, next);
         } else {
-          this.handleServerSideError(error);
+          // this.handleServerSideError(error);
           return throwError(error);
         }
       })
@@ -52,6 +52,8 @@ export class AuthInterceptor implements HttpInterceptor {
           switchMap((response: any) => {
             this.isRefreshing = false;
             this.auth.loginSuccess(response);
+            // const token = this.auth.getToken();
+            // request = this.addAuthenticationToken(token, request);
             this.refreshTokenSubject.next(response.access_token);
             return next.handle(this.addAuthenticationToken(response.access_token, request));
           }),
@@ -111,13 +113,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.router.navigateByUrl('/login');
         handled = true;
         break;
-      case 401:
-        // this.messageService.add({severity: 'error', summary: 'Thông báo', detail: `Error: Bạn không có quyền sử dụng chức năng này`});
-        this.spinner.hide();
-        this.router.navigateByUrl('/login');
-        handled = true;
-        break;
-      case 403:
+     case 403:
         // this.messageService.add({severity: 'error', summary: 'Thông báo', detail: `Error: Bạn không có quyền sử dụng chức năng này`});
         this.spinner.hide();
         handled = true;

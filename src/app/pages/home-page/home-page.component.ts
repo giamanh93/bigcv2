@@ -12,7 +12,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   displayLogin: boolean = false;
   @ViewChild('startLine') startLine!: ElementRef;
   @ViewChild('endLine') endLine!: ElementRef;
-
+  @ViewChild('draggable') draggableElement!: ElementRef;
   images = [
     {
       itemImageSrc: '/assets/images/home-page/image-slide.png',
@@ -34,8 +34,9 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    window.location.reload();
-
+    document.querySelectorAll('.svgDomArrows').forEach(function (a) {
+      a.remove();
+    });
   }
 
   ngOnInit(): void {
@@ -43,6 +44,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.heightBrder = this.borderBottom.nativeElement.clientHeight + 24;
     }
   }
+
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -55,7 +57,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
             top: 0.5,
             left: 1,
           },
-
+          markerId: '#marker1',
         },
         end: {
           element: document.getElementById('endLine'),
@@ -63,9 +65,15 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
             top: 0.5,
             left: 0,
           },
+          markerId: '#marker1',
         },
         style: 'stroke:white;stroke-width:4;fill:transparent; stroke-dasharray:4;',
         appendTo: document.body,
+        customClass: {
+          container: `container svgDomArrows foo bar`,
+          svgPath: `path-${1} baz`,
+          svgElement: `element-${1}`,
+        }
       });
       new ArcPath({
         start: {
@@ -84,6 +92,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         style: 'stroke:white;stroke-width:4;fill:transparent; stroke-dasharray:4',
         appendTo: document.body,
+        customClass: {
+          container: `container svgDomArrows foo bar`,
+          svgPath: `path-${1} baz`,
+          svgElement: `element-${1}`,
+        }
       });
       new ArcPath({
         start: {
@@ -102,6 +115,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         style: 'stroke:white;stroke-width:4;fill:transparent; stroke-dasharray:4',
         appendTo: document.body,
+        customClass: {
+          container: `container svgDomArrows foo bar`,
+          svgPath: `path-${1} baz`,
+          svgElement: `element-${1}`,
+        }
       });
       new ArcPath({
         start: {
@@ -120,6 +138,11 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         style: 'stroke:white;stroke-width:4;fill:transparent; stroke-dasharray:4',
         appendTo: document.body,
+        customClass: {
+          container: `container svgDomArrows foo bar`,
+          svgPath: `path-${1} baz`,
+          svgElement: `element-${1}`,
+        }
       });
     }, 300);
 
