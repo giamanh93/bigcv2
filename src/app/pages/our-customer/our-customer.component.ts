@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-our-customer',
@@ -22,10 +22,12 @@ export class OurCustomerComponent implements OnInit {
     },
 
   ];
+
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+
   }
 
   onBackLogin() {

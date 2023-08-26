@@ -22,17 +22,28 @@ export class AuthService {
   }
 
   login(params: Login): Observable<any> {
-    return this.http.post(this.baseUrl + '/user/v1/login', params, this.options);
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'accept': '*/*'
+      })
+    };
+    return this.http.post(this.baseUrl + '/user/v1/login', params, options);
   }
 
 
   refreshToken(refreshToken: string): Observable<any> {
-    const urlencoded = new URLSearchParams();
+    // const urlencoded = new URLSearchParams();
     // urlencoded.append('client_id', 'swagger_development');
     // urlencoded.append('grant_type', 'refresh_token');
     // urlencoded.append('scope', 'openid');
     // urlencoded.append('refresh_token', refreshToken);
-    return this.http.post(`${this.baseUrl}/auth/realms/usee/protocol/openid-connect/token`, urlencoded);
+    const options = {
+      headers: new HttpHeaders({
+        'accept': '*/*'
+      })
+    };
+    return this.http.post(`${this.baseUrl}/user/v1/refresh?refreshToken=${refreshToken}`, {}, options);
   }
 
   loginSuccess(data: any): void {

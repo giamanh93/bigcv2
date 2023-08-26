@@ -617,4 +617,11 @@ section {
   color: #495057;
   font-size: 18px;
   font-weight: 700;
+  border: none;
+  &:hover {
+    background: orange !important;
+    .p-menuitem-text {
+      color: #495057 !important;
+    }
+  }
 }

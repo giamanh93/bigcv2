@@ -66,16 +66,19 @@ export class LoginComponent implements OnInit {
             if (response.success && response.data.access_token) {
               this.authService.loginSuccess(response.data);
               // this.router.navigateByUrl('/');
+              this.spinner.hide();
               this.router.navigate(['/home']);
               this.options.formState.submitted = false;
               this.displayLogin = false;
               // this._messageService.add({ severity: 'success', summary: 'Thông báo', detail: 'Đăng nhập thành công' });
             } else {
+              this.spinner.hide();
               // this.isShowNotification = true;
               // this._messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Đăng nhập thất bại'});
             }
           },
           error: (err: any) => {
+            this.spinner.hide();
             // this._messageService.add({ severity: 'error', summary: 'Thông báo', detail: 'Đăng nhập thất bại'});
             setTimeout(() => {
             }, 3000);
