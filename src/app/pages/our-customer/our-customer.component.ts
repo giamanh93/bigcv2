@@ -1,11 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-our-customer',
   templateUrl: './our-customer.component.html',
   styleUrls: ['./our-customer.component.scss']
 })
-export class OurCustomerComponent {
+export class OurCustomerComponent implements OnInit {
+
   displayLogin: boolean = false;
   images = [
     {
@@ -20,8 +22,18 @@ export class OurCustomerComponent {
     },
 
   ];
+  constructor(private router: Router) {
+  }
+
+  ngOnInit() {
+  }
 
   onBackLogin() {
     this.displayLogin = true;
   }
+
+  showLogin() {
+    this.router.navigate(['/login']);
+  }
+
 }

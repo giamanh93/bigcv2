@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {ArcPath, CurvyPath, LinePath, SquarePath} from 'svg-dom-arrows';
 
@@ -7,7 +7,7 @@ import {ArcPath, CurvyPath, LinePath, SquarePath} from 'svg-dom-arrows';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('borderBottom') borderBottom: any;
   displayLogin: boolean = false;
   @ViewChild('startLine') startLine!: ElementRef;
@@ -27,8 +27,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   ];
   heightBrder = 0;
+  show = true;
 
   constructor(private router: Router) {
+
+  }
+
+  ngOnDestroy() {
+    window.location.reload();
 
   }
 
@@ -49,6 +55,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
             top: 0.5,
             left: 1,
           },
+
         },
         end: {
           element: document.getElementById('endLine'),
@@ -150,7 +157,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   showLogin() {
-    console.log('showLogin');
     this.router.navigate(['/login']);
   }
 

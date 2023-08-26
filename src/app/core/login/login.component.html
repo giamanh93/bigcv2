@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6 right flex justify-content-center align-items-center">
+      <div class="col-6 right flex justify-content-center align-items-center flex-direction" style="flex-direction:column">
         <div class="col-10 form-box">
           <h3>Đăng nhập</h3>
           <form [formGroup]="form" *ngIf="fields.length > 0" (ngSubmit)="handleLogin()">
