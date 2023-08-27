@@ -1,5 +1,7 @@
-<div class="field">
-    <input  [type]="type" [formControl]="formControl" (change)="to.change && to.change(field, $event)"
-         [formlyAttributes]="field"  [ngClass]="{'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched': ((formControl.touched || options.formState.submitted) && formControl.getError('required')) }"
-          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+<div class="field" [ngClass]="{'error_input': ((formControl.touched || options.formState.submitted) && formControl.getError('required')) }">
+    <input  [type]="type" [formControl]="formControl" (change)="to.change && to.change(field, $event)" autocomplete="off"
+            [formlyAttributes]="field" (focus)="to.focus && to.focus(field, $event)" (blur)="to.blur && to.blur(field, $event)"
+            [ngClass]="{'ng-pristine ng-invalid ng-star-inserted ng-dirty ng-touched': ((formControl.touched || options.formState.submitted) && formControl.getError('required')) }"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border
+           border-round appearance-none outline-none focus:border-primary w-full">
 </div>

@@ -149,10 +149,12 @@
 
         .banner {
           display: flex;
-          height: 405px;
+          //height: 405px;
           width: calc(100% - 87px);
           margin: auto;
           margin-top: calc(1vw + 255px);
+          position: relative;
+          padding-top: 50%;
           //padding-top: 118px;
           //justify-content: center;
           //padding-top: calc(1vw + 83px);
@@ -173,9 +175,9 @@
 
 
           .bg-a {
-            top: 365px;
-            left: 64px;
-            width: 100%;
+            //top: 365px;
+            //left: 64px;
+            //width: 100%;
             //width: 569px;
             border-radius: 16px;
             margin-right: 40px;
@@ -183,6 +185,13 @@
             display: flex;
             justify-content: end;
             align-items: center;
+
+            background: #EAF2FE;
+            position: absolute;
+            top: 0px;
+            height: 100%;
+            left: 0px;
+            width: calc(100% - 40px);
             //position: relative;
             //@media screen and (max-width: 1300px) {
             //  top: 280px;
@@ -216,8 +225,8 @@
           }
 
           .bg-b {
-            width: 295px;
-            height: 211px;
+            width: 50%;
+            height: 50%;
             left: 361px;
             margin-right: -40px;
             top: 463px;
@@ -268,13 +277,16 @@
           line-height: 27.9px;
           font-weight: 700;
         }
-
-
         .inputt {
           .p-field {
             label {
               display: none;
             }
+
+            .error_input {
+              margin-bottom: 2rem !important;
+            }
+
           }
         }
 
@@ -294,9 +306,16 @@
           //border: none !important;
           //border-bottom: 1px solid #ccc !important;
           border-radius: 8px !important;
-          padding: 0px 16px 0px 16px !important;
+          //padding: 0px 16px 0px 16px !important;
           gap: 8px !important;
-          height: 56px;
+          //height: 56px;
+
+          height: auto;
+          padding: 17px 16px !important;
+
+          color: rgba(51, 51, 51, 0.40);
+          font-size: 18px;
+          font-family: "Inter";
           //font-weight: 500;
           //padding-left: 0px !important;
           //font-family: "Inter";
@@ -345,6 +364,75 @@
               opacity: 0.4;
             }
           }
+        .p-password{
+          .pi-eye{
+            width: 21px;
+            height: 15px;
+            background: url("/assets/images/eye.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            //background: url('/assets/images/bg-login.jpg');
+            &:before{
+              display: none;
+            }
+          }
+        }
+        .show-placeholder{
+          input{
+            padding-bottom: 7px !important;
+            padding-top: 27px !important;
+          }
+        }
+        .p-field{
+          position: relative;
+          .p-error{
+            position: absolute;
+            bottom: -25px;
+          }
+        }
+        .show-label
+        {
+          .p-field {
+            position: relative;
+            label {
+              display: block;
+              z-index: 1;
+              top: 15px;
+              position: absolute;
+              color: rgba(51, 51, 51, 0.40);
+              font-size: 18px;
+              font-family: "Inter";
+              font-weight: 400;
+              line-height: 27.90px;
+              left: 16px;
+            }
+            input{
+
+              &::-webkit-input-placeholder {
+                color: transparent;
+              }
+              &:focus:-moz-placeholder {
+                color: transparent;
+              }
+              &:focus::-moz-placeholder {
+                /* Mozilla Firefox 19+ */
+                color: transparent;
+              }
+              &:focus:-ms-input-placeholder {
+                /* Internet Explorer 10+ */
+                color: transparent;
+              }
+            }
+          }
+          &.show-placeholder{
+            label{
+              z-index: 1;
+              font-size: 12px;
+              top: 10px;
+              line-height: 1;
+            }
+          }
+        }
 
           .checkbox-login {
             .p-field {
