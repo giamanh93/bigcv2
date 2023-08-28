@@ -20,7 +20,6 @@ import {ProductManagerService} from 'src/app/services/productManager.serivce';
 import {financialControlSystemService} from 'src/app/services/financialControlSystem.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {AuthService} from '../../../services/auth/auth.service';
-import {AgGridImageComponent} from '../../../common/components/list-grid-angular/aggrid-image';
 import {ButtonAgGridComponent} from 'src/app/common/components/list-grid-angular/ag-buttons';
 import {Router} from '@angular/router';
 
@@ -152,6 +151,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       {
         headerName: 'Ngày hóa đơn',
         field: 'purchaseDate',
+        cellClass: 'flex',
         editable: false,
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
@@ -161,6 +161,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       {
         headerName: 'Đường dẫn',
         field: 'pathToFile',
+        cellClass: 'flex',
         editable: false,
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
@@ -170,6 +171,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       {
         headerName: 'Tên file',
         field: 'fileName',
+        cellClass: 'flex',
         editable: false,
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
@@ -179,6 +181,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       {
         headerName: 'Nhà cung cấp',
         field: 'supplierName',
+        cellClass: 'flex',
         editable: false,
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
@@ -189,11 +192,25 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       {
         headerName: 'Tổng tiền',
         field: 'imageTotal',
+        cellClass: 'flex',
         editable: false,
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
         filter: false,
         menuTabs: [],
+      },
+      {
+        headerName: 'Trạng thái',
+        field: 'isProcessed',
+        editable: false,
+        cellClass: 'flex',
+        cellEditor: 'agTextCellEditor',
+        cellEditorPopup: false,
+        filter: false,
+        menuTabs: [],
+        cellRenderer: (params) => {
+          return params.data.isProcessed === 1 ? '<span class="bg-success noti-number">Đã lưu</span>' : '<span class="bg-secondary noti-number">Chưa lưu</span>'
+        }
       },
       // {
       //   headerName: 'Trạng thái',

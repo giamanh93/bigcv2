@@ -947,6 +947,7 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
     const params = {
       branchId: this.query.branchId,
       retailerId: this.query.retailerId,
+      imagePurchaseOrderId: this.imagePurchaseOrderId,
       supplierName: this.query.selectSuppliers.supplierName,
       imageSupplierName: this.query.filter.supplierName === ''
       || this.query.filter.supplierName === null

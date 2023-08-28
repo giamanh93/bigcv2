@@ -689,3 +689,66 @@ p-selectButton{
 .p-password-panel {
   display: none !important;
 }
+
+.noti-number{
+  display: block;
+  padding: 6px 6px;
+  line-height: 1;
+  margin-top: 0;
+  font-size: 12px;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  font-weight: 400;
+  width: 100%;
+  position: relative;
+  border-radius: 3px;
+  text-align: center;
+  &:after {
+    // content: '';
+    // width: 4px;
+    // height: 4px;
+    // display: block;
+    // position: absolute;
+    // top: 8px;
+    // left: 0px;
+    // border-radius: 100%;
+  }
+  &.bg-primary{
+    background: #0d6efd;
+  }
+  &.bg-secondary {
+    // background: #6c757d;
+    // border: 1px solid #6c757d;
+    // color: #6c757d;
+    background: #6c757d;
+    color: #fff;
+
+    &:after {
+      background: #6c757d;
+    }
+  }
+  &.bg-danger{
+    // color: #c82333;
+    background: #dc3545;
+  }
+  &.bg-warning{
+    background: #ffc107;
+  }
+  &.bg-success{
+    // color: #34C759;
+    background: #198754;
+    width: 100%;
+  }
+  &.bg-dark{
+    color: #ffffff;
+    background: #212529
+  }
+  &.bg-info{
+    color: #ffffff;
+    background: #0dcaf0;
+  }
+  &.bg-light{
+    color: #212529;
+    background: #f8f9fa;
+  }
+}
