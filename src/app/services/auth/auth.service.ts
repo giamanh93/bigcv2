@@ -78,8 +78,8 @@ export class AuthService {
     return true;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(AUTH_CONSTANT.TOKENBIGCV);
+  getToken(): string {
+    return localStorage.getItem(AUTH_CONSTANT.TOKENBIGCV) || '';
   }
 
   getRefreshToken(): string | null {
@@ -105,7 +105,7 @@ export class AuthService {
 
   getRetailerId(): number {
     const tokenData = parseJwt(localStorage.getItem(AUTH_CONSTANT.TOKENBIGCV));
-    return tokenData.retailer_id;
+    return tokenData.ex_retailer_id;
   }
 
   getRetailerName(): string {

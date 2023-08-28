@@ -101,40 +101,83 @@ export class LoginComponent implements OnInit {
       {
         key: 'retailer',
         type: 'nzInput',
-        className: 'inputt',
-        defaultValue: 'FSC',
+        className: 'inputt show-label',
+        defaultValue: '',
+        focus: true,
+        hooks: {
+          onInit: (field) => {
+            return field.className = this.model.retailer ? 'inputt show-label show-placeholder' : 'inputt show-label';
+          },
+        },
         templateOptions: {
           label: 'Mã cửa hàng',
           placeholder: 'Mã cửa hàng',
           required: true,
           value: 'vannd',
-          type: 'text'
+          type: 'text',
+          focus: (field, event) => {
+            field.className = field.className?.includes(' show-placeholder')
+              ? field.className :  field.className + ' show-placeholder';
+          },
+          blur: (field, event) => {
+            field.className = this.model.retailer
+              ? field.className : field.className
+                ? field.className.replace(' show-placeholder', '') : '';
+          }
         }
       },
       {
         key: 'userName',
-        className: 'inputt',
+        className: 'inputt show-label',
         type: 'nzInput',
-        defaultValue: 'FSC',
+        defaultValue: '',
+        hooks: {
+          onInit: (field) => {
+            return field.className = this.model.userName ? 'inputt show-label show-placeholder' : 'inputt show-label';
+          },
+        },
         templateOptions: {
           label: 'Tên đăng nhập',
           placeholder: 'Tên đăng nhập',
           required: true,
           value: 'vannd',
-          type: 'text'
+          type: 'text',
+          focus: (field, event) => {
+            field.className = field.className?.includes(' show-placeholder')
+              ? field.className :  field.className + ' show-placeholder';
+          },
+          blur: (field, event) => {
+            field.className = this.model.userName
+              ? field.className : field.className
+                ? field.className.replace(' show-placeholder', '') : '';
+          }
         }
       },
       {
         key: 'password',
-        className: 'inputt',
+        className: 'inputt show-label',
         type: 'nzPassword',
-        defaultValue: '!Q2w3e4r5t',
+        defaultValue: '',
+        hooks: {
+          onInit: (field) => {
+            return field.className = this.model.password ? 'inputt show-label show-placeholder' : 'inputt show-label';
+          },
+        },
         templateOptions: {
           label: 'Mật khẩu',
           placeholder: 'Mật khẩu',
           required: true,
           value: 'vannd',
-          type: 'password'
+          type: 'password',
+          focus: (field, event) => {
+            field.className = field.className?.includes(' show-placeholder')
+              ? field.className :  field.className + ' show-placeholder';
+          },
+          blur: (field, event) => {
+            field.className = this.model.password
+              ? field.className : field.className
+                ? field.className.replace(' show-placeholder', '') : '';
+          }
         }
       },
       {
