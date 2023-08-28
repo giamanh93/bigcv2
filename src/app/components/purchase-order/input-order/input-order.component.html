@@ -95,8 +95,8 @@
           <div class="grid mt-2">
             <div class="md:col-2 lg:col-2 xl:col-2">
               <label for="firstname2">Ngày nhập</label>
-              <p-calendar placeholder="Ngày nhập"
-                          panelStyleClass="datepicker-default-only-icon" placeholder="(YYYY-MM-DD)"
+              <p-calendar placeholder="Ngày nhập"  [hourFormat]="'24'" [showTime]="true"
+                          panelStyleClass="datepicker-default-only-icon" placeholder="(YYYY-MM-DD hh:mm)"
                           [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.supplierName.purchaseDate"
                           [monthNavigator]="true"
                           [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"

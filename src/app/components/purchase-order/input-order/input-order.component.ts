@@ -952,7 +952,7 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
       imageSupplierName: this.query.filter.supplierName === ''
       || this.query.filter.supplierName === null
         ? this.query.selectSuppliers.supplierName : this.query.filter.supplierName,
-      purchaseDate: this.$datepipe.transform(this.query.supplierName.purchaseDate, 'yyyy-MM-dd'),
+      purchaseDate: this.$datepipe.transform(this.query.supplierName.purchaseDate, 'yyyy-MM-dd HH:mm:ss'),
       supplierId: this.query.selectSuppliers.supplierId,
       totalQuantity: this.pinnedBottomData.quantity ? numeral(this.pinnedBottomData.quantity).value() : 0,
       totalamount: this.model.totalamount,
@@ -988,6 +988,8 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
       })
     };
     this.$spinner.show();
+    // console.log(JSON.stringify(params));
+
     this.$service.savePurchaseOrder(params)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
@@ -1006,7 +1008,7 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
   convertDate(stringDate: any) {
     if (stringDate) {
       const string = stringDate.split('/');
-      return new Date(`${string[2]}-${parseFloat(string[1]) < 10 ? '0' + string[1] : string[1]}-${string[0]}`);
+      return new Date(`${string[2]}-${parseFloat(string[1]) < 10 ? '0' + string[1] : string[1]}-${string[0]} ${new Date().getHours()}: ${new Date().getMinutes()}`);
     }
     return new Date();
   }
@@ -1014,7 +1016,7 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
   convertDate2(stringDate: any) {
     if (stringDate) {
       const string = stringDate.split('-');
-      return new Date(`${string[2]}-${parseFloat(string[1]) < 10 ? '0' + string[1] : string[1]}-${string[0]}`);
+      return new Date(`${string[2]}-${parseFloat(string[1]) < 10 ? '0' + string[1] : string[1]}-${string[0]} ${new Date().getHours()}: ${new Date().getMinutes()}`);
     }
     return new Date();
   }
