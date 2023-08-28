@@ -52,3 +52,19 @@
         margin-top: 0px;
     }
 }
+
+@media screen and (max-width: 1300px) {
+    .about{
+      padding-bottom: 100px;
+      .log{
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    .about{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

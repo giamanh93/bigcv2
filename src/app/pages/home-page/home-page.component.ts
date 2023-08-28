@@ -28,6 +28,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   heightBrder = 0;
   show = true;
+  isShowMenu = false;
 
   constructor(private router: Router) {
 

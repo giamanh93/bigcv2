@@ -1,17 +1,38 @@
 <div class="home-page page">
   <section class="navigator">
     <div
-      style="justify-content: space-between;align-items: center;display: flex;width: 100%;">
+      style="justify-content: space-between;align-items: center;display: flex;width: 100%; gap: 12px">
+        <div class="wrap-hamburger">
+          <label for="hamburger" class="hamburger" [ngClass]="isShowMenu ? 'active' : ''" (click)="isShowMenu = !isShowMenu">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+          </label>
+        </div>  
         <div class="logo">
           <img src="/assets/images/home-page/logo.png" alt="">
         </div>
         <div class="group">
-          <div class="nav-heading">
+          <div class="nav-heading menu-destkop">
             <div class="menu-item">
-              <div class="menu-title" routerLink="/home-page">Trang chủ</div>
+              <div class="menu-title active" routerLink="/home-page">Trang chủ</div>
             </div>
             <div class="menu-item">
-              <div class="menu-title active" routerLink="/our-customer">Khách hàng</div>
+              <div class="menu-title" routerLink="/our-customer">Khách hàng</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-title" routerLink="/about-us">Về chúng tôi</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-title">Liên hệ</div>
+            </div>
+          </div>
+          <div class="nav-heading menu-mobile" *ngIf="isShowMenu">
+            <div class="menu-item">
+              <div class="menu-title active" routerLink="/home-page">Trang chủ</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-title" routerLink="/our-customer">Khách hàng</div>
             </div>
             <div class="menu-item">
               <div class="menu-title" routerLink="/about-us">Về chúng tôi</div>
@@ -21,7 +42,7 @@
             </div>
           </div>
           <div style="justify-content: flex-start; align-items: flex-start; gap: 14px; display: flex">
-            <p-button label="Đăng nhập" (onClick)="showLogin()" routerLink="/login" styleClass="p-button-sm bg-dang-nhap"></p-button>
+            <p-button label="Đăng nhập" (onClick)="showLogin()" routerLink="/login" styleClass="p-button-sm bg-dang-nhap"></p-button>          
           </div>
         </div>
       </div>

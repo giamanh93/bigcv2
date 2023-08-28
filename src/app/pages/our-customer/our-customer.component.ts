@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 export class OurCustomerComponent implements OnInit {
 
   displayLogin: boolean = false;
+  isShowMenu = false;
   images = [
     {
       itemImageSrc: '/assets/images/customer/sl1.png',

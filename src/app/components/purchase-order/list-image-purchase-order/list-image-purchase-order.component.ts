@@ -433,6 +433,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
   }
 
   changeBranch() {
+    this.query.uploadDate = null;
     localStorage.setItem('branchId', this.query.branchId?.toString() ?? '');
     this.query.page = 1;
     this.query.size = 20;
@@ -442,7 +443,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    this.getListImagePurchaseOrder();
+    this.getListUploadDate();
   }
 
   onClearSuppliers() {

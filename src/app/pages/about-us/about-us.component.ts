@@ -22,6 +22,7 @@ export class AboutUsComponent {
 
   ];
   displayLogin: boolean = false;
+  isShowMenu = false;
   constructor(private router: Router) {
   }
   onBackLogin() {

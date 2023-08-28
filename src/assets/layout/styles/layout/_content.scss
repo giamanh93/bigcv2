@@ -193,7 +193,6 @@ input {
       position: absolute;
       top: 72px;
       left: 100px;
-      width: 675px;
       flex-direction: column;
       align-items: flex-start;
       gap: 16px;
@@ -622,6 +621,255 @@ section {
     background: orange !important;
     .p-menuitem-text {
       color: #495057 !important;
+    }
+  }
+}
+
+
+label.hamburger {
+  display: block;
+    width: 23px;
+    height: 23px;
+    position: relative;
+    cursor: pointer;
+}
+
+input#hamburger {
+ display:none
+}
+
+.line {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  transition: 0.5s;
+}
+/* steps of 12 are optional, could also be 10, 13 etc */
+.line:nth-child(1) { top: 0px; }
+.line:nth-child(2) { top: 9px; }
+.line:nth-child(3) { top: 18px; }
+
+/* translateY must be same as */
+.hamburger.active .line:nth-child(1){
+  transform: translateY(9px) rotate(-45deg);
+}
+
+.hamburger.active .line:nth-child(2){
+  opacity:0;
+}
+
+.hamburger.active .line:nth-child(3){
+  transform: translateY(-9px) rotate(45deg);
+}
+.wrap-hamburger{
+  display: none;
+}
+.hamburger{
+  display: none;
+}
+.navigator{
+  position: sticky;
+  top: 0px;
+  z-index: 99;
+}
+.menu-mobile{
+  display: none;
+}
+@media screen and (max-width: 1030px) {
+  .menu-destkop{
+    display: none !important;
+  }
+  .menu-mobile{
+    display: block;
+  }
+  .wrap-hamburger{
+    display: block;
+  }
+  .navigator{
+    // position: relative;
+  }
+  .hamburger{
+    display: block;
+  }
+  .page {
+    .navigator {
+      .group {
+        .nav-heading{
+          position: absolute;
+          top: 100%;
+          left: 120px;
+          z-index: 3;
+          display: block;
+          background: #5889fe;
+          border-radius: 4px;
+          box-shadow: 1px 1px 8px #3c3c3c;
+          min-width: 115px;
+          .menu-item{
+            padding: 7px 15px;
+            border-bottom: 1px solid #02112617;
+            .menu-title{
+              font-size: 14px !important;
+            }
+            &:last-child{
+              border-bottom: none
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1300px) {
+  .page {
+    .boxs-info{
+      flex-wrap: wrap;
+      li{
+        width: 50%;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .page {
+    .box-info {
+      margin: auto;
+    }
+    .chuyen-gia{
+      ul {
+        li{
+          width: 50%;
+          &:nth-child(3){
+            .end{
+              left: auto !important;
+              right: -13px !important;
+            }
+          }
+          &:nth-child(5){
+            .end{
+              left: auto !important;
+              right: -13px !important;
+            }
+            .start{
+              left: -13px !important;
+              right: auto !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .page {
+    .register-form{
+      padding: 100px 120px;
+      margin-top: 0 !important; 
+      div{
+        display: block !important;
+      }
+      .fields{
+        input {
+          width: 100%;
+        }
+        svg{
+          top: 9px;
+        }
+      }
+      .bder-bottom {
+        display: none !important;
+      }
+    }
+    .chuyen-gia{
+      background: none;
+      background-color: #4883ff;
+      padding-top: 60px;
+      min-height: 0;
+      .bder-top{
+        display: none;
+      }
+    }
+    h2 {
+      font-size: 26px;
+    }
+    .footer{
+      padding-left: 20px;
+      padding-right: 20px;
+      .menu {
+        h3 {
+            font-size: 20px;
+        }
+        li a {
+          font-size: 16px;
+        }
+      }
+    }
+    .boxs-info{
+      width: 100%;
+      margin: auto;
+    }
+    .navigator {
+      padding: 24px 20px;
+      .nav-heading {
+        left: 20px !important;
+      }
+    }
+  }
+
+  .page {
+    .slider {
+      .slider-frame38 {
+        top: 20px;
+        .lable-frame{
+          font-size: 20px;
+          line-height: 26px;
+          &:nth-child(2) {
+            font-size: 20px;
+            line-height: 26px;
+          }
+        }
+      }
+    }
+  }
+
+  .page {
+    .header-box {
+      .title-big{
+        font-size: 30px;
+      }
+      .title-small {
+        font-size: 22px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  section {
+    .content{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .page {
+    .slider {
+      .slider-frame38 {
+        top: 0;
+        left: 20px;
+      }
+    }
+    .register-form{
+      padding: 50px 20px;
+    }
+    .footer{
+      &>.grid{
+        &>.col-6{
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 }
