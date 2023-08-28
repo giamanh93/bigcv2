@@ -1,3 +1,10 @@
+:host ::ng-deep {
+  *{
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
 .list-food{
     display: flex;
     flex-wrap: wrap;
