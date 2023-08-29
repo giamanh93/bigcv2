@@ -87,7 +87,7 @@ input {
     }
 
     &:after {
-      content: '';
+      // content: '';
       display: block;
       height: 100%;
       border-radius: 20px;
@@ -900,8 +900,21 @@ input#hamburger {
     }
   }
 
-}
+  .copyright{
+    .grid{
+      justify-content: center !important;
+      ul{
+        margin-top: 12px;
+      }
+    }
+  }
 
+}
+@media screen and (max-width: 500px) {
+  .page .font-normal{
+    font-size: 22px;
+  }
+}
 @media screen and (max-width: 500px) {
   .page {
     .slider {

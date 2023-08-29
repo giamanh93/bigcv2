@@ -47,9 +47,42 @@
 @media screen and (max-width: 600px) {
     .page{
         .slider{
+            margin-bottom: 15px;
             .slider-frame38{
                 right: 20px;
             }
+        }
+        .text-section {
+            margin-bottom: 20px;
+            &>div{
+                width: 100%;
+                ul{
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+                &:first-child{
+                    margin-bottom: 15px;
+                }
+            }
+            hr{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+:host::ng-deep{
+    @media screen and (max-width: 600px) {
+        .p-galleria-item-container:before{
+            background: #00000066;
+            content: '';
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+        .slider .slider-frame38{
+            z-index: 2;
         }
     }
 }

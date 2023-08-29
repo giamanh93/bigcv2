@@ -75,3 +75,26 @@
         padding-right: 20px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    
+    .list-food{
+        .food{
+            width: calc(50% - 30px);
+            height: 185px;
+        }
+    }
+    .page .header-box {
+        padding-left: 20px;
+        padding-right: 20px;
+        .title-big {
+            font-size: 22px;
+        }
+        .title-small{
+            font-size: 18px;
+        }
+    }
+    .about{
+        background-position: right center;
+    }
+}

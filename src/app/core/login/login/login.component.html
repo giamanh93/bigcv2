@@ -45,7 +45,7 @@
   <div class="md:col-12 lg:col-12 xl:col-12 p-0">
     <div class="grid">
       <div class="col-6 left">
-        <div class="backgroup-login">
+        <div class="backgroup-login destkop">
           <div class="logo">
             <img src="/assets/images/logo-login.png" alt="">
           </div>
@@ -66,6 +66,17 @@
         </div>
       </div>
       <div class="col-6 right flex justify-content-center align-items-center flex-direction" style="flex-direction:column">
+        <div class="backgroup-login mobile">
+          <div class="logo">
+            <img src="/assets/images/logo3.png" alt="">
+          </div>
+
+          <div class="heading page">
+            <h3>Sử dụng công nghệ thông minh</h3>
+            <p class="heading-small">để tối ưu hoá công việc kinh doanh của bạn</p>
+            <div class="hr-title" style="margin: 0"></div>
+          </div>
+        </div>
         <div class="col-10 form-box">
           <h3>Đăng nhập</h3>
           <form  autocomplete="off" [formGroup]="form" *ngIf="fields.length > 0" (ngSubmit)="handleLogin()">

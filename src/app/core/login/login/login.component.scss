@@ -87,6 +87,7 @@
         border-radius: 10px;
         background: #021126;
         display: flex;
+        
         //background: url('/assets/images/bg-login.jpg');
         //background-repeat: no-repeat;
         //background-size: cover;
@@ -449,5 +450,48 @@
 
       }
 
+    }
+  }
+  .backgroup-login{
+    &.mobile{
+      display: none;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    .left{
+      display: none;
+    }
+    .backgroup-login{
+      &.mobile{
+        display: block;
+      }
+    }
+    .login{
+      background: #021126;
+      .right{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 6px;
+        padding: 20px;
+        align-items: flex-start !important;
+        .heading{
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          p{
+            margin-top: 3px;
+          }
+          h3{
+            font-size: 26px;
+          }
+        }
+        .form-box{
+          width: 100%;
+        }
+        .form-box h3{
+          position: static;
+        }
+      }
     }
   }
