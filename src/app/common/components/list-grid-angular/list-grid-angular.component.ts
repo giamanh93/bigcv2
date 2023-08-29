@@ -220,6 +220,8 @@ export class ListGridAngularComponent implements OnInit, OnChanges {
           target[element] = `Khách hàng: ${this.listsData.length} `;
         } else if (element === 'productName') {
           target[element] = `Sản phẩm: ${this.listsData.length} `;
+        } else if (element === 'supplierName') {
+          target[element] = `NCC: ${this.listsData.length} `;
         } else if (element === 'areaName') {
           target[element] = `Khu vực: ${this.listsData.length} `;
         } else if (element === 'purchaseDate') {

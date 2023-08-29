@@ -69,6 +69,7 @@ export const menus = [
             { label: '2. Đối Soát Thực trả nhà cung cấp', routerLink: '/financial-control-system/review-payment-with-supplier', class: 'nav-item' },
             { label: '3. Kiểm soát công nợ nhà cung cấp', routerLink: '/financial-control-system/review-supplier-debt', class: 'nav-item' },
             { label: '4. Kiểm soát công nợ khách hàng', routerLink: '/financial-control-system/customer-debt', class: 'nav-item' },
+            { label: '5. Công nợ nhà cung cấp phát sinh theo sản phẩm', routerLink: '/financial-control-system/review-supplier-debt-by-product', class: 'nav-item' },
             //   { label: '5. Theo dõi công nợ nhà cung cấp', routerLink: '/cai-dat/quan-ly-ngay-nghi', class: 'nav-item' },
         ]
     },

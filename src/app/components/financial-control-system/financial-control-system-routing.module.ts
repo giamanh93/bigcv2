@@ -4,6 +4,7 @@ import { CustomerDebtComponent } from './customer-debt/customer-debt.component';
 import { ReviewPaymentWithSupplierComponent } from './review-payment-with-supplier/review-payment-with-supplier.component';
 import { ReviewRevenueWithFlowOfMoneyComponent } from './review-revenue-with-flow-of-money/review-revenue-with-flow-of-money.component';
 import { ReviewSupplierDebtComponent } from './review-supplier-debt/review-supplier-debt.component';
+import {ReviewSupplierDebtByProductComponent} from './review-supplier-debt-by-product/review-supplier-debt-by-product.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
@@ -12,6 +13,7 @@ import { ReviewSupplierDebtComponent } from './review-supplier-debt/review-suppl
         { path: 'review-payment-with-supplier', component: ReviewPaymentWithSupplierComponent },
         { path: 'review-supplier-debt', component: ReviewSupplierDebtComponent },
         { path: 'customer-debt', component: CustomerDebtComponent },
+        { path: 'review-supplier-debt-by-product', component: ReviewSupplierDebtByProductComponent },
     ])],
     exports: [RouterModule]
 })

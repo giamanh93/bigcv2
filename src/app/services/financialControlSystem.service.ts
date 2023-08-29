@@ -57,7 +57,15 @@ export class financialControlSystemService {
         return of(error.error);
       })
     );
+  }
 
+  getReviewSupplierDebtByProduct(query: string): Observable<Responses> {
+    return this.$http.get<Responses>(baseUrl + `/review/v1/getReviewSupplierDebtByProduct?` + query).pipe(
+      catchError(error => {
+        this.handleError(error);
+        return of(error.error);
+      })
+    );
   }
 
   getReviewPaymentWithSupplierDetail(query: string): Observable<Responses> {
