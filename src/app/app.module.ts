@@ -31,7 +31,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { OurCustomerComponent } from './pages/our-customer/our-customer.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { GalleriaModule } from 'primeng/galleria';
-import {LoginModule} from './core/login/login.module';
 import {DEFAULT_REFRESH_URL_BLACKLIST, REFRESH_URL_BLACKLIST } from './services/auth/url-blacklist';
 
 @NgModule({

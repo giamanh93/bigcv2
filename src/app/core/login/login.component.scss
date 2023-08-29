@@ -87,7 +87,7 @@
         border-radius: 10px;
         background: #021126;
         display: flex;
-        
+
         //background: url('/assets/images/bg-login.jpg');
         //background-repeat: no-repeat;
         //background-size: cover;
@@ -495,3 +495,19 @@
       }
     }
   }
+
+@media screen and (max-width: 768px) {
+  .login{
+    background: #ffffff;
+    overflow: auto;
+    .grid{
+      height: 100%;
+    }
+    .right{
+      width: 100%;
+      position: static;
+      transform: none;
+    }
+  }
+
+}
