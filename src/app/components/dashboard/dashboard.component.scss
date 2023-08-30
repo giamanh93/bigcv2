@@ -1,0 +1,184 @@
+
+.main-container{
+    background: #F8F8F8 !important;
+}
+
+.main-grid{
+    .drop{
+        color: #333;
+        font-family: "Inter";
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+    .box{
+        box-shadow: 0px 0px 4px 0px rgba(51, 51, 51, 0.10);
+        border-radius: 0px 0px 8px 8px;
+        overflow: hidden;
+        .box-header{
+            border-radius: 8px 8px 0px 0px;
+            padding: 8px 16px !important;
+            align-items: center;
+            align-self: stretch;
+            color: #FFF;
+            font-family: "Inter";
+            font-size: 14px;
+            font-weight: 500;
+            justify-content: space-between;
+        }
+        .box-content{
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            padding: 8px;
+            gap: 20px;
+            background: #fff;
+            min-height: 100px;
+            &>div{
+                font-family: "Inter";
+                text-transform: uppercase;
+                color: rgba(51, 51, 51, 0.40);
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 18px;
+                span{
+                    text-transform: none;
+                    text-align: center;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    display: block;
+                    margin-bottom: 5px;
+                    line-height: 25px;
+                }
+                // &:first-child{
+                //     width: 30%;
+                    
+                // }
+                // &:last-child{
+                //     width: 70%;
+                // }
+            }
+        }
+        &.blue{
+            .box-content{
+                &>div{
+                    &:first-child{
+                        width: 30%;
+                        
+                    }
+                    &:last-child{
+                        width: 70%;
+                    }
+                }
+            }
+            &>div{
+                
+                span{
+                    color: #4DB9E9;
+                }
+            }
+            .box-header{
+                background: #4DB9E9;
+            }
+        }
+        &.green{
+            &>div{
+                span{
+                    color: #33CC7F;
+                }
+            }
+            .box-header{
+                background: #33CC7F;
+            }
+        }
+        &.orange{
+            &>div{
+                span{
+                    color: #F49966;
+                }
+            }
+            .box-header{
+                background: #F49966;
+            }
+        }
+    }
+}
+
+.card{
+    border-radius: 16px;
+    background: var(--white-100, #FFF);
+    box-shadow: 0px 0px 4px 0px rgba(51, 51, 51, 0.10);
+    padding: 32px;
+    h5{
+        color: #333;
+        font-family: "Inter";
+        font-size: 24px;
+        font-weight: 500;
+    }
+    &.list{
+        padding: 8px 16px 16px;
+        .box-header{
+            padding: 0px !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #333;
+            font-family: "Inter";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 22.4px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.10);
+        }
+        .box-item{
+            display: flex;
+            color: #333;
+            font-family: "Inter";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            gap: 8px;
+            line-height: 22.4px;
+            padding: 4px 8px;
+            &:hover{
+                background: #EAF2FE;
+                cursor: pointer;
+            }
+        }
+    }
+}
+h4{
+    font-family: "Inter";
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.box-white{
+    border-radius: 8px;
+    border: 1px solid var(--black-5, rgba(51, 51, 51, 0.05));
+    background: var(--white-100, #FFF);
+    display: flex;
+    gap: 14px;
+    font-family: "Inter";
+    padding: 14px;
+    .name-file{
+        color: #333;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 25.6px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: calc(100% - 10px);
+        height: 1.2em;
+        white-space: nowrap;
+    }
+    .size{
+        color: rgba(51, 51, 51, 0.60);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px
+    }
+}

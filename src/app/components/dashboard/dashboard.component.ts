@@ -12,6 +12,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   itemsBreadcrumb: HrmBreadcrumb[] = [];
@@ -35,19 +36,19 @@ export class DashboardComponent implements OnInit {
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.dataChart = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['20/08', '21/08', '22/08', '23/08', '24/08', 'Hôm qua', 'Hôm nay'],
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: documentStyle.getPropertyValue('--blue-500'),
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
-          data: [65, 59, 80, 81, 56, 55, 40]
+          label: 'Số lượng đơn theo ngày',
+          backgroundColor: documentStyle.getPropertyValue('--primary-600'),
+          borderColor: documentStyle.getPropertyValue('--primary-600'),
+          data: [30, 70, 130, 160, 90, 10, 70]
         },
         {
-          label: 'My Second dataset',
-          backgroundColor: documentStyle.getPropertyValue('--pink-500'),
-          borderColor: documentStyle.getPropertyValue('--pink-500'),
-          data: [28, 48, 40, 19, 86, 27, 90]
+          label: 'Doanh thu theo ngày',
+          backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+          borderColor: documentStyle.getPropertyValue('--yellow-500'),
+          data: [70, 210, 90, 160, 135, 20, 160]
         }
       ]
     };

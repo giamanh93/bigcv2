@@ -8,117 +8,142 @@
   <!--    </section>-->
   <section>
     <div class="grid">
-      <div class="col-8">
+      <div class="col-9">
         <div class="drop">
           Hôm qua
         </div>
-        <div class="grid">
-          <div class="col-3 box">
-            <div class="box-header p-4 flex">
-              <div class="">Khách hàng * 640</div>
-              <div class="">
-                <img src="/assets/images/svg/home-1.svg" alt="">
+        <div class="grid mb16">
+          <div class="col-3">
+            <div class="box blue">
+              <div class="box-header p-4 flex ">
+                <div class="">Khách hàng * 640</div>
+                <div class="">
+                  <img src="/assets/images/svg/home-1.svg" alt="">
+                </div>
               </div>
-            </div>
-            <div class="box-content">
-              <div><span>48</span> <br> Mới</div>
-              <div><span>406</span> <br> Không phát sinh doanh thu theo chu kỳ</div>
+              <div class="box-content">
+                <div><span>48</span>  Mới</div>
+                <div><span>406</span>  Không phát sinh doanh thu theo chu kỳ</div>
+              </div>
             </div>
           </div>
           <div class="col-6">
-            <div class="box-header p-4 flex">
-              <div class="">Sản phẩm * 1.928</div>
-              <div class="">
-                <img src="/assets/images/svg/home-3.svg" alt="">
+            <div class="box green">
+              <div class="box-header  p-4 flex">
+                <div class="">Sản phẩm * 1.928</div>
+                <div class="">
+                  <img src="/assets/images/svg/home-3.svg" alt="">
+                </div>
               </div>
-            </div>
-            <div class="box-content">
-              <div><span>48</span> <br> Mới</div>
-              <div><span>406</span> <br> Không phát sinh doanh thu theo chu kỳ</div>
-              <div><span>406</span> <br> Hỏng, Hủy</div>
-              <div><span>406</span> <br> Giảm theo chu kỳ</div>
+              <div class="box-content">
+                <div><span>48</span>  Mới</div>
+                <div><span>406</span>  Không phát sinh doanh thu theo chu kỳ</div>
+                <div><span>406</span>  Hỏng, Hủy</div>
+                <div><span>406</span>  Giảm theo chu kỳ</div>
+              </div>
             </div>
           </div>
           <div class="col-3">
-            <div class="box-header p-4 flex">
-              <div class="">Nhà cung cấp * 287</div>
-              <div class="">
-                <img src="/assets/images/svg/home-2.svg" alt="">
+            <div class="box orange">
+              <div class="box-header p-4 flex">
+                <div class="">Nhà cung cấp * 287</div>
+                <div class="">
+                  <img src="/assets/images/svg/home-2.svg" alt="">
+                </div>
               </div>
-            </div>
-            <div class="box-content">
-              <div><span>48</span> <br> CÓ SỐ LƯỢNG
-                HÀNG HỎNG, HỦY
-              </div>
-              <div><span>406</span> <br> CÓ CÔNG NỢ
-                ĐẾN KỲ
+              <div class="box-content">
+                <div><span>48</span>  CÓ SỐ LƯỢNG
+                  HÀNG HỎNG, HỦY
+                </div>
+                <div><span>406</span>  CÓ CÔNG NỢ
+                  ĐẾN KỲ
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="grid chart">
-          <div class="card">
-            <h5>Biểu đồ Báo cáo số lượng và doanh thu theo ngày</h5>
-            <p-chart type="bar" [data]="dataChart" [options]="options"></p-chart>
+        <div class="grid chart mb16">
+          <div class="col-12">
+            <div class="card">
+              <h5>Biểu đồ Báo cáo số lượng và doanh thu theo ngày</h5>
+              <p-chart type="bar" [data]="dataChart" [options]="options"></p-chart>
+            </div>
           </div>
         </div>
-        <div class="grid chart">
-          <h4>Báo cáo nhanh</h4>
-
-          <div class="grid">
-            <div class="col-4">
-              <img src="/assets/images/svg/home-2.svg" alt="">
-              <div class="name-file">
-                Báo cáo doanh thu T07/20...
+        <div class="grid">
+          <div class="col-12">
+            <h4 class="mb16">Báo cáo nhanh</h4>
+            <div class="grid">
+              <div class="col-4">
+                <div class="box-white">
+                  <img src="/assets/images/svg/home-2.svg" alt="">
+                  <div>
+                    <div class="name-file">
+                      Báo cáo doanh thu T07/20...
+                    </div>
+                    <div class="size">
+                      128kB
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="size">
-                128kB
+              <div class="col-4">
+                <div class="box-white">
+                  <img src="/assets/images/svg/home-2.svg" alt="">
+                  <div>
+                    <div class="name-file">
+                      Báo cáo doanh thu T07/20...
+                    </div>
+                    <div class="size">
+                      128kB
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="col-4">
-              <img src="/assets/images/svg/home-2.svg" alt="">
-              <div class="name-file">
-                Báo cáo doanh thu T07/20...
-              </div>
-              <div class="size">
-                128kB
-              </div>
-            </div>
-            <div class="col-4">
-              <img src="/assets/images/svg/home-2.svg" alt="">
-              <div class="name-file">
-                Báo cáo doanh thu T07/20...
-              </div>
-              <div class="size">
-                128kB
+              <div class="col-4">
+                <div class="box-white">
+                  <img src="/assets/images/svg/home-2.svg" alt="">
+                  <div>
+                    <div class="name-file">
+                      Báo cáo doanh thu T07/20...
+                    </div>
+                    <div class="size">
+                      128kB
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <div class="drop">
-          Hôm qua
+         Công cụ
         </div>
         <div class="grid">
-          <div class="box-header p-4 flex">
-            <div class="">
-              <img src="/assets/images/svg/home-2.svg" alt="">
-            </div>
-            <div class="">Nhập dữ liệu tự động</div>
-          </div>
-          <div class="box-content">
-            <div class="box-item">
-              <img src="/assets/images/svg/home-r1.svg" alt="">
-              <div class="">Tải tệp lên</div>
-            </div>
-            <div class="box-item">
-              <img src="/assets/images/svg/home-r2.svg" alt="">
-              <div class="">Tải thư mục lên</div>
-            </div>
-            <div class="box-item">
-              <img src="/assets/images/svg/home-r3.svg" alt="">
-              <div class="">Danh sách dữ liệu đã nhập</div>
+          <div class="col-12">
+            <div class="card list">
+              <div class="box-header p-4 flex">
+                <div class="">
+                  <img src="/assets/images/svg/home-right0.svg" alt="">
+                </div>
+                <div class="">Nhập dữ liệu tự động</div>
+              </div>
+              <div class="box-content">
+                <div class="box-item">
+                  <img src="/assets/images/svg/home-r1.svg" alt="">
+                  <div class="">Tải tệp lên</div>
+                </div>
+                <div class="box-item">
+                  <img src="/assets/images/svg/home-r2.svg" alt="">
+                  <div class="">Tải thư mục lên</div>
+                </div>
+                <div class="box-item">
+                  <img src="/assets/images/svg/home-r3.svg" alt="">
+                  <div class="">Danh sách dữ liệu đã nhập</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
