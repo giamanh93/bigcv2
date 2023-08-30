@@ -54,7 +54,7 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
             path: 'order-purchase',
             loadChildren: () => import('../app/components/purchase-order/purchase-order.module').then(m => m.PurchaseOrderModule)
           },
-        ]
+        ],  canActivate: [AuthGuardService]
         // ], canActivate: [AuthGuardService]
       },
       // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },

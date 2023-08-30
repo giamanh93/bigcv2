@@ -429,6 +429,10 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
         cellEditor: 'agTextCellEditor',
         cellEditorPopup: false,
         filter: false,
+        cellRenderer: (params: any) => {
+          return params.node.rowPinned === 'bottom'
+            ? `Tổng tiền từ ảnh: ${this.query.supplierName && this.query.supplierName.imageTotal ? this.query.supplierName.imageTotal : ''}` : params.data.imageProductName;
+        },
         cellClass: (params: any) => {
           return params.data.imageProductName === '' || params.data.imageProductName === null
             ? params.node.rowPinned === 'bottom' ? ['left_sl'] : ['bg-orange-400', 'left_sl'] : ['left_sl'];
@@ -1241,7 +1245,7 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
 
 
   autoSizeAll(skipHeader: boolean) {
-    console.log(this.gridColumnApi)
+    console.log(this.gridColumnApi);
     const notAutoSizes = ['productName', 'imageProductName'];
     const allColumnIds: string[] = [];
     // tslint:disable-next-line:no-non-null-assertion
