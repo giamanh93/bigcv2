@@ -3879,7 +3879,7 @@
   "resolved" "https://registry.npmjs.org/chardet/-/chardet-0.7.0.tgz"
   "version" "0.7.0"
 
-"chart.js@^3.3.2":
+"chart.js@^3.9.1":
   "integrity" "sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w=="
   "resolved" "https://registry.npmjs.org/chart.js/-/chart.js-3.9.1.tgz"
   "version" "3.9.1"
