@@ -96,6 +96,7 @@ export const menus = [
     code: 'listsync',
     class: 'nav-item',
     routerLink: '/sync/listsync',
+    isExternalLink: true
     // items: [
     //   { label: '1. Nhập hoá đơn từ tệp ảnh', routerLink: '/order-purchase/input-purchase-order', class: 'nav-item' },
     //   { label: '2. Upload ảnh', routerLink: '/order-purchase/upload-image', class: 'nav-item' },
