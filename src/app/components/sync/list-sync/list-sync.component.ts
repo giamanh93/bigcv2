@@ -117,7 +117,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       },
       {
-        headerName: 'syncItem',
+        headerName: 'Hạng mục',
         field: 'syncItem',
         cellClass: 'flex',
         editable: false,
