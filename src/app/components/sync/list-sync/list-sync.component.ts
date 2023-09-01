@@ -104,6 +104,19 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   onInitGrid() {
     this.columnDefs = this.columnDefs = [
       {
+        headerName: 'Stt',
+        field: 'stt',
+        cellClass: 'flex',
+        editable: false,
+        cellEditor: 'agTextCellEditor',
+        cellEditorPopup: false,
+        filter: false,
+        menuTabs: [],
+        cellRenderer: (params) => {
+          return params.rowIndex + 1;
+        }
+      },
+      {
         headerName: 'syncItem',
         field: 'syncItem',
         cellClass: 'flex',
@@ -113,26 +126,26 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         filter: false,
         menuTabs: [],
       },
-      {
-        headerName: 'syncCode',
-        field: 'syncCode',
-        cellClass: 'flex',
-        editable: false,
-        cellEditor: 'agTextCellEditor',
-        cellEditorPopup: false,
-        filter: false,
-        menuTabs: [],
-      },
-      {
-        headerName: 'syncType',
-        field: 'syncType',
-        cellClass: 'flex',
-        editable: false,
-        cellEditor: 'agTextCellEditor',
-        cellEditorPopup: false,
-        filter: false,
-        menuTabs: [],
-      },
+      // {
+      //   headerName: 'syncCode',
+      //   field: 'syncCode',
+      //   cellClass: 'flex',
+      //   editable: false,
+      //   cellEditor: 'agTextCellEditor',
+      //   cellEditorPopup: false,
+      //   filter: false,
+      //   menuTabs: [],
+      // },
+      // {
+      //   headerName: 'syncType',
+      //   field: 'syncType',
+      //   cellClass: 'flex',
+      //   editable: false,
+      //   cellEditor: 'agTextCellEditor',
+      //   cellEditorPopup: false,
+      //   filter: false,
+      //   menuTabs: [],
+      // },
       //
       {
         headerName: 'Trạng thái',
