@@ -77,8 +77,8 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     branchId: localStorage.hasOwnProperty('branchId') && localStorage.getItem('branchId') ? Number(localStorage.getItem('branchId')) : 0,
     syncCode: null,
     syncType: null,
-    startDate: null,
-    endDate: null,
+    startDate: new Date(),
+    endDate: new Date(),
   };
   first: number = 0;
   isUploadFile: boolean = true;
