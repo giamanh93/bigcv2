@@ -91,6 +91,17 @@ export const menus = [
             { label: '3. Danh sách hoá đơn đọc tự động', routerLink: '/order-purchase/list-image-purchase-order', class: 'nav-item' },
         ]
     },
+  {
+    label: 'Đồng bộ',
+    code: 'listsync',
+    class: 'nav-item',
+    routerLink: '/sync/listsync',
+    // items: [
+    //   { label: '1. Nhập hoá đơn từ tệp ảnh', routerLink: '/order-purchase/input-purchase-order', class: 'nav-item' },
+    //   { label: '2. Upload ảnh', routerLink: '/order-purchase/upload-image', class: 'nav-item' },
+    //   { label: '3. Danh sách hoá đơn đọc tự động', routerLink: '/order-purchase/list-image-purchase-order', class: 'nav-item' },
+    // ]
+  },
     // a68dc8d0-707e-4446-b397-622ecc7eceb4
 
 
