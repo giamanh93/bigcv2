@@ -1,0 +1,26 @@
+
+<div class="main-grid">
+  <section class="bread-crumb" style="background: transparent">
+    <div class="flex bet middle">
+      <div class="md:col-8 sm:col-12 p-0">
+        <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+      </div>
+      <div class="md:col-4 sm:col-0 p-0 flex justify-content-end align-items-center dropdown-branch">
+        <div class="fields p-top-right">
+          <p-dropdown [options]="listBranchs"  [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId"  [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- this.organizeInfoService.setStocks(e.value); -->
+  <p-divider type="solid"></p-divider>
+
+  <div class="grid">
+    <div class="col-2">
+      <p-panelMenu [model]="itemsPanelMenu"></p-panelMenu>
+    </div>
+    <div class="col-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+

@@ -27,6 +27,10 @@ import {SyncRoutingModule} from './components/sync/sync-routing.module';
         children: [
           {path: 'home', loadChildren: () => import('../app/components/dashboard/dashboard.module').then(m => m.DashboardModule)},
           {
+            path: 'bao-cao',
+            loadChildren: () => import('../app/components/menu-bao-cao/menu-bao-cao.module').then(m => m.MenuBaoCaoModule)
+          },
+          {
             path: 'customer-mgmt-system',
             loadChildren: () => import('../app/components/customer-management-system/customer-management-system.module').then(m => m.CustomerManagementSystemModule)
           },
