@@ -1425,8 +1425,6 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
       'paste',
       'separator',
       'excelExport',
-
-
     ];
     return result;
   };
