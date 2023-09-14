@@ -86,8 +86,6 @@ export class SidebarComponent implements OnInit {
           }
         } else {
           if (k.routerLink && pathname.includes(k.routerLink)) {
-            console.log(pathname);
-            console.log(k.routerLink);
             k.styleClass = 'active';
           } else {
             k.styleClass = 'no-active';

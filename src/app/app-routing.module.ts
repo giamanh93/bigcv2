@@ -8,6 +8,7 @@ import {
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {OurCustomerComponent} from './pages/our-customer/our-customer.component';
 import {AboutUsComponent} from './pages/about-us/about-us.component';
+import {SyncRoutingModule} from './components/sync/sync-routing.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,10 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
         path: '', component: DefaultLayoutComponent,
         children: [
           {path: 'home', loadChildren: () => import('../app/components/dashboard/dashboard.module').then(m => m.DashboardModule)},
+          {
+            path: 'bao-cao',
+            loadChildren: () => import('../app/components/menu-bao-cao/menu-bao-cao.module').then(m => m.MenuBaoCaoModule)
+          },
           {
             path: 'customer-mgmt-system',
             loadChildren: () => import('../app/components/customer-management-system/customer-management-system.module').then(m => m.CustomerManagementSystemModule)
@@ -50,6 +55,7 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
             loadChildren: () => import('../app/components/product-manager/product-manager.module').then(m => m.ProductManagerModule)
           },
           {path: 'utility', loadChildren: () => import('../app/components/utility/utility.module').then(m => m.UtilityModule)},
+          {path: 'sync', loadChildren: () => import('../app/components/sync/sync.module').then(m => m.SyncModule)},
           {
             path: 'order-purchase',
             loadChildren: () => import('../app/components/purchase-order/purchase-order.module').then(m => m.PurchaseOrderModule)
