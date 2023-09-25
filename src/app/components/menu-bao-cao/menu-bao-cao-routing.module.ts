@@ -9,11 +9,11 @@ import {MenuBaoCaoComponent} from './menu-bao-cao/menu-bao-cao.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '#',
+    redirectTo: 'v1',
     pathMatch: 'full',
   },
   {
-    path: '#', component: MenuBaoCaoComponent,
+    path: 'v1', component: MenuBaoCaoComponent,
     children: [
       {
         path: 'customer-mgmt-system',

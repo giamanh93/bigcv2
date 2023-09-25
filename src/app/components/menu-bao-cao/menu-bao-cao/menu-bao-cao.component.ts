@@ -26,34 +26,22 @@ export class MenuBaoCaoComponent implements OnInit {
 
     this.itemsPanelMenu = [
       {
-        label: 'File',
+        label: 'Khách hàng',
         icon: 'pi pi-fw pi-file',
-        routerLink: '/bao-cao/#/customer-mgmt-system',
+        routerLink: '/bao-cao/v1/customer-mgmt-system',
         items: [
           {
-            label: 'New',
-            icon: 'pi pi-fw pi-plus',
-            items: [
-              {
-                label: 'Bookmark',
-                icon: 'pi pi-fw pi-bookmark'
-              },
-              {
-                label: 'Video',
-                icon: 'pi pi-fw pi-video'
-              }
-            ]
+            label: 'Chu Kỳ khách hàng',
+            routerLink: '/bao-cao/v1/customer-mgmt-system',
           },
           {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-trash'
+            label: 'Chu kỳ doanh thu',
           },
           {
-            separator: true
+            label: 'Chu kỳ sản phẩm',
           },
           {
-            label: 'Export',
-            icon: 'pi pi-fw pi-external-link'
+            label: 'Công nợ và định mức',
           }
         ]
       },
