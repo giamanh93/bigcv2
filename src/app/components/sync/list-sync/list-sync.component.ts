@@ -23,6 +23,8 @@ import {AuthService} from '../../../services/auth/auth.service';
 import {ButtonAgGridComponent} from 'src/app/common/components/list-grid-angular/ag-buttons';
 import {Router} from '@angular/router';
 import {SyncService} from '../../../services/sync.service';
+import {WebsocketService2} from '../../../services/websocket.service';
+import {environment} from '../../../../environments/environment';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -89,11 +91,14 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.querySyncData.retailerCode = this.authService?.getRetailerName();
     this.onInitGrid();
+    this.$webSocketService.connect(`${environment.socketServer}?username=0983732396`);
+    this.$webSocketService.emit2(['/user/0983732396/sync/notify']);
   }
 
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.$webSocketService.closeConnection();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -198,8 +203,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         const object: any = {...this.querySyncData};
         object.endDate = this.$datepipe.transform(this.querySyncData.endDate, 'yyyy-MM-dd');
         object.startDate = this.$datepipe.transform(this.querySyncData.startDate, 'yyyy-MM-dd');
-        const queryParams = queryString.stringify({...object});
-        this.$syncService.syncData(queryParams).subscribe((results: any) => {
+        this.$syncService.syncData(object).subscribe((results: any) => {
           if (results.success) {
             const itemUpdate = event.rowData;
             itemUpdate.syncMessage = results.data.syncMessage;
@@ -223,6 +227,15 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     ];
     this.getListImagePurchaseOrder();
     this.getListBranch();
+    this.$webSocketService.myWebSocket
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(repon => {
+            console.log(repon)
+        },
+        err => {
+          console.log(err);
+        });
+
   }
 
   convertDate(stringDate: any) {
@@ -362,6 +375,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   private readonly unsubscribe$: Subject<void> = new Subject();
   private $service = inject(PurchaseOrderService);
   private $syncService = inject(SyncService);
+  private $webSocketService = inject(WebsocketService2);
   private $messageService = inject(MessageService);
   private $changeDetech = inject(ChangeDetectorRef);
 }

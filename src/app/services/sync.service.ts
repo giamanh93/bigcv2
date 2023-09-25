@@ -23,7 +23,7 @@ export class SyncService {
   }
 
   syncData(query: string): Observable<Responses> {
-    return this.$http.get<Responses>(baseUrl + `/sync/v1/syncData?` + query).pipe(
+    return this.$http.post<Responses>(baseUrl + `/sync/v1/syncData` , query).pipe(
       catchError(error => {
         this.handleError(error);
         return of(error.error);

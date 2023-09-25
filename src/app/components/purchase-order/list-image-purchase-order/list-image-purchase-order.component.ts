@@ -22,6 +22,8 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {AuthService} from '../../../services/auth/auth.service';
 import {ButtonAgGridComponent} from 'src/app/common/components/list-grid-angular/ag-buttons';
 import {Router} from '@angular/router';
+import {WebsocketService2} from 'src/app/services/websocket.service';
+import {environment} from 'src/environments/environment';
 
 export interface ContentBase64 {
   name: string;
@@ -92,6 +94,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
   constructor(private authService: AuthService, private router: Router) {
     this.query.retailerId = this.authService?.getRetailerId();
     this.onInitGrid();
+
   }
 
 
@@ -209,7 +212,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
         filter: false,
         menuTabs: [],
         cellRenderer: (params) => {
-          return params.data.isProcessed === 1 ? '<span class="bg-success noti-number">Đã lưu</span>' : '<span class="bg-secondary noti-number">Chưa lưu</span>'
+          return params.data.isProcessed === 1 ? '<span class="bg-success noti-number">Đã lưu</span>' : '<span class="bg-secondary noti-number">Chưa lưu</span>';
         }
       },
       // {
