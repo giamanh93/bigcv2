@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import queryString from 'query-string';
-import {AsyncSubject, Observable, Subject, takeUntil, zip} from 'rxjs';
+import {AsyncSubject, map, Observable, Subject, Subscription, takeUntil, zip} from 'rxjs';
 import {HrmBreadcrumb} from 'src/app/common/components/hrm-breadcrumb/hrm-breadcrumb.component';
 import {Branch, CountRecord} from 'src/app/models/early-warning';
 import {ColDef, RowGroupingDisplayType} from 'ag-grid-community';
@@ -23,8 +23,7 @@ import {AuthService} from '../../../services/auth/auth.service';
 import {ButtonAgGridComponent} from 'src/app/common/components/list-grid-angular/ag-buttons';
 import {Router} from '@angular/router';
 import {SyncService} from '../../../services/sync.service';
-import {WebsocketService2} from '../../../services/websocket.service';
-import {environment} from '../../../../environments/environment';
+import {RxStompService} from 'src/app/rx-stomp.service';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -87,18 +86,16 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   displayFilter: boolean = false;
   ListUploadDates: any[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private stomp: RxStompService) {
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.querySyncData.retailerCode = this.authService?.getRetailerName();
     this.onInitGrid();
-    this.$webSocketService.connect(`${environment.socketServer}?username=0983732396`);
-    this.$webSocketService.emit2(['/user/0983732396/sync/notify']);
   }
 
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.$webSocketService.closeConnection();
+    this.topicSubscription.unsubscribe();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -206,7 +203,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.$syncService.syncData(object).subscribe((results: any) => {
           if (results.success) {
             const itemUpdate = event.rowData;
-            itemUpdate.syncMessage = results.data.syncMessage;
+            itemUpdate.syncMessage = results.data.syncStatus;
             this.gridApi.applyTransaction({update: [itemUpdate]});
           } else {
             this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
@@ -227,14 +224,23 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     ];
     this.getListImagePurchaseOrder();
     this.getListBranch();
-    this.$webSocketService.myWebSocket
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(repon => {
-            console.log(repon)
-        },
-        err => {
-          console.log(err);
-        });
+    // this.stomp.publish({destination: '/user/0983732396/sync/notify'});
+    const userName = this.$auth.getUserName();
+    this.topicSubscription = this.stomp.watch(`/user/${userName}/sync/notify`).subscribe((message: any) => {
+      // const itemUpdate = event.rowData;
+      // itemUpdate.syncMessage = results.data.syncStatus;
+      // this.gridApi.applyTransaction({update: [itemUpdate]});
+      if (message.body) {
+        const item = JSON.parse(message.body);
+        if (item.branchId) {
+          const itemUpdate: any = this.listDatas.filter(_ => parseFloat(_.syncCode) === parseFloat(item.syncCode));
+          console.log(itemUpdate);
+          itemUpdate.syncMessage = itemUpdate.length > 0 ? item.syncStatus : '';
+          this.gridApi.applyTransaction({update: [itemUpdate]});
+        }
+        console.log(JSON.parse(message.body));
+      }
+    });
 
   }
 
@@ -366,6 +372,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     ];
     return result;
   };
+  private topicSubscription!: Subscription;
 
   private $datepipe = inject(DatePipe);
   private _confirmationService = inject(ConfirmationService);
@@ -374,8 +381,8 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   private $serviceProduct = inject(ProductManagerService);
   private readonly unsubscribe$: Subject<void> = new Subject();
   private $service = inject(PurchaseOrderService);
+  private $auth = inject(AuthService);
   private $syncService = inject(SyncService);
-  private $webSocketService = inject(WebsocketService2);
   private $messageService = inject(MessageService);
   private $changeDetech = inject(ChangeDetectorRef);
 }
