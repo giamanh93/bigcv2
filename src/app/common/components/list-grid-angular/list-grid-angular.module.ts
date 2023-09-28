@@ -9,7 +9,7 @@ import {AgGridModule} from 'ag-grid-angular';
 import {TotalValueFooterComponent} from '../total-value-component/total-value-component';
 import {DropdownModule} from 'primeng/dropdown';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [ListGridAngularComponent, TotalValueFooterComponent],
   imports: [
@@ -21,7 +21,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ButtonModule,
     DialogModule,
     DropdownModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ProgressSpinnerModule
   ],
   entryComponents: [],
   exports: [

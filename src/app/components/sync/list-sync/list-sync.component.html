@@ -22,8 +22,8 @@
     <div class="grid mt-1">
       <div class="col-12 md:col-12 lg:col-12 ">
         <div class="table-default">
-          <app-list-grid-angular [idGrid]="'image-order'" [isShowTotalBottom]="false"   (callbackGridReady)="onGridReady($event)"
-                                 [columnsWithAggregation]="fieldsTotal" [rowClassRules]="rowClassRules"
+          <app-list-grid-angular [idGrid]="'image-order'" *ngIf="columnDefs.length > 0" [isShowTotalBottom]="false"   (callbackGridReady)="onGridReady($event)"
+                                 [columnsWithAggregation]="fieldsTotal" [rowClassRules]="rowClassRules"  [getRowId]="getRowId"
                                  [listsData]="contentItems" [height]="heightGrid" [heightRow]="50"
                                  [groupDisplayType]="groupDisplayType" [rowDragManaged]="true"  (callback)="getSelectedRows($event)"
                                  [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" ></app-list-grid-angular>

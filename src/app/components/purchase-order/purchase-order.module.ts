@@ -48,6 +48,7 @@ import {AvatarModule} from 'primeng/avatar';
 import { ListImagePurchaseOrderComponent } from './list-image-purchase-order/list-image-purchase-order.component';
 import {ButtonAgGridComponent} from '../../common/components/list-grid-angular/ag-buttons';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [
     InputOrderComponent,
@@ -96,7 +97,9 @@ import {SplitButtonModule} from 'primeng/splitbutton';
     InputTextareaModule,
     InputTextModule,
     AvatarModule,
-    SplitButtonModule
+    SplitButtonModule,
+    ProgressSpinnerModule
+
   ],
   providers: [PurchaseOrderService, ProductManagerService, financialControlSystemService]
 })

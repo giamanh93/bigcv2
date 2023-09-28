@@ -12,8 +12,17 @@ import {MenuItem} from 'primeng/api';
 <!--    <p-splitButton *ngIf="items.length > 0" [label]="this.params.buttons[0].label" styleClass="p-button-sm p-button-outlined"-->
 <!--                   (onClick)="onClick($event, 0)" [model]="items" [appendTo]="'body'"></p-splitButton>-->
 
-    <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label" (onClick)="onClick($event, 0)"
-              styleClass="p-button-sm p-button-outlined"></p-button>
+
+
+<ng-container *ngIf="this.params.buttons[0].disabled && this.params.data.syncMessage === 'PROCESSING'; else buttonOther">
+  <div class="flex justify-content-center align-items-center">
+    <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+  </div>
+</ng-container>
+<ng-template #buttonOther>
+  <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label" [disabled]="this.params.buttons[0].disabled" (onClick)="onClick($event, 0)"
+            styleClass="p-button-sm p-button-outlined"></p-button>
+</ng-template>
   `
 })
 
@@ -25,6 +34,7 @@ export class ButtonAgGridComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.params = params;
+    console.log(this.params.buttons[0].disabled)
     for (const index in this.params.buttons) {
       if (!this.params.buttons[index].hide) {
         const object = {
