@@ -90,6 +90,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.querySyncData.retailerCode = this.authService?.getRetailerName();
     this.onInitGrid();
+    this.stomp.deactivate();
   }
 
   public getRowId: GetRowIdFunc = (params: GetRowIdParams) => {
@@ -212,8 +213,9 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       message: '',
       key: 'key-confirm',
       accept: () => {
+        this.stomp.activate();
         this.columnDefs = [];
-        this.stomp.publish({destination: '/user/0983732396/sync/notify'});
+        // this.stomp.publish({destination: '/user/0983732396/sync/notify'});
         const object: any = {...this.querySyncData};
         object.endDate = this.$datepipe.transform(this.querySyncData.endDate, 'yyyy-MM-dd');
         object.startDate = this.$datepipe.transform(this.querySyncData.startDate, 'yyyy-MM-dd');
@@ -258,6 +260,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
             this.columnDefs = [];
 
             setTimeout(() => {
+              this.stomp.deactivate();
               const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
               const itemUpdate: any = this.contentItems[index];
               itemUpdate.syncMessage = item.syncStatus;
