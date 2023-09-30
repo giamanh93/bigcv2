@@ -126,6 +126,7 @@ export class AuthInterceptor implements HttpInterceptor {
     } else {
       return request.clone({
         setHeaders: {
+          'accept': '*/*',
           Authorization: `Bearer ${token}`,
         }
       });

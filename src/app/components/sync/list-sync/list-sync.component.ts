@@ -340,7 +340,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   getListImagePurchaseOrder() {
     this.querySyncData.retailerId = this.authService?.getRetailerId();
-    const queryParams = queryString.stringify({page: 0, size: 100000000});
+    const queryParams = queryString.stringify({page: 1, size: 100000000});
     this.$syncService.getListSync(queryParams)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
