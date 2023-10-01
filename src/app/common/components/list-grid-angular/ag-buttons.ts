@@ -14,13 +14,13 @@ import {MenuItem} from 'primeng/api';
 
 
 
-<ng-container *ngIf="this.params.buttons[0].disabled && this.params.data.syncMessage === 'PROCESSING'; else buttonOther">
+<ng-container *ngIf="this.params.data.syncMessage === 'PROCESSING'; else buttonOther">
   <div class="flex justify-content-center align-items-center">
     <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
   </div>
 </ng-container>
 <ng-template #buttonOther>
-  <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label" [disabled]="this.params.buttons[0].disabled" (onClick)="onClick($event, 0)"
+  <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label"  (onClick)="onClick($event, 0)"
             styleClass="p-button-sm p-button-outlined"></p-button>
 </ng-template>
   `

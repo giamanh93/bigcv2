@@ -97,7 +97,7 @@ export class UnitChangeComponent implements OnInit {
           this.products = [...products];
         } else {
           this.products = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }

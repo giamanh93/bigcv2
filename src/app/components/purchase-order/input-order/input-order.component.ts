@@ -1565,11 +1565,11 @@ export class InputOrderComponent implements OnInit, AfterViewInit, OnDestroy, Af
             , contentItems: this.contentItems
           });
           this.isUploadFile = true;
-          this.$messageService.add({severity: 'success', summary: 'Error Message', detail: 'Xử lý dữ liệu thành công'});
+          this.$messageService.add({severity: 'success', summary: 'Thông báo', detail: 'Xử lý dữ liệu thành công'});
           this.$spinner.hide();
         } else {
           this.isUploadFile = true;
-          this.$messageService.add({severity: 'warn', summary: 'Error Message', detail: 'Xử lý dữ liệu thất bại'});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Xử lý dữ liệu thất bại'});
           this.$spinner.hide();
         }
       });

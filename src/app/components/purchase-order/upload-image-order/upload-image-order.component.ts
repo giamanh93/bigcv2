@@ -223,7 +223,7 @@ export class UploadImageOrderComponent implements OnInit, OnDestroy, AfterViewCh
           this.gridApi.applyTransaction({update: [itemUpdate]});
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }
@@ -293,7 +293,7 @@ export class UploadImageOrderComponent implements OnInit, OnDestroy, AfterViewCh
           }
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }

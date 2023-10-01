@@ -302,7 +302,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
           this.gridApi.applyTransaction({update: [itemUpdate]});
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }
@@ -377,7 +377,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
           }
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }
@@ -397,7 +397,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
           }
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }
@@ -417,7 +417,7 @@ export class ListImagePurchaseOrderComponent implements OnInit, OnDestroy, After
           this.autoSizeAll(false);
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }

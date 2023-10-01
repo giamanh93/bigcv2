@@ -34,7 +34,7 @@
                   Trên tổng số
                   {{ countRecord.totalRecord }} Kết quả</span>
             <p-paginator [rows]="query.size" [totalRecords]="countRecord.totalRecord" [dropdownAppendTo]="'body'" [first]="first" [styleClass]="'all_' + query.size"
-                         (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,50,80,100,200,500, 1000000000]">
+                         (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,50,80,100]">
             </p-paginator>
           </div>
         </div>

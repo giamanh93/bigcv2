@@ -853,27 +853,27 @@ p-selectButton{
   }
 }
 
-
-.p-dropdown-panel ul p-dropdownitem:last-child {
-  li span::before {
-    content: "All";
-    visibility: visible;
-  }
-  li span::after {
-    content: "";
-  }
-  li span {
-    visibility: hidden;
-  }
-
-}
-
-.p-dropdown-panel{
-  .p-dropdown-items {
-    .p-dropdown-item{
-      white-space: unset;
-    }
-  }
-}
+//
+//.p-dropdown-panel ul p-dropdownitem:last-child {
+//  li span::before {
+//    content: "All";
+//    visibility: visible;
+//  }
+//  li span::after {
+//    content: "";
+//  }
+//  li span {
+//    visibility: hidden;
+//  }
+//
+//}
+//
+//.p-dropdown-panel{
+//  .p-dropdown-items {
+//    .p-dropdown-item{
+//      white-space: unset;
+//    }
+//  }
+//}
 
 

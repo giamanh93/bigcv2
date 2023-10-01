@@ -67,7 +67,7 @@ export class OrderPaymentComponent implements OnInit {
             this.modelpayment.amount = 0;
           }
         } else {
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }

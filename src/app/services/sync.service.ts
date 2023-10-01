@@ -73,7 +73,7 @@ export class SyncService {
 
   private handleError(error: any) {
     this.$errorService.setError(error.error);
-    this.$messageService.add({severity: 'error', summary: 'Error Message', detail: error.error});
+    this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
   }
 
 

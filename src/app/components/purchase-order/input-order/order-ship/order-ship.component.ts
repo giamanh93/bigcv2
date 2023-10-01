@@ -74,7 +74,7 @@ export class OrderShipComponent implements OnInit {
             }
           }
         } else {
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }

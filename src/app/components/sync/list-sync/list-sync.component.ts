@@ -149,6 +149,16 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         filter: false,
         menuTabs: [],
       },
+      {
+        headerName: 'Ngày cập nhật gần nhất',
+        field: 'lastSyncDate',
+        cellClass: 'flex',
+        editable: false,
+        cellEditor: 'agTextCellEditor',
+        cellEditorPopup: false,
+        filter: false,
+        menuTabs: [],
+      },
       // {
       //   headerName: 'syncCode',
       //   field: 'syncCode',
@@ -171,7 +181,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       // },
       //
       {
-        headerName: 'Trạng thái',
+        headerName: 'TT gần nhất',
         field: 'syncMessage',
         editable: false,
         cellClass: 'flex',
@@ -185,10 +195,9 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       },
       {
-        headerName: 'Thao tác',
+        headerName: 'Đồng bộ',
         filter: '',
         width: 100,
-        pinned: 'right',
         cellRenderer: ButtonAgGridComponent,
         cellClass: ['border-right', 'no-auto'],
         cellRendererParams: (params: any) => this.showButtons(params),
@@ -266,12 +275,22 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
             this.columnDefs = [];
 
             setTimeout(() => {
-              this.stomp.deactivate();
               const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
               const itemUpdate: any = this.contentItems[index];
               itemUpdate.syncMessage = item.syncStatus;
               this.contentItems[index] = itemUpdate;
               this.contentItems = [...this.contentItems];
+              let isConnectWs = false;
+              this.contentItems = this.contentItems.map(item1 => {
+                if (item1.syncStatus === 'PROCESSING') {
+                  this.disabledButtonGrid = true;
+                  isConnectWs = true;
+                }
+                return {...item1, syncMessage: item1.syncStatus};
+              });
+              if (!isConnectWs) {
+                this.stomp.deactivate();
+              }
               this.disabledButtonGrid = false;
               this.onInitGrid();
               this.autoSizeAll(false);
@@ -342,13 +361,13 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           }
         } else {
           this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });
   }
 
   paginate(event: any) {
-    this.query.page = event.first;
+    this.query.page = event.pageCount;
     this.first = event.first;
     this.query.size = event.rows;
     this.getListImagePurchaseOrder();
@@ -392,7 +411,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           this.onInitGrid();
           this.autoSizeAll(false);
           this.countRecord.totalRecord = results.data.totalElements;
-          this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page + 1;
+          this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page > 1 ? this.query.page + 1 : this.query.page;
           if ((results.data.totalElements - this.query.page) > this.query.size) {
             this.countRecord.currentRecordEnd = this.query.page + Number(this.query.size);
           } else {
