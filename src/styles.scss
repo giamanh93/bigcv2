@@ -5,8 +5,7 @@
 
 $fontMmedium: "Graphik Webfont", "-apple-system", "Helvetica Neue", "Droid Sans", Arial, sans-serif;
 $fontRegular: "Graphik Webfont", "-apple-system", "Helvetica Neue", "Droid Sans", Arial, sans-serif;
-
-
+$mainBg: #0a58ca;
 $mainColor: #0B3A85;
 $grey: #76809B;
 $white: #fff;
@@ -772,7 +771,6 @@ p-selectButton{
   line-height: 30px !important;
 }
 
-
 .paginator{
   color: $grey;
   font-size: 12px;
@@ -786,24 +784,11 @@ p-selectButton{
     .p-paginator-first, .p-paginator-last {
       display: none !important;
     }
-
-
   }
-  .all_1000000000 {
-    .p-dropdown-label::before {
-      content: "All";
-      visibility: visible;
-    }
-    .p-dropdown-label::after {
-      content: "";
-    }
-    .p-dropdown-label {
-      visibility: hidden;
-    }
-  }
+
   .p-paginator-rpp-options{
     height: 24px;
-    background: $mainColor;
+    background: $mainBg;
     border-radius: 3px;
     border: none;
     padding: 0px !important;
@@ -820,9 +805,24 @@ p-selectButton{
       width:2rem;
     }
   }
+  .all_1000000000 {
+    .p-paginator-rpp-options{
+      width: 80px;
+    }
+    .p-dropdown-label::before {
+      content: "All";
+      visibility: visible;
+    }
+    .p-dropdown-label::after {
+      content: "";
+    }
+    .p-dropdown-label {
+      visibility: hidden;
+    }
+
+  }
   button{
-    border-radius: 2px;
-    color: $grey !important;
+    border-radius: 2px !important;
     font-size: 14px;
     width: 24px;
     height: 24px !important;
@@ -832,12 +832,13 @@ p-selectButton{
     min-width: 0px !important;
     font-weight: 500;
     padding: 0px !important;
+    line-height: 25px;
     .p-paginator-icon{
       line-height: 24px;
       margin-right: 0px;
     }
     &.p-highlight{
-      background: $mainColor !important;
+      background: $mainBg !important;
       color: $white !important;
     }
     &.p-paginator-first,
@@ -851,4 +852,28 @@ p-selectButton{
 
   }
 }
+
+
+.p-dropdown-panel ul p-dropdownitem:last-child {
+  li span::before {
+    content: "All";
+    visibility: visible;
+  }
+  li span::after {
+    content: "";
+  }
+  li span {
+    visibility: hidden;
+  }
+
+}
+
+.p-dropdown-panel{
+  .p-dropdown-items {
+    .p-dropdown-item{
+      white-space: unset;
+    }
+  }
+}
+
 

@@ -368,6 +368,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   getListImagePurchaseOrder() {
+    this.columnDefs = [];
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.query.retailerId = this.authService?.getRetailerId();
     this.$spinner.show();
@@ -377,18 +378,25 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (results: any) => {
+          let isConnectWs = false;
           this.contentItems = results.data.content.map(item => {
-            return {...item, syncMessage: ''};
+            if (item.syncStatus === 'PROCESSING') {
+              this.disabledButtonGrid = true;
+              isConnectWs = true;
+            }
+            return {...item, syncMessage: item.syncStatus};
           });
-          if (this.gridApi) {
-            this.gridApi.setRowData(this.contentItems);
-            this.gridApi.setColumnDefs(this.columnDefs);
+          if (isConnectWs) {
+            this.stomp.activate();
           }
+          this.onInitGrid();
           this.autoSizeAll(false);
           this.countRecord.totalRecord = results.data.totalElements;
           this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page + 1;
           if ((results.data.totalElements - this.query.page) > this.query.size) {
             this.countRecord.currentRecordEnd = this.query.page + Number(this.query.size);
+          } else {
+            this.countRecord.currentRecordEnd = results.data.totalElements;
           }
           this.$spinner.hide();
         },
