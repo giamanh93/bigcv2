@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
+import {PurchaseOrderService} from '../purcher-order.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
@@ -23,11 +25,12 @@ export class ErrorService {
 
   setError(value: any) {
     this.errorInfo = value;
+    this.$spinner.hide();
   }
 
   fetchError() {
     return  this._errorInfo;
   }
   private readonly _errorInfo = new BehaviorSubject<any>(null);
-
+  private $spinner = inject(NgxSpinnerService);
 }
