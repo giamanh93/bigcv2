@@ -6,7 +6,7 @@
 <!-- <p-menubar [model]="menuItems" styleClass="sidebarBody" id="sidebarBody"></p-menubar> -->
 
 
-<p-menubar [model]="menuItems" [autoDisplay]="true" styleClass="sidebarBody1" id="sidebarBody">
+<p-menubar [model]="menuItems" [autoDisplay]="true" [style]="{'z-index': 9}" styleClass="sidebarBody1" id="sidebarBody">
     <ng-template pTemplate="start">
         <a (click)="goToHome()" class="go-to-home">
             <img src="../../../assets/images/logo.png" style="width: 100px;" alt="">

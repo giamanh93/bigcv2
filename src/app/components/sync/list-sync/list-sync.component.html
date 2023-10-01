@@ -1,6 +1,6 @@
-<!--<div class="fields p-top-right">-->
-<!--  <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
-<!--</div>-->
+<div class="fields p-top-right">
+  <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+</div>
 <div class="main-grid">
   <section class="bread-crumb" >
     <div class="flex bet middle">
@@ -27,6 +27,16 @@
                                  [listsData]="contentItems" [height]="heightGrid" [heightRow]="50"
                                  [groupDisplayType]="groupDisplayType" [rowDragManaged]="true"  (callback)="getSelectedRows($event)"
                                  [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" ></app-list-grid-angular>
+          <div class="paginator">
+                <span>
+                    Từ {{ countRecord.currentRecordStart }} Đến
+                  {{ countRecord.currentRecordEnd }}
+                  Trên tổng số
+                  {{ countRecord.totalRecord }} Kết quả</span>
+            <p-paginator [rows]="query.size" [totalRecords]="countRecord.totalRecord" [dropdownAppendTo]="'body'" [first]="first" [styleClass]="'all_' + query.size"
+                         (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,50,80,100,200,500, 1000000000]">
+            </p-paginator>
+          </div>
         </div>
 
       </div>

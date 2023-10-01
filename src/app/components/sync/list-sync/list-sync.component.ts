@@ -71,6 +71,12 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   state: string = '';
   initialised = false;
   pinnedBottomData: any = null;
+  query: any = {
+    retailerId: null,
+    branchId: localStorage.hasOwnProperty('branchId') && localStorage.getItem('branchId') ? Number(localStorage.getItem('branchId')) : 0,
+    page: 1,
+    size: 20
+  };
   querySyncData: any = {
     retailerId: null,
     retailerCode: null,
@@ -341,13 +347,36 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       });
   }
 
+  paginate(event: any) {
+    this.query.page = event.first;
+    this.first = event.first;
+    this.query.size = event.rows;
+    this.getListImagePurchaseOrder();
+  }
+
+  changeBranch() {
+    localStorage.setItem('branchId', this.query.branchId?.toString() ?? '');
+    this.query.page = 1;
+    this.query.size = 20;
+    this.first = 1;
+    this.countRecord = {
+      totalRecord: 0,
+      currentRecordStart: 0,
+      currentRecordEnd: 0
+    };
+    // this.getLists();
+  }
+
   getListImagePurchaseOrder() {
     this.querySyncData.retailerId = this.authService?.getRetailerId();
-    const queryParams = queryString.stringify({page: 1, size: 100000000});
+    this.query.retailerId = this.authService?.getRetailerId();
+    this.$spinner.show();
+    const params: any = {...this.query};
+    const queryParams = queryString.stringify(params);
     this.$syncService.getListSync(queryParams)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(results => {
-        if (results.success) {
+      .subscribe(
+        (results: any) => {
           this.contentItems = results.data.content.map(item => {
             return {...item, syncMessage: ''};
           });
@@ -356,21 +385,26 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
             this.gridApi.setColumnDefs(this.columnDefs);
           }
           this.autoSizeAll(false);
-        } else {
-          this.listDatas = [];
-          this.$messageService.add({severity: 'error', summary: 'Error Message', detail: results.code});
-        }
-      });
+          this.countRecord.totalRecord = results.data.totalElements;
+          this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page + 1;
+          if ((results.data.totalElements - this.query.page) > this.query.size) {
+            this.countRecord.currentRecordEnd = this.query.page + Number(this.query.size);
+          }
+          this.$spinner.hide();
+        },
+        error => {
+          this.$spinner.hide();
+        });
   }
 
   ngAfterViewChecked(): void {
     const b: any = document.querySelector('.sidebarBody1');
     const c: any = document.querySelector('.breadcrumb');
-    // const e: any = document.querySelector(".paginator");
+    const e: any = document.querySelector('.paginator');
     this.loadjs++;
     if (this.loadjs === 5) {
       if (b && b.clientHeight) {
-        const totalHeight = b.clientHeight + c.clientHeight + 80;
+        const totalHeight = b.clientHeight + c.clientHeight + e.clientHeight + 60;
         this.heightGrid = window.innerHeight - totalHeight;
         this.$changeDetech.detectChanges();
       } else {

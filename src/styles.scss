@@ -6,6 +6,21 @@
 $fontMmedium: "Graphik Webfont", "-apple-system", "Helvetica Neue", "Droid Sans", Arial, sans-serif;
 $fontRegular: "Graphik Webfont", "-apple-system", "Helvetica Neue", "Droid Sans", Arial, sans-serif;
 
+
+$mainColor: #0B3A85;
+$grey: #76809B;
+$white: #fff;
+$fontColor: #2B2F33;
+$pink: #FF7ADA;
+$yellow: #FFC01E;
+$C-212633: #212633;
+$C-99A2BC: #99A2BC;
+$C-525B73: #525B73;
+$C-F3F8FF: #F3F8FF;
+$C-FF3B49: #FF3B49;
+$C-E2E6F2: #E2E6F2;
+$C-f68c1f: #f68c1f;
+$orangeColor: orange;
 @font-face {
   font-family: 'Inter';
   src: url('assets/fonts/Inter-Regular.woff2') format('woff2'),
@@ -549,8 +564,8 @@ p-inputNumber, .p-inputtextarea {
 
 .p-top-right{
   position: absolute;
-  top: 5px;
-  right: 137px;
+  top: 10px;
+  right: 165px;
   //right: 105px;
 }
 
@@ -756,3 +771,84 @@ p-selectButton{
 .line-height-3 {
   line-height: 30px !important;
 }
+
+
+.paginator{
+  color: $grey;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #FFFFFF;
+  .p-paginator{
+    padding: 0px;
+    .p-paginator-first, .p-paginator-last {
+      display: none !important;
+    }
+
+
+  }
+  .all_1000000000 {
+    .p-dropdown-label::before {
+      content: "All";
+      visibility: visible;
+    }
+    .p-dropdown-label::after {
+      content: "";
+    }
+    .p-dropdown-label {
+      visibility: hidden;
+    }
+  }
+  .p-paginator-rpp-options{
+    height: 24px;
+    background: $mainColor;
+    border-radius: 3px;
+    border: none;
+    padding: 0px !important;
+    .p-dropdown-label{
+      padding: 0px 8px;
+      line-height: 24px;
+      font-size: 14px;
+      color: $white;
+    }
+    .p-dropdown-trigger-icon{
+      color: $white;
+    }
+    .p-dropdown-trigger{
+      width:2rem;
+    }
+  }
+  button{
+    border-radius: 2px;
+    color: $grey !important;
+    font-size: 14px;
+    width: 24px;
+    height: 24px !important;
+    display: inline-block;
+    text-align: center;
+    margin: 0px !important;
+    min-width: 0px !important;
+    font-weight: 500;
+    padding: 0px !important;
+    .p-paginator-icon{
+      line-height: 24px;
+      margin-right: 0px;
+    }
+    &.p-highlight{
+      background: $mainColor !important;
+      color: $white !important;
+    }
+    &.p-paginator-first,
+    &.p-paginator-prev,
+    &.p-paginator-last,
+    &.p-paginator-next{
+      .p-paginator-icon{
+        color: $C-525B73
+      }
+    }
+
+  }
+}
+
