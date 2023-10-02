@@ -281,17 +281,12 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
               this.contentItems[index] = itemUpdate;
               this.contentItems = [...this.contentItems];
               let isConnectWs = false;
-              this.contentItems = this.contentItems.map(item1 => {
-                if (item1.syncStatus === 'PROCESSING') {
-                  this.disabledButtonGrid = true;
-                  isConnectWs = true;
-                }
-                return {...item1, syncMessage: item1.syncStatus};
-              });
+              if (this.contentItems.map(item1 => item1.syncMessage).indexOf('PROCESSING') > -1) {
+                isConnectWs = true;
+              }
               if (!isConnectWs) {
                 this.stomp.deactivate();
               }
-              this.disabledButtonGrid = false;
               this.onInitGrid();
               this.autoSizeAll(false);
             }, 200);
@@ -409,7 +404,9 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
             this.stomp.activate();
           }
           this.onInitGrid();
-          this.autoSizeAll(false);
+          if (this.gridApi) {
+            this.autoSizeAll(false);
+          }
           this.countRecord.totalRecord = results.data.totalElements;
           this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page > 1 ? this.query.page + 1 : this.query.page;
           if ((results.data.totalElements - this.query.page) > this.query.size) {
