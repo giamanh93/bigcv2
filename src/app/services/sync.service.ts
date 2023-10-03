@@ -30,6 +30,14 @@ export class SyncService {
       })
     );
   }
+  cancelSync(query: any): Observable<Responses> {
+    return this.$http.put<Responses>(baseUrl + `/sync/v1/cancelSync` , query).pipe(
+      catchError(error => {
+        this.handleError(error);
+        return of(error.error);
+      })
+    );
+  }
 
 
   getListProduct(query: string): Observable<Responses> {

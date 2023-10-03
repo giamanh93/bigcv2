@@ -197,9 +197,9 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       {
         headerName: 'Đồng bộ',
         filter: '',
-        width: 100,
+        width: 130,
         cellRenderer: ButtonAgGridComponent,
-        cellClass: ['border-right', 'no-auto'],
+        cellClass: ['border-right', 'no-auto', 'loading-cell'],
         cellRendererParams: (params: any) => this.showButtons(params),
         checkboxSelection: false,
         field: 'checkbox'
@@ -216,41 +216,68 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           disabled: this.disabledButtonGrid,
           icon: 'fa fa-edit',
           class: 'btn-primary mr5',
-        },
+        }
       ]
     };
   }
 
+  cancel(event: any) {
+
+  }
+
   dongbo(event: any) {
-    this.querySyncData.syncCode = event.rowData.syncCode;
-    this.querySyncData.syncType = event.rowData.syncType;
-    this._confirmationService.confirm({
-      message: '',
-      key: 'key-confirm',
-      accept: () => {
-        this.stomp.activate();
-        this.columnDefs = [];
-        // this.stomp.publish({destination: '/user/0983732396/sync/notify'});
-        const object: any = {...this.querySyncData};
-        object.endDate = this.$datepipe.transform(this.querySyncData.endDate, 'yyyy-MM-dd');
-        object.startDate = this.$datepipe.transform(this.querySyncData.startDate, 'yyyy-MM-dd');
-        this.$syncService.syncData(object).subscribe((results: any) => {
-          if (results.success) {
-            const itemUpdate = event.rowData;
-            const index: number = this.contentItems.findIndex(_ => _.syncCode === event.rowData.syncCode);
-            itemUpdate.syncMessage = results.data.syncStatus;
-            this.contentItems[index] = itemUpdate;
-            this.contentItems = [...this.contentItems];
-            // this.gridApi.applyTransaction({update: [itemUpdate]});
-            this.disabledButtonGrid = true;
-            this.onInitGrid();
-            this.autoSizeAll(false);
-          } else {
-            this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
-          }
-        });
-      }
-    });
+    if (event.type === 'dongbo') {
+      this.querySyncData.syncCode = event.rowData.syncCode;
+      this.querySyncData.syncType = event.rowData.syncType;
+      this._confirmationService.confirm({
+        message: '',
+        key: 'key-confirm',
+        accept: () => {
+          this.stomp.activate();
+          // this.columnDefs = [];
+          // this.stomp.publish({destination: '/user/0983732396/sync/notify'});
+          const object: any = {...this.querySyncData};
+          object.endDate = this.$datepipe.transform(this.querySyncData.endDate, 'yyyy-MM-dd');
+          object.startDate = this.$datepipe.transform(this.querySyncData.startDate, 'yyyy-MM-dd');
+          this.$syncService.syncData(object).subscribe((results: any) => {
+            if (results.success) {
+              const itemUpdate = event.rowData;
+              const index: number = this.contentItems.findIndex(_ => _.syncCode === event.rowData.syncCode);
+              itemUpdate.syncMessage = results.data.syncStatus;
+              this.contentItems[index] = itemUpdate;
+              this.contentItems = [...this.contentItems];
+              // this.gridApi.applyTransaction({update: [itemUpdate]});
+              this.disabledButtonGrid = true;
+              this.gridApi.setRowData(this.contentItems);
+              this.gridApi.setColumnDefs(this.columnDefs);
+              this.autoSizeAll(false);
+            } else {
+              this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
+            }
+          });
+        }
+      });
+    } else {
+      this._confirmationService.confirm({
+        message: 'Bạn có thực sự muốn hủy?',
+        key: 'key-confirm-cancel',
+        accept: () => {
+          const params = {
+            syncId: event.rowData.syncId,
+            syncStatus: 'CANCELED'
+          };
+          this.$syncService.cancelSync(params).subscribe((results: any) => {
+            if (results.success) {
+              this.$messageService.add({severity: 'success', summary: 'Thông báo', detail: 'Đã Canceled !'});
+             this.getListImagePurchaseOrder();
+            } else {
+              this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
+            }
+          });
+        }
+      });
+    }
+
   }
 
   getSelectedRows(event: any[]) {
@@ -272,28 +299,25 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         if (message.body) {
           const item = JSON.parse(message.body);
           if (item.syncCode) {
-            this.columnDefs = [];
+            // this.columnDefs = [];
 
-            setTimeout(() => {
-              const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
-              const itemUpdate: any = this.contentItems[index];
-              itemUpdate.syncMessage = item.syncStatus;
-              this.contentItems[index] = itemUpdate;
-              this.contentItems = [...this.contentItems];
-              let isConnectWs = false;
-              if (this.contentItems.map(item1 => item1.syncMessage).indexOf('PROCESSING') > -1) {
-                isConnectWs = true;
-              }
-              if (!isConnectWs) {
-                this.stomp.deactivate();
-              }
-              this.onInitGrid();
-              this.autoSizeAll(false);
-            }, 200);
-            // this.gridApi.setRowData(this.contentItems);
-            // this.gridApi.setColumnDefs(this.columnDefs);
+            const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
+            const itemUpdate: any = this.contentItems[index];
+            itemUpdate.syncMessage = item.syncStatus;
+            this.contentItems[index] = itemUpdate;
+            this.contentItems = [...this.contentItems];
+            let isConnectWs = false;
+            if (this.contentItems.map(item1 => item1.syncMessage).indexOf('PROCESSING') > -1) {
+              isConnectWs = true;
+            }
+            if (!isConnectWs) {
+              this.stomp.deactivate();
+            }
+            // this.onInitGrid();
+            this.gridApi.setRowData(this.contentItems);
+            this.gridApi.setColumnDefs(this.columnDefs);
+            this.autoSizeAll(false);
           }
-          console.log(JSON.parse(message.body));
         }
       });
 
@@ -382,7 +406,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   getListImagePurchaseOrder() {
-    this.columnDefs = [];
+    // this.columnDefs = [];
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.query.retailerId = this.authService?.getRetailerId();
     this.$spinner.show();
@@ -403,10 +427,9 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           if (isConnectWs) {
             this.stomp.activate();
           }
-          this.onInitGrid();
-          if (this.gridApi) {
-            this.autoSizeAll(false);
-          }
+          this.gridApi.setRowData(this.contentItems);
+          this.gridApi.setColumnDefs(this.columnDefs);
+          this.autoSizeAll(false);
           this.countRecord.totalRecord = results.data.totalElements;
           this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page > 1 ? this.query.page + 1 : this.query.page;
           if ((results.data.totalElements - this.query.page) > this.query.size) {

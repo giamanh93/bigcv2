@@ -47,19 +47,27 @@
 </div>
 
 
-<p-confirmDialog #cd [key]="'key-confirm'" [style]="{width: '50vw'}">
+<p-confirmDialog #cdd header="Thông báo" [key]="'key-confirm-cancel'"  [baseZIndex]="9999999999"  maskStyleClass="confirm-top-zindex" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" label="Có" (click)="cdd.accept()"></button>
+    <button type="button" class="p-button-secondary btn-cancel" pButton icon="pi pi-times" label="Không" (click)="cdd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+
+<p-confirmDialog #cdc [key]="'key-confirm'" [style]="{width: '50vw'}">
 
   <ng-template pTemplate="header">
     <h3>Đồng bộ - {{[ querySyncData?.syncCode ]}}</h3>
   </ng-template>
   <ng-template pTemplate="footer">
     <div class="grid " style="margin-top: -20px">
-      <div class="col-12 text-left line-height-3">
-        <label for="icon" class="font-bold">Chi nhánh</label>
-        <p-dropdown [options]="listBranchs" [(ngModel)]="querySyncData.branchId" styleClass="w-full"
-                    [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId"
-                    [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-      </div>
+<!--      <div class="col-12 text-left line-height-3">-->
+<!--        <label for="icon" class="font-bold">Chi nhánh</label>-->
+<!--        <p-dropdown [options]="listBranchs" [(ngModel)]="querySyncData.branchId" styleClass="w-full"-->
+<!--                    [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId"-->
+<!--                    [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
+<!--      </div>-->
       <div class="col-12 text-left  line-height-3">
         <label class="font-bold" for="dateformat">Từ ngày <span style="color: red">*</span> <span style="font-weight: 400">(Bắt buộc)</span></label>
         <p-calendar placeholder="Từ ngày"
@@ -80,8 +88,8 @@
                     name="endDate"></p-calendar>
       </div>
       <div class="mt-2  col-12">
-        <button type="button" pButton [disabled]="!querySyncData.endDate || !querySyncData.startDate" icon="pi pi-check" label="Xác nhận" (click)="cd.accept()"></button>
-        <button type="button" class="p-button-danger" pButton icon="pi pi-times" label="Đóng" (click)="cd.reject()"></button>
+        <button type="button" pButton [disabled]="!querySyncData.endDate || !querySyncData.startDate" icon="pi pi-check" label="Xác nhận" (click)="cdc.accept()"></button>
+        <button type="button" class="p-button-danger" pButton icon="pi pi-times" label="Đóng" (click)="cdc.reject()"></button>
       </div>
     </div>
   </ng-template>

@@ -16,12 +16,16 @@ import {MenuItem} from 'primeng/api';
 
 <ng-container *ngIf="this.params.data.syncMessage === 'PROCESSING'; else buttonOther">
   <div class="flex justify-content-center align-items-center">
-    <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p-progressSpinner styleClass="w-1rem h-1rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p-button label="Canceled" (onClick)="onClick($event, 'cancel')"
+              styleClass="p-button-sm p-button-danger p-button-outlined"></p-button>
   </div>
 </ng-container>
 <ng-template #buttonOther>
-  <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label"  (onClick)="onClick($event, 0)"
-            styleClass="p-button-sm p-button-outlined"></p-button>
+  <div class="flex justify-content-center align-items-center">
+    <p-button *ngIf="items.length > 0" [label]="this.params.buttons[0].label"  (onClick)="onClick($event, 'dongbo')"
+              styleClass="p-button-sm p-button-outlined"></p-button>
+  </div>
 </ng-template>
   `
 })
@@ -55,16 +59,17 @@ export class ButtonAgGridComponent implements ICellRendererAngularComp {
     return true;
   }
 
-  onClick($event: any, idx: any) {
-    if (this.params.buttons[idx].onClick instanceof Function) {
+  onClick($event: any, type: any) {
+    if (this.params.buttons[0].onClick instanceof Function) {
       // put anything into params u want pass into parents component
       const params = {
         event: $event,
         rowData: this.params.node.data,
-        index: this.params.rowIndex
+        index: this.params.rowIndex,
+        type: type
         // ...something
       };
-      this.params.buttons[idx].onClick(params);
+      this.params.buttons[0].onClick(params);
     }
   }
 }
