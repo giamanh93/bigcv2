@@ -245,16 +245,16 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           object.startDate = this.$datepipe.transform(this.querySyncData.startDate, 'yyyy-MM-dd');
           this.$syncService.syncData(object).subscribe((results: any) => {
             if (results.success) {
-              const itemUpdate = event.rowData;
-              const index: number = this.contentItems.findIndex(_ => _.syncCode === event.rowData.syncCode);
-              itemUpdate.syncMessage = results.data.syncStatus;
-              this.contentItems[index] = itemUpdate;
-              this.contentItems = [...this.contentItems];
-              // this.gridApi.applyTransaction({update: [itemUpdate]});
-              this.disabledButtonGrid = true;
-              this.gridApi.setRowData(this.contentItems);
-              this.gridApi.setColumnDefs(this.columnDefs);
-              this.autoSizeAll(false);
+              // const itemUpdate = event.rowData;
+              // const index: number = this.contentItems.findIndex(_ => _.syncCode === event.rowData.syncCode);
+              // itemUpdate.syncMessage = results.data.syncStatus;
+              // this.contentItems[index] = itemUpdate;
+              // this.contentItems = [...this.contentItems];
+              // // this.gridApi.applyTransaction({update: [itemUpdate]});
+              // this.disabledButtonGrid = true;
+              // this.gridApi.setRowData(this.contentItems);
+              // this.gridApi.setColumnDefs(this.columnDefs);
+              // this.autoSizeAll(false);
               this.getListImagePurchaseOrder();
             } else {
               this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
