@@ -274,7 +274,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
 
           this.$syncService.cancelSync(params).subscribe((results: any) => {
             if (results.success) {
-              this.$messageService.add({severity: 'success', summary: 'Thông báo', detail: 'Đã Canceled !'});
+              // this.$messageService.add({severity: 'success', summary: 'Thông báo', detail: 'Đã Canceled !'});
               const columnDefs = cloneDeep(this.columnDefs);
               this.columnDefs = [];
               setTimeout(() => {
