@@ -24,6 +24,7 @@ import {ButtonAgGridComponent} from 'src/app/common/components/list-grid-angular
 import {Router} from '@angular/router';
 import {SyncService} from '../../../services/sync.service';
 import {RxStompService} from 'src/app/rx-stomp.service';
+import {cloneDeep} from 'lodash';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -191,7 +192,10 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
         menuTabs: [],
         cellRenderer: (params) => {
           return params.data.syncMessage === '' || params.data.syncMessage === null || params.data.syncMessage === undefined
-            ? '' : `<span class=" ${params.data.syncMessage === 'SUCCEED' ? 'bg-success text-white' : 'bg-warning text-white'} noti-number">${params.data.syncMessage}</span>`;
+            ? '' : `<span class=" ${params.data.syncMessage === 'SUCCEED'
+              ? 'bg-success text-white'
+              : params.data.syncMessage === 'CANCELED' ? 'bg-pink-500 text-white'
+              :  'bg-warning text-white'} noti-number">${params.data.syncMessage}</span>`;
         }
       },
       {
@@ -227,13 +231,13 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   dongbo(event: any) {
     if (event.type === 'dongbo') {
+      this.stomp.activate();
       this.querySyncData.syncCode = event.rowData.syncCode;
       this.querySyncData.syncType = event.rowData.syncType;
       this._confirmationService.confirm({
         message: '',
         key: 'key-confirm',
         accept: () => {
-          this.stomp.activate();
           // this.columnDefs = [];
           // this.stomp.publish({destination: '/user/0983732396/sync/notify'});
           const object: any = {...this.querySyncData};
@@ -251,6 +255,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
               this.gridApi.setRowData(this.contentItems);
               this.gridApi.setColumnDefs(this.columnDefs);
               this.autoSizeAll(false);
+              this.getListImagePurchaseOrder();
             } else {
               this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
             }
@@ -266,10 +271,25 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
             syncId: event.rowData.syncId,
             syncStatus: 'CANCELED'
           };
+
           this.$syncService.cancelSync(params).subscribe((results: any) => {
             if (results.success) {
               this.$messageService.add({severity: 'success', summary: 'Thông báo', detail: 'Đã Canceled !'});
-             this.getListImagePurchaseOrder();
+              const columnDefs = cloneDeep(this.columnDefs);
+              this.columnDefs = [];
+              setTimeout(() => {
+                const itemUpdate = event.rowData;
+                const index: number = this.contentItems.findIndex(_ => _.syncCode === event.rowData.syncCode);
+                itemUpdate.syncMessage = results.data.syncStatus;
+                this.contentItems[index] = itemUpdate;
+                this.contentItems = [...this.contentItems];
+                // this.gridApi.applyTransaction({update: [itemUpdate]});
+                this.disabledButtonGrid = true;
+                this.gridApi.setRowData(this.contentItems);
+                this.columnDefs = columnDefs;
+                this.gridApi.setColumnDefs(columnDefs);
+                this.autoSizeAll(false);
+              }, 0);
             } else {
               this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: results.message ? results.message : 'Lỗi !!'});
             }
@@ -300,23 +320,33 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
           const item = JSON.parse(message.body);
           if (item.syncCode) {
             // this.columnDefs = [];
+            // this.contentItems = [];
+            // this.gridApi.setRowData(this.contentItems);
+            // this.getListImagePurchaseOrder();
 
-            const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
-            const itemUpdate: any = this.contentItems[index];
-            itemUpdate.syncMessage = item.syncStatus;
-            this.contentItems[index] = itemUpdate;
-            this.contentItems = [...this.contentItems];
-            let isConnectWs = false;
-            if (this.contentItems.map(item1 => item1.syncMessage).indexOf('PROCESSING') > -1) {
-              isConnectWs = true;
-            }
-            if (!isConnectWs) {
-              this.stomp.deactivate();
-            }
-            // this.onInitGrid();
-            this.gridApi.setRowData(this.contentItems);
-            this.gridApi.setColumnDefs(this.columnDefs);
-            this.autoSizeAll(false);
+            // Tạm ẩn
+            const columnDefs = cloneDeep(this.columnDefs);
+            this.columnDefs = [];
+            setTimeout(() => {
+              const index: number = this.contentItems.findIndex(_ => _.syncCode === item.syncCode);
+              const itemUpdate: any = this.contentItems[index];
+              itemUpdate.syncMessage = item.syncStatus;
+              this.contentItems[index] = itemUpdate;
+              this.contentItems = [...this.contentItems];
+              let isConnectWs = false;
+              if (this.contentItems.map(item1 => item1.syncMessage).indexOf('PROCESSING') > -1) {
+                isConnectWs = true;
+              }
+              if (!isConnectWs) {
+                this.stomp.deactivate();
+              }
+              // this.onInitGrid();
+              this.gridApi.setRowData(this.contentItems);
+              this.columnDefs = columnDefs;
+              this.gridApi.setColumnDefs(columnDefs);
+              this.autoSizeAll(false);
+            }, 0);
+
           }
         }
       });
@@ -406,7 +436,6 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   getListImagePurchaseOrder() {
-    // this.columnDefs = [];
     this.querySyncData.retailerId = this.authService?.getRetailerId();
     this.query.retailerId = this.authService?.getRetailerId();
     this.$spinner.show();
@@ -416,20 +445,28 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (results: any) => {
-          let isConnectWs = false;
-          this.contentItems = results.data.content.map(item => {
-            if (item.syncStatus === 'PROCESSING') {
-              this.disabledButtonGrid = true;
-              isConnectWs = true;
+          const columnDefs = cloneDeep(this.columnDefs);
+          this.columnDefs = [];
+          setTimeout(() => {
+            let isConnectWs = false;
+            this.contentItems = results.data.content.map(item => {
+              if (item.syncStatus === 'PROCESSING') {
+                this.disabledButtonGrid = true;
+                isConnectWs = true;
+              }
+              return {...item, syncMessage: item.syncStatus};
+            });
+            if (isConnectWs) {
+              this.stomp.activate();
+            } else {
+              this.stomp.deactivate();
             }
-            return {...item, syncMessage: item.syncStatus};
-          });
-          if (isConnectWs) {
-            this.stomp.activate();
-          }
-          this.gridApi.setRowData(this.contentItems);
-          this.gridApi.setColumnDefs(this.columnDefs);
-          this.autoSizeAll(false);
+            this.gridApi.setRowData(this.contentItems);
+            this.columnDefs = columnDefs;
+            this.gridApi.setColumnDefs(columnDefs);
+            // this.onInitGrid();
+            this.autoSizeAll(false);
+          }, 0);
           this.countRecord.totalRecord = results.data.totalElements;
           this.countRecord.currentRecordStart = results.data.totalElements === 0 ? this.query.page = 1 : this.query.page > 1 ? this.query.page + 1 : this.query.page;
           if ((results.data.totalElements - this.query.page) > this.query.size) {
