@@ -1,0 +1,56 @@
+
+
+:host ::ng-deep  {
+  .text-0 {
+    .p-inputtext{
+      //color: #fff !important;
+    }
+  }
+
+  .p-toolbar {
+    padding: 5px !important;
+    background-color: #ccc !important; ;
+  }
+
+  .p-calendar{
+    width: 100%;
+  }
+  input{
+    max-width: 100%;
+  }
+  table{
+    tr{
+      td{
+        button{
+          &.td-button-dropdown{
+            padding: 3px 5px;
+            width: auto;
+            height: auto !important;
+            outline: none;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+  tile {
+    display: inline-block;
+  }
+  .ag-floating-bottom-viewport {
+    .ag-cell-value {
+      color: red;
+      // font-weight: bold;
+    }
+    app-dropdown-render {
+      p-dropdown{
+        display: none !important;
+      }
+    }
+  }
+  .pan-zoom-frame{
+    .pan-element{
+      position: static;
+    }
+  }
+
+}

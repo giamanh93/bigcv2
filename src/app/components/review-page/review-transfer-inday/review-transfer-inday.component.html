@@ -1,0 +1,222 @@
+<div class="fields" style="position: absolute;right: 165px;z-index: 2;padding-top: 11px;">
+  <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+</div>
+<div class="main-grid">
+  <section class="bread-crumb" >
+    <div class="flex bet middle">
+      <div class="md:col-7 sm:col-12 p-0">
+        <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+      </div>
+      <div class="md:col-5 sm:col-0 p-0 flex justify-content-end align-items-center dropdown-branch">
+        <!--                <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"-->
+        <!--                [style]="{'margin-right': '20px'}"></p-button>-->
+        <div class="fields mb-0 mr-4">
+          <!-- <label for="icon">Chọn nhà cung cấp</label>
+          <p-dropdown [options]="products" [(ngModel)]="query.supplierName" [autoDisplayFirst]="false" optionLabel="supplierName" [editable]="true" [appendTo]="'body'" [filter]="true" filterBy="supplierName"></p-dropdown> -->
+          <!--                <button type="button" (click)="editProductDetail()"-->
+          <!--                        class="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">-->
+          <!--                  Chọn ảnh</button>-->
+
+          <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onSelect)="onUpload($event)"></p-fileUpload>
+<!--          <p-button *ngIf="this.imagePurchaseOrderId !== ''" style="cursor: pointer" styleClass="p-button-secondary ml-2" (onClick)="onBack()" label="Quay lại danh sách"></p-button>-->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- this.organizeInfoService.setStocks(e.value); -->
+  <p-divider type="solid"></p-divider>
+
+  <p-toolbar>
+    <div class="p-toolbar-group-start">
+    </div>
+    <div class="p-toolbar-group-end" style="display: flex; align-items: end">
+      <div class="mr-2">
+        <label for="firstname5" class="">Chọn ngày:</label>
+        <p-calendar placeholder="Từ ngày"
+                    panelStyleClass="datepicker-default-only-icon"  placeholder="Từ ngày (YYYY-MM-DD)"
+                    [appendTo]="'body'" [baseZIndex]="101"
+                    [monthNavigator]="true" styleClass="w-full"
+                    [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
+                    name="startDate"></p-calendar>
+      </div>
+<!--      <div class="mr-2">-->
+<!--        <label for="firstname5" class="">Tham chiếu nhà cung cấp:</label>-->
+<!--        <div style="display: flex;-->
+<!--    justify-content: space-between;">-->
+<!--          <p-autoComplete-->
+<!--            field="supplierName"-->
+<!--            [inputStyleClass]="query.selectSuppliers && query.filter.status === 1 ? 'bg-green-400 text-0' : 'bg-orange-400 text-0'"-->
+<!--            placeholder="Tìm kiếm nhà cung cấp"-->
+<!--            [dropdownAriaLabel]="'sadasd'"-->
+<!--            [(ngModel)]="query.selectSuppliers"-->
+<!--            [showEmptyMessage]="true"-->
+<!--            [emptyMessage]="'Không tìm thấy dữ liệu search'"-->
+<!--            id="FullName"-->
+<!--            [size]="40"-->
+<!--            [suggestions]="listSuppliers"-->
+<!--            [lazy]="true"-->
+<!--            [showClear]="true"-->
+<!--            [appendTo]="'body'"-->
+<!--            [style]="{'width':'100%'}"-->
+<!--            [inputStyle]="{'width':'100%'}"-->
+<!--            (onSelect)="onChangeMapSuppliers()"-->
+<!--            (onClear)="onClearSuppliers()"-->
+<!--            (completeMethod)="getListSupplier($event.query)"-->
+<!--          ></p-autoComplete>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="mr-2">
+        <button type="button" (click)="getMappingProduct()" class="text-white  bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Đối soát</button>
+      </div>
+    </div>
+  </p-toolbar>
+
+  <div class="card">
+    <div class="grid mt-1">
+      <div class="col-12 md:col-12 lg:col-12 ">
+        <div class="table-default">
+          <app-list-grid-angular [idGrid]="'my-table-order'" [isShowTotalBottom]="true"   (callbackGridReady)="onGridReady($event)"
+                                 [columnsWithAggregation]="fieldsTotal" [rowClassRules]="rowClassRules"
+                                 [listsData]="listDatas" [height]="400" [autoGroupColumnDef]="autoGroupColumnDef"
+                                 [groupDisplayType]="groupDisplayType" [rowDragManaged]="true"
+                                 [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" ></app-list-grid-angular>
+        </div>
+<!--        <div class="grid p-0 m-0">-->
+<!--          <div class="col-1 bg-orange-400">-->
+<!--            cần xem lại-->
+<!--          </div>-->
+<!--          <div class="col-3 bg-green-400" style="color: #fff">-->
+<!--            Giảm giá so với lần nhập cuối-->
+<!--          </div>-->
+<!--          <div class="col-3 bg-red-400" style="color: #fff">-->
+<!--            Tăng giá so với lần nhập cuối-->
+<!--          </div>-->
+<!--          <div class="col  cell-bg-purple">-->
+<!--            Có nhiều hơn 2 sản phẩm trong ảnh tham chiếu về cùng 1 sản phẩm-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="grid mt-2">-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">Ngày nhập</label>-->
+<!--            <p-calendar placeholder="Ngày nhập"  [hourFormat]="'24'" [showTime]="true"-->
+<!--                        panelStyleClass="datepicker-default-only-icon" placeholder="(YYYY-MM-DD hh:mm)"-->
+<!--                        [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.supplierName.purchaseDate"-->
+<!--                        [monthNavigator]="true"-->
+<!--                        [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"-->
+<!--                        name="endDate"></p-calendar>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">Tổng tiền hàng</label>-->
+<!--            <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageCKHD()" [(ngModel)]="model.totalamount"  [showButtons]="false"-->
+<!--                           [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">CK hàng hóa</label>-->
+<!--            <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageCKHD()" [(ngModel)]="model.ckhh"  [showButtons]="false"-->
+<!--                           [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">CK hóa đơn</label>-->
+<!--            <p-inputNumber  *ngIf="model.ratio === 1" (click)="Discount.toggle($event)" inputId="decimal" [style]="{'width': '100%'}" (onBlur)="onChageCKHD()" [(ngModel)]="model.invoiceDiscount" [showButtons]="false"-->
+<!--                            [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+
+<!--            <p-inputNumber *ngIf="model.ratio === 2" (click)="Discount.toggle($event)" inputId="percent" [style]="{'width': '100%'}" prefix="%" (onBlur)="onChageCKHD()" [(ngModel)]="model.discountRatio"  [showButtons]="false"-->
+<!--                           styleClass="text-base text-color focus:border-primary w-full"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2" (click)="visibleNCCShip = true">Tiền ship<span [ngClass]="{'active': model.ship.length >0}" class="pi pi-arrow-right-arrow-left" style="color: #1c80cf;margin-left: 10px;cursor: pointer;"></span></label>-->
+<!--            <p-inputNumber  inputId="decimal" [disabled]="true" [style]="{'width': '100%'}" (onBlur)="onChageCKHD()" [(ngModel)]="model.shipAmount" [showButtons]="false"-->
+<!--                            [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2" >Tiền phải thanh toán</label>-->
+<!--            <p-inputNumber inputId="decimal" [(ngModel)]="model.haveToPayedAmount" [showButtons]="false"-->
+<!--                           [minFractionDigits]="0" [maxFractionDigits]="3"  styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-4 lg:col-4 xl:col-4">-->
+<!--            <label for="firstname2"  (click)="visiblePayment = true">Tiền trả nhà cung cấp<span [ngClass]="{'active': model.paying.length >0}" class="pi pi-credit-card" style="color: #1c80cf;margin-left: 10px;cursor: pointer;"></span></label>-->
+<!--            <p-inputNumber inputId="decimal" [disabled]="true" [style]="{'width': '100%'}"  (onBlur)="onChageCKHD()" [(ngModel)]="model.paidAmount" [showButtons]="false"-->
+<!--                           [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">Công nợ</label>-->
+<!--            <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" [(ngModel)]="model.debtAmount"  [showButtons]="false"-->
+<!--                           [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>-->
+<!--          </div>-->
+<!--          &lt;!&ndash;            <div class="col">&ndash;&gt;-->
+<!--          &lt;!&ndash;              <label for="firstname2">Thuế VAT</label>&ndash;&gt;-->
+<!--          &lt;!&ndash;              <p-inputNumber inputId="decimal" [style]="{'width': '100%'}" [(ngModel)]="model.vat"  [showButtons]="false"&ndash;&gt;-->
+<!--          &lt;!&ndash;                             [minFractionDigits]="0" [maxFractionDigits]="3" styleClass="text-base text-color focus:border-primary w-full text-right"></p-inputNumber>&ndash;&gt;-->
+<!--          &lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--          <div class="md:col-2 lg:col-2 xl:col-2">-->
+<!--            <label for="firstname2">Ghi chú</label>-->
+<!--            <input type="text" pInputText [(ngModel)]="model.description"   [style]="{'width': '100%'}"-->
+<!--                   styleClass="text-base text-color focus:border-primary w-full text-right" />-->
+<!--          </div>-->
+<!--          <div class="col md:col-12 lg:col-5 xl:col-4 gap-2 justify-content-start" style="display: flex;flex-direction: row;align-items: flex-end;">-->
+<!--            <button type="button" pButton pRipple icon="pi pi-check" label="Lưu" *ngIf="listDatas.length > 0" (click)="saveProductOrder()" class="p-button-sm ml-1"></button>-->
+<!--            &lt;!&ndash;                  <p-button  style="cursor: pointer" styleClass="p-button-secondary" (click)="reloadTotal()" label="Tính lại tổng tiền"></p-button>&ndash;&gt;-->
+<!--            <button type="button" pButton pRipple icon="pi pi-plus"  label="Thêm" (click)="addRow()" class="p-button-secondary p-button-sm ml-1"></button>-->
+<!--            <button type="button" pButton pRipple icon="pi pi-trash" *ngIf="listDataSelect.length > 0" label="Xóa" (click)="deleteRow()" class="p-button-secondary ml-1 p-button-sm"></button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      </div>
+
+<!--      <div *ngIf="contentItems.length > 0" class=" col-4 md:col-4 lg:col-4">-->
+<!--        <ng-container *ngIf="contentItems[0].contentFile">-->
+<!--          <h6 style="margin-top: 0px">Tên File: {{contentItems[0].contentFile}}</h6>-->
+<!--        </ng-container>-->
+<!--        <div style="overflow:hidden; height: 100%"  >-->
+<!--          <pan-zoom [config]="panzoomConfig">-->
+<!--            <div-->
+<!--              class="bg noselect items"-->
+<!--              style="position: relative;"-->
+<!--              [style.width.px]="2400"-->
+<!--            >-->
+<!--              <tile *ngFor="let item of contentItems" [state]="state" [content]="item"> </tile>-->
+<!--            </div>-->
+<!--          </pan-zoom>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+
+<!--  <p-sidebar [(visible)]="displayFilter" (onHide)="displayFilter = false" position="right" styleclass="w-30rem">-->
+<!--    <ng-template pTemplate="header">-->
+<!--      <div class="flex grid justify-content-end">-->
+<!--        &lt;!&ndash; <button type="button" pButton pRipple icon="pi pi-search" label="Tìm kiếm" (click)="find()" class="p-button-secondary mr-1 p-button-sm"></button>   &ndash;&gt;-->
+<!--        &lt;!&ndash; <button type="button" pButton pRipple icon="pi pi-times" label="Làm mới" (click)="refresh(); displayFilter=false" class="p-button-danger p-button-sm"></button>   &ndash;&gt;-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--    <div class="p-fluid grid formgrid">-->
+<!--      <div class="field col-12 md:col-12">-->
+<!--        <label for="icon">Chi nhánh</label>-->
+<!--        <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
+<!--      </div>-->
+<!--      <div class="field col-12 md:col-12">-->
+<!--        &lt;!&ndash; <label for="icon">Chọn nhà cung cấp</label>-->
+<!--        <p-dropdown [options]="products" [(ngModel)]="query.supplierName" [autoDisplayFirst]="false" optionLabel="supplierName" [editable]="true" [appendTo]="'body'" [filter]="true" filterBy="supplierName"></p-dropdown> &ndash;&gt;-->
+<!--        <button type="button" (click)="editProductDetail()" class="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700"> Lấy dữ liệu từ ảnh</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </p-sidebar>-->
+
+<!--  <app-edit-product-detail [product]="query.supplierName" *ngIf="displayEdit" [contentItems]="contentItems" (callBack)="xacnhan($event)" [displayEdit]="displayEdit"></app-edit-product-detail>-->
+
+<!--  <p-overlayPanel #Discount>-->
+<!--    <div class="p-inputgroup " style="flex-direction: column">-->
+<!--      <span class="p-inputgroup-addon">Giảm giá</span>-->
+<!--      <p-inputNumber  inputId="integeronly" (onBlur)="onChageCKHD()" [(ngModel)]="model.invoiceDiscount"-->
+<!--                      styleClass="text-right {{model.ratio === 2 ? 'hidden' : ''}}"></p-inputNumber>-->
+<!--      <p-inputNumber   inputId="percent" prefix="%" (onBlur)="onChageCKHD()" [(ngModel)]="model.discountRatio"-->
+<!--                       styleClass="text-right  {{model.ratio === 1 ? 'hidden' : ''}}"></p-inputNumber>-->
+<!--      <p-selectButton styleClass="btn-2" [options]="stateOptions" (onChange)="onChageCKHD()" [(ngModel)]="model.ratio" optionLabel="label" optionValue="value"></p-selectButton>-->
+<!--    </div>-->
+<!--  </p-overlayPanel>-->
+
+<!--  <app-order-ship *ngIf="visibleNCCShip" (close)="closeNCCShip()" (save)="saveNCCShip($event)" [model]="model" [visibleNCC]="visibleNCCShip" [branchId]="this.query.branchId" [dataProductItem]="dataProductItem"></app-order-ship>-->
+
+<!--  <app-unit-change *ngIf="visibleChangeUnit" (save)="saveUnitChange($event)" (close)="closeUnitChange()" [visibleChangeUnit]="visibleChangeUnit" [branchId]="this.query.branchId" [dataProductItem]="dataProductItem"></app-unit-change>-->
+<!--  <app-order-payment *ngIf="visiblePayment" [model]="model" (close)="closePayment()" (save)="savePayment($event)" [visiblePayment]="visiblePayment" [branchId]="this.query.branchId" [dataProductItem]="dataProductItem"></app-order-payment>-->

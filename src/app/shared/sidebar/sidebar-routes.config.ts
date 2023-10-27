@@ -111,6 +111,16 @@ export const menus = [
     //   { label: '3. Danh sách hoá đơn đọc tự động', routerLink: '/order-purchase/list-image-purchase-order', class: 'nav-item' },
     // ]
   },
+  {
+    label: 'Đối soát thu ngân',
+    code: 'review',
+    class: 'nav-item',
+    isExternalLink: true,
+    items: [
+      { label: '1. Mở đóng quầy', routerLink: '/review/', class: 'nav-item' },
+      { label: '2. Đối soát', routerLink: '/review/review-transfer-inday', class: 'nav-item' },
+    ]
+  },
     // a68dc8d0-707e-4446-b397-622ecc7eceb4
 
 

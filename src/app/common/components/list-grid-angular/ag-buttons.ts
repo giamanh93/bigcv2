@@ -17,7 +17,7 @@ import {MenuItem} from 'primeng/api';
 <ng-container *ngIf="this.params.data.syncMessage === 'PROCESSING'; else buttonOther">
   <div class="flex justify-content-center align-items-center">
     <p-progressSpinner styleClass="w-1rem h-1rem" strokeWidth="4" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
-    <p-button label="Canceled" (onClick)="onClick($event, 'cancel')"
+    <p-button label="Cancel" (onClick)="onClick($event, 'cancel')"
               styleClass="p-button-sm p-button-danger p-button-outlined"></p-button>
   </div>
 </ng-container>

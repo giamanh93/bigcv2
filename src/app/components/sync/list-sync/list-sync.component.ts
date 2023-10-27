@@ -432,7 +432,7 @@ export class ListSyncComponent implements OnInit, OnDestroy, AfterViewChecked {
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getListImagePurchaseOrder();
   }
 
   getListImagePurchaseOrder() {

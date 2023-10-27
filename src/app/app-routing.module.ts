@@ -9,6 +9,7 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
 import {OurCustomerComponent} from './pages/our-customer/our-customer.component';
 import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {SyncRoutingModule} from './components/sync/sync-routing.module';
+import {ReviewPageModule} from './components/review-page/review-page.module';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import {SyncRoutingModule} from './components/sync/sync-routing.module';
           },
           {path: 'utility', loadChildren: () => import('../app/components/utility/utility.module').then(m => m.UtilityModule)},
           {path: 'sync', loadChildren: () => import('../app/components/sync/sync.module').then(m => m.SyncModule)},
+          {path: 'review', loadChildren: () => import('../app/components/review-page/review-page.module').then(m => m.ReviewPageModule)},
           {
             path: 'order-purchase',
             loadChildren: () => import('../app/components/purchase-order/purchase-order.module').then(m => m.PurchaseOrderModule)
