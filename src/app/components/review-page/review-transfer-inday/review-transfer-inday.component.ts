@@ -51,7 +51,7 @@ interface UploadEvent {
   templateUrl: './review-transfer-inday.component.html',
   styleUrls: ['./review-transfer-inday.component.scss']
 })
-export class ReviewTransferIndayComponent implements OnInit, OnDestroy {
+export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterViewChecked {
   itemsBreadcrumb: HrmBreadcrumb[] = [];
   screenWidth: number = 0;
   fieldsTotal: any[] = ['quantity', 'amount', 'discount'];
@@ -131,56 +131,56 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy {
       header: '#',
       typeField: 'text',
       masterDetail: false,
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'invoiceDate',
-      header: 'invoiceDate',
+      header: 'Ngày hóa đơn',
       typeField: 'text',
       masterDetail: false,
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'invoiceAmount',
-      header: `invoiceAmount`,
+      header: `Tổng tiền`,
       typeField: 'decimal',
       aggFunc: 'sum',
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'excelDate',
       header: 'excelDate',
       typeField: 'text',
       masterDetail: false,
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'excelAmount',
       header: 'excelAmount',
       typeField: 'decimal',
       aggFunc: 'sum',
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'description',
-      header: 'description',
+      header: 'Mô tả',
       typeField: 'text',
       masterDetail: false,
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
     {
       field: 'diff',
       header: 'Chênh lệnh',
       typeField: 'decimal',
       aggFunc: 'sum',
-      headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // headerClass: 'bg-primary-reverse',
+      // cellClass: ['bg-primary-reverse']
     },
   ];
   gridApi: any;
@@ -369,11 +369,12 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy {
   ngAfterViewChecked(): void {
     const b: any = document.querySelector('.sidebarBody1');
     const c: any = document.querySelector('.breadcrumb');
+    const d: any = document.querySelector('.toolbar');
     // const e: any = document.querySelector(".paginator");
     this.loadjs++;
     if (this.loadjs === 5) {
       if (b && b.clientHeight) {
-        const totalHeight = b.clientHeight + c.clientHeight + 200;
+        const totalHeight = b.clientHeight + c.clientHeight + d.clientHeight + 60;
         this.heightGrid = window.innerHeight - totalHeight;
         this.$changeDetech.detectChanges();
       } else {
@@ -415,21 +416,44 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy {
 
   handleUpload(files: any) {
     const file = files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.isUploadFile = false;
-      this.$spinner.show();
-      const datas: any = reader.result;
-      // this.linkImagebase64 = reader.result || null;
-      this.contentItems = [{
-        contentFile: file.name,
-        thumbnail: reader.result,
-        id: 1
-      }];
-      const base64s = datas.split(',');
-      // this.calApiUploadImageOrder(base64s[1]);
-    };
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   this.isUploadFile = false;
+    //   this.$spinner.show();
+    //   const datas: any = reader.result;
+    //   // this.linkImagebase64 = reader.result || null;
+    //   this.contentItems = [{
+    //     contentFile: file.name,
+    //     thumbnail: reader.result,
+    //     id: 1
+    //   }];
+    //   const base64s = datas.split(',');
+    //   // this.calApiUploadImageOrder(base64s[1]);
+    // };
+    this.listDatas= [];
+    const formData = new FormData();
+    formData.append('retailerId', '717250');
+    formData.append('branchId', '73817');
+    formData.append('checkDate', '2023-09-18');
+    formData.append('startRow', '14');
+    formData.append('dateColumn', '1');
+    formData.append('amountColumn', '2');
+    formData.append('descriptionColumn', '4');
+    formData.append('page', '1');
+    formData.append('size', '10000');
+    formData.append('excelFile', file);
+    this.$serviceReview.getReviewTransferInDay(formData)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(results => {
+        if (results.success) {
+            this.listDatas = results.data.content;
+            this.gridApi.setRowData(this.listDatas);
+        } else {
+          this.listDatas = [];
+          this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
+        }
+      });
   }
 
   getMappingProduct() {

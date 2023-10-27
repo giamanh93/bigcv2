@@ -13,6 +13,16 @@ const baseUrl = environment.apiBase;
 })
 export class ReviewService {
 
+  getReviewTransferInDay(query: any): Observable<Responses> {
+    return this.$http.post<Responses>(baseUrl + `/reviewTransfer/v1/getReviewTransferInDay`, query).pipe(
+      catchError(error => {
+        this.handleError(error);
+        return of(error.error);
+      })
+    );
+  }
+
+
   getListBranch(query: string): Observable<Responses> {
     return this.$http.get<Responses>(baseUrl + `/branch/v1/getListBranch?` + query)
       .pipe(
