@@ -1,5 +1,4 @@
 <div class="fields p-top-right">
-  <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
 </div>
 <div class="main-grid">
     <section class="bread-crumb" >
@@ -10,15 +9,15 @@
             <div class="md:col-5 sm:col-0 p-0 flex justify-content-end align-items-center dropdown-branch">
 <!--                <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"-->
 <!--                [style]="{'margin-right': '20px'}"></p-button>-->
-              <div class="fields mb-0 mr-4">
+              <div class="fields mb-0 mr-4 flex gap-2">
                 <!-- <label for="icon">Chọn nhà cung cấp</label>
                 <p-dropdown [options]="products" [(ngModel)]="query.supplierName" [autoDisplayFirst]="false" optionLabel="supplierName" [editable]="true" [appendTo]="'body'" [filter]="true" filterBy="supplierName"></p-dropdown> -->
 <!--                <button type="button" (click)="editProductDetail()"-->
 <!--                        class="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">-->
 <!--                  Chọn ảnh</button>-->
-
+                <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
                 <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile && this.imagePurchaseOrderId === ''" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onSelect)="onUpload($event)"></p-fileUpload>
-                <p-button *ngIf="this.imagePurchaseOrderId !== ''" style="cursor: pointer" styleClass="p-button-secondary ml-2" (onClick)="onBack()" label="Quay lại danh sách"></p-button>
+                <p-button *ngIf="this.imagePurchaseOrderId !== ''" style="cursor: pointer" styleClass="p-button-secondary ml-2" (onClick)="onBack()" label="Quay lại"></p-button>
               </div>
             </div>
         </div>

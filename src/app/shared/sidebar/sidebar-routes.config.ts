@@ -35,14 +35,15 @@ export const menus = [
     //       ]
     //   },
     // 0200f578-4b8e-45e8-99eb-c5446db7efb6
-
-  {
-    label: 'Báo cáo',
-    code: 'bao-cao',
-    class: 'navigation-header',
-    routerLink: '/bao-cao/#',
-    items: []
-  },
+  // Không hiểu thêm vào làm gì
+  //
+  // {
+  //   label: 'Báo cáo',
+  //   code: 'bao-cao',
+  //   class: 'navigation-header',
+  //   routerLink: '/bao-cao/#',
+  //   items: []
+  // },
 
     {
         label: 'Quản trị khách hàng',

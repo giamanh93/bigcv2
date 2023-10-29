@@ -1,14 +1,12 @@
-<div class="fields p-top-right">
-  <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-</div>
 <div class="main-grid">
     <section class="bread-crumb" >
         <div class="flex bet middle">
             <div class="md:col-8 sm:col-12 p-0">
                 <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
             </div>
-            <div class="md:col-4 sm:col-0 p-0 flex justify-content-end align-items-center dropdown-branch">
-                <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"
+            <div class="md:col-4 sm:col-0 p-0 flex gap-2 justify-content-end align-items-center dropdown-branch">
+              <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+              <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"
                 [style]="{'margin-right': '20px'}"></p-button>
             </div>
         </div>
