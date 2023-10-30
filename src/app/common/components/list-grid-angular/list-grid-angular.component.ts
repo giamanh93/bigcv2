@@ -226,6 +226,8 @@ export class ListGridAngularComponent implements OnInit, OnChanges {
           target[element] = `Khu vực: ${this.listsData.length} `;
         } else if (element === 'purchaseDate') {
           target[element] = `Count: ${this.listsData.length} `;
+        } else if (element === 'code') {
+          target[element] = `Count: ${this.listsData.length} `;
         } else {
           if (rowNode.data && rowNode.data[element]) {
             if (this.containsOnlyNumbers(rowNode.data[element])) {

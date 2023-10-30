@@ -1,3 +1,5 @@
+import numeral from 'numeral';
+
 export function AgGridFn(lists: Array<any>) {
     const arrAgGrids: any = [];
     for (const value of lists) {
@@ -134,9 +136,10 @@ export function AgGridFn(lists: Array<any>) {
 }
 
 export function formatMargin(params: any) {
-    if (typeof params.value === 'number') {
+  const value = params.value ? numeral(params.value).value() : 0;
+    if (typeof value === 'number') {
         const numb = +params.value;
-        return Number(numb).toLocaleString('en-GB');
+        return numeral(params.value).format('0,0[.]000');
     }
     return '';
 }

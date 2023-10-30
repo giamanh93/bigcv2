@@ -54,7 +54,7 @@ interface UploadEvent {
 export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterViewChecked {
   itemsBreadcrumb: HrmBreadcrumb[] = [];
   screenWidth: number = 0;
-  fieldsTotal: any[] = ['quantity', 'amount', 'discount'];
+  fieldsTotal: any[] = ['invoiceAmount', 'excelAmount', 'diff', 'code'];
   countRecord: CountRecord = {
     totalRecord: 0,
     currentRecordStart: 0,
@@ -108,6 +108,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     selectSuppliers: null
 
   };
+  checkDate = new Date();
   public autoGroupColumnDef: ColDef = {
     minWidth: 300,
     cellRendererParams: {
@@ -167,6 +168,14 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       // cellClass: ['bg-primary-reverse']
     },
     {
+      field: 'diff',
+      header: 'Chênh lệnh',
+      typeField: 'decimal',
+      aggFunc: 'sum',
+      // headerClass: 'bg-primary-reverse',
+      cellClass: ['bg-primary-reverse']
+    },
+    {
       field: 'description',
       header: 'Mô tả',
       typeField: 'text',
@@ -174,14 +183,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
     },
-    {
-      field: 'diff',
-      header: 'Chênh lệnh',
-      typeField: 'decimal',
-      aggFunc: 'sum',
-      // headerClass: 'bg-primary-reverse',
-      // cellClass: ['bg-primary-reverse']
-    },
+
   ];
   gridApi: any;
   rowClassRules = {
@@ -431,11 +433,13 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     //   const base64s = datas.split(',');
     //   // this.calApiUploadImageOrder(base64s[1]);
     // };
-    this.listDatas= [];
+    this.listDatas = [];
     const formData = new FormData();
-    formData.append('retailerId', '717250');
-    formData.append('branchId', '73817');
-    formData.append('checkDate', '2023-09-18');
+    const retailerId: string = this.authService?.getRetailerId() ? this.authService?.getRetailerId().toString() : '';
+    const checkDate: any = this.checkDate ? this.$datepipe.transform(this.checkDate, 'yyyy-MM-dd') : '';
+    formData.append('retailerId', retailerId);
+    formData.append('branchId', this.query.branchId);
+    formData.append('checkDate', checkDate);
     formData.append('startRow', '14');
     formData.append('dateColumn', '1');
     formData.append('amountColumn', '2');
@@ -443,14 +447,17 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     formData.append('page', '1');
     formData.append('size', '10000');
     formData.append('excelFile', file);
+    this.$spinner.show();
     this.$serviceReview.getReviewTransferInDay(formData)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
         if (results.success) {
-            this.listDatas = results.data.content;
-            this.gridApi.setRowData(this.listDatas);
+          this.listDatas = results.data.content;
+          this.gridApi.setRowData(this.listDatas);
+          this.$spinner.hide();
         } else {
           this.listDatas = [];
+          this.$spinner.hide();
           this.$messageService.add({severity: 'warn', summary: 'Thông báo', detail: 'Hệ thông đang bảo trì.'});
         }
       });

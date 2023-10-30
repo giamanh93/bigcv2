@@ -15,7 +15,6 @@
           <!--                        class="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">-->
           <!--                  Chọn ảnh</button>-->
           <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-          <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (onSelect)="onUpload($event)"></p-fileUpload>
 <!--          <p-button *ngIf="this.imagePurchaseOrderId !== ''" style="cursor: pointer" styleClass="p-button-secondary ml-2" (onClick)="onBack()" label="Quay lại danh sách"></p-button>-->
         </div>
       </div>
@@ -30,7 +29,7 @@
     <div class="p-toolbar-group-end" style="display: flex; align-items: end">
       <div class="mr-2">
         <label for="firstname5" class="">Chọn ngày:</label>
-        <p-calendar placeholder="Từ ngày"
+        <p-calendar placeholder="Từ ngày" [(ngModel)]="checkDate"
                     panelStyleClass="datepicker-default-only-icon"  placeholder="Từ ngày (YYYY-MM-DD)"
                     [appendTo]="'body'" [baseZIndex]="101"
                     [monthNavigator]="true" styleClass="w-full"
@@ -64,7 +63,8 @@
 <!--        </div>-->
 <!--      </div>-->
       <div class="mr-2">
-        <button type="button" (click)="getMappingProduct()" class="text-white  bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Đối soát</button>
+        <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (onSelect)="onUpload($event)"></p-fileUpload>
+<!--        <button type="button" (click)="getMappingProduct()" class="text-white  bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Đối soát</button>-->
       </div>
     </div>
   </p-toolbar>
