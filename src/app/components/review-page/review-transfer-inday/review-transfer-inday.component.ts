@@ -60,6 +60,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     currentRecordStart: 0,
     currentRecordEnd: 0
   };
+  files: any = null;
   public listBranchs: Branch[] = [];
   public listDatas: any[] = [];
   public listDatasLoading: any[] = Array(20).fill(1).map((x, i) => i);
@@ -173,7 +174,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       typeField: 'decimal',
       aggFunc: 'sum',
       // headerClass: 'bg-primary-reverse',
-      cellClass: ['bg-primary-reverse']
+      // cellClass: ['text-red-500']
     },
     {
       field: 'description',
@@ -185,9 +186,12 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     },
 
   ];
+  isShowCancel: boolean = false;
   gridApi: any;
   rowClassRules = {
-    // 'cell-bg-red': (params: any) => { return params.data.hasOwnProperty('status') && params.data.status === 0 },
+    'text-diff-red-500': (params: any) => {
+      return params.data.hasOwnProperty('diff') && params.data.diff !== 0;
+    },
   };
   detailCellRendererParams: any = {};
   gridColumnApi: any = null;
@@ -413,26 +417,21 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
   // phần chọn ảnh
 
   onUpload(event: UploadEvent) {
-    this.handleUpload(event.currentFiles);
+    this.isShowCancel = true;
+    this.files = event.currentFiles[0];
   }
 
-  handleUpload(files: any) {
-    const file = files[0];
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   this.isUploadFile = false;
-    //   this.$spinner.show();
-    //   const datas: any = reader.result;
-    //   // this.linkImagebase64 = reader.result || null;
-    //   this.contentItems = [{
-    //     contentFile: file.name,
-    //     thumbnail: reader.result,
-    //     id: 1
-    //   }];
-    //   const base64s = datas.split(',');
-    //   // this.calApiUploadImageOrder(base64s[1]);
-    // };
+  cancelUpload() {
+    this.isUploadFile = false;
+    this.files = null;
+    this.isShowCancel = false;
+    setTimeout(() => {
+      this.isUploadFile = true;
+    }, 100);
+  }
+
+  handleUpload() {
+    const file = this.files;
     this.listDatas = [];
     const formData = new FormData();
     const retailerId: string = this.authService?.getRetailerId() ? this.authService?.getRetailerId().toString() : '';

@@ -55,7 +55,13 @@
 
   .p-fileupload {
     .p-fileupload-choose {
-      padding: 0.4rem 1rem !important;
+      padding: 0.42rem 1rem !important;
+    }
+  }
+
+  .text-diff-red-500 {
+    div[col-id="diff"] {
+      color: red !important;
     }
   }
 

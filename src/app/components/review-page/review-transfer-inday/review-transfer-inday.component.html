@@ -8,14 +8,15 @@
       <div class="md:col-5 sm:col-0 p-0 flex justify-content-end align-items-center dropdown-branch">
         <!--                <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"-->
         <!--                [style]="{'margin-right': '20px'}"></p-button>-->
-        <div class="fields mb-0 mr-4 flex gap-4">
+        <div class="fields mb-0 mr-4 flex gap-2">
           <!-- <label for="icon">Chọn nhà cung cấp</label>
           <p-dropdown [options]="products" [(ngModel)]="query.supplierName" [autoDisplayFirst]="false" optionLabel="supplierName" [editable]="true" [appendTo]="'body'" [filter]="true" filterBy="supplierName"></p-dropdown> -->
           <!--                <button type="button" (click)="editProductDetail()"-->
           <!--                        class="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">-->
           <!--                  Chọn ảnh</button>-->
           <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-<!--          <p-button *ngIf="this.imagePurchaseOrderId !== ''" style="cursor: pointer" styleClass="p-button-secondary ml-2" (onClick)="onBack()" label="Quay lại danh sách"></p-button>-->
+          <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (onSelect)="onUpload($event)"></p-fileUpload>
+           <p-button (onClick)="cancelUpload()" *ngIf="isShowCancel" style="cursor: pointer" styleClass="p-button-danger" icon="pi pi-times" label="Cancel"></p-button>
         </div>
       </div>
     </div>
@@ -63,8 +64,7 @@
 <!--        </div>-->
 <!--      </div>-->
       <div class="mr-2">
-        <p-fileUpload mode="basic" styleclass="text-white bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700" *ngIf="isUploadFile" styleClass="p-button-secondary" chooseLabel="Chọn tệp..." name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (onSelect)="onUpload($event)"></p-fileUpload>
-<!--        <button type="button" (click)="getMappingProduct()" class="text-white  bg-primary-500 border-primary-500 px-3 py-2  border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Đối soát</button>-->
+        <p-button style="cursor: pointer" (click)="handleUpload()" styleClass="p-button-primary"  icon="pi pi-check" label="Đối soát"></p-button>
       </div>
     </div>
   </p-toolbar>
