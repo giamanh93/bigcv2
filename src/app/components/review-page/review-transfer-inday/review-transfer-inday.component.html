@@ -33,6 +33,7 @@
         <p-calendar placeholder="Từ ngày" [(ngModel)]="checkDate"
                     panelStyleClass="datepicker-default-only-icon"  placeholder="Từ ngày (YYYY-MM-DD)"
                     [appendTo]="'body'" [baseZIndex]="101"
+                    (onSelect)="saveDate()"
                     [monthNavigator]="true" styleClass="w-full"
                     [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
                     name="startDate"></p-calendar>

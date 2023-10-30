@@ -32,6 +32,7 @@ import {Account, Ship} from '../../../models/account';
 import {AuthService} from '../../../services/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ReviewService} from '../../../services/review.service';
+import {LOCALKEY} from '../../../pipe/constant';
 
 export interface ContentBase64 {
   contentFile: string;
@@ -180,7 +181,9 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'description',
       header: 'Mô tả',
       typeField: 'text',
-      masterDetail: false,
+      suppressSizeToFit: true,
+      resizable: false,
+      width: 100
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
     },
@@ -251,6 +254,10 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem(LOCALKEY.DATETIME) !== null) {
+      const newDate: any = localStorage.getItem(LOCALKEY.DATETIME);
+      this.checkDate = new Date(newDate);
+    }
     this.onInitGrid();
     // ['_value'].title
     const titlePage: any = this.$activatedRoute.data;
@@ -414,6 +421,10 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     return result;
   };
 
+  saveDate() {
+    localStorage.setItem(LOCALKEY.DATETIME, this.checkDate.toString());
+  }
+
   // phần chọn ảnh
 
   onUpload(event: UploadEvent) {
@@ -453,6 +464,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
         if (results.success) {
           this.listDatas = results.data.content;
           this.gridApi.setRowData(this.listDatas);
+          this.onInitGrid();
           this.$spinner.hide();
         } else {
           this.listDatas = [];
