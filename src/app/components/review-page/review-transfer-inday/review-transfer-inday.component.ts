@@ -133,6 +133,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'code',
       header: '#',
       typeField: 'text',
+      suppressSizeToFit: true,
+      width: 110,
       masterDetail: false,
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
@@ -141,6 +143,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'invoiceDate',
       header: 'Ngày hóa đơn',
       typeField: 'text',
+      suppressSizeToFit: true,
+      width: 150,
       masterDetail: false,
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
@@ -149,6 +153,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'invoiceAmount',
       header: `Tổng tiền`,
       typeField: 'decimal',
+      suppressSizeToFit: true,
+      width: 110,
       aggFunc: 'sum',
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
@@ -156,6 +162,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     {
       field: 'excelDate',
       header: 'excelDate',
+      suppressSizeToFit: true,
+      width: 150,
       typeField: 'text',
       masterDetail: false,
       // headerClass: 'bg-primary-reverse',
@@ -165,6 +173,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'excelAmount',
       header: 'excelAmount',
       typeField: 'decimal',
+      suppressSizeToFit: true,
+      width: 80,
       aggFunc: 'sum',
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
@@ -174,6 +184,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       header: 'Chênh lệnh',
       typeField: 'decimal',
       aggFunc: 'sum',
+      suppressSizeToFit: true,
+      width: 80,
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['text-red-500']
     },
@@ -181,9 +193,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       field: 'description',
       header: 'Mô tả',
       typeField: 'text',
-      suppressSizeToFit: true,
       resizable: false,
-      width: 100
       // headerClass: 'bg-primary-reverse',
       // cellClass: ['bg-primary-reverse']
     },
@@ -305,6 +315,9 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    setTimeout(() => {
+      this.gridApi.sizeColumnsToFit()
+    },500)
   }
 
 
@@ -458,6 +471,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     formData.append('size', '10000');
     formData.append('excelFile', file);
     this.$spinner.show();
+    this.columnDefs = [];
     this.$serviceReview.getReviewTransferInDay(formData)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
