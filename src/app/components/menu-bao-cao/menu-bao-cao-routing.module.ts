@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'v1', component: MenuBaoCaoComponent,
     children: [
       {
-        path: 'customer-mgmt-system',
+        path: 'report',
         loadChildren: () => import('../../components/customer-management-system/customer-management-system.module')
           .then(m => m.CustomerManagementSystemModule)
       },

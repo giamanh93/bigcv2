@@ -14,10 +14,28 @@ import { FollowDebtCustomerComponent } from './follow-debt-customer/follow-debt-
 // { label: '5. Theo dõi doanh số khách hàng theo khu vực', routerLink: '/customer-mgmt-system/follow-up-customer-sales-area' },
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: FollowUpCustomerSalesProductComponent },
-        { path: 'follow-up-customer-sales-product', component: FollowUpCustomerSalesProductComponent },
-        { path: 'follow-up-customer-cycle', component: FollowUpCustomerCycleComponent },
-        { path: 'follow-order-value', component: FollowOrderValueComponent },
+        { path: '', component: FollowUpCustomerCycleComponent },
+        {
+          path: 'follow-up-customer-cycle',
+          component: FollowUpCustomerCycleComponent,
+          data: {
+            title: 'Chu kỳ khách hàng'
+          }
+        },
+        {
+          path: 'follow-order-value',
+          component: FollowOrderValueComponent,
+          data: {
+            title: 'Chu kỳ doanh thu'
+          }
+        },
+        {
+          path: 'follow-up-customer-sales-product',
+          component: FollowUpCustomerSalesProductComponent,
+          data: {
+            title: 'Chu kỳ sản phẩm'
+          }
+        },
         { path: 'follow-form-shopping', component: FollowFormShoppingComponent },
         { path: 'follow-up-customer-sales-area', component: FollowUpCustomerSalesAreaComponent },
         { path: 'follow-debt-customer', component: FollowDebtCustomerComponent },

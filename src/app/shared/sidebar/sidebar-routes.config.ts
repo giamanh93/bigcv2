@@ -90,7 +90,7 @@ export const menus = [
   },
 ];
 
-const menuItems = [
+export const menuItems = [
   {
     label: 'Tổng quan',
     icon: 'pi pi-fw pi-video',
@@ -110,17 +110,20 @@ const menuItems = [
           items: [
             {
               label: 'Chu kỳ khách hàng',
-              routerLink: '/customer-mgmt-system/follow-up-customer-cycle',
+              // routerLink: '/customer-mgmt-system/follow-up-customer-cycle',
+              routerLink: '/bao-cao/v1/report/follow-up-customer-cycle',
             },
             {
               label: 'Chu kỳ doanh thu',
-              routerLink: '/customer-mgmt-system/follow-order-value'
+              // routerLink: '/customer-mgmt-system/follow-order-value'
+              routerLink: '/bao-cao/v1/report/follow-order-value',
             },
             {
               label: 'Chu kỳ sản phẩm',
-              routerLink: '/customer-mgmt-system/follow-up-customer-sales-product'
+              // routerLink: '/customer-mgmt-system/follow-up-customer-sales-product'
+              routerLink: '/bao-cao/v1/report/follow-up-customer-sales-product',
             },
-            {label: 'Công nợ vượt định mức'},
+            {label: 'Công nợ vượt định mức',   routerLink: '/bao-cao/v1'},
           ]
         }
       ],

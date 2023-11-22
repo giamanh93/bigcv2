@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Event, RouterEvent, Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs';
-import {menus} from './sidebar-routes.config';
+import {menuItems, menus} from './sidebar-routes.config';
 import {AuthService} from '../../services/auth/auth.service';
 // import { menus } from './sidebar-routes.config';
 declare var $: any;
@@ -65,9 +65,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     const pathname = window.location.pathname;
-    this.menuItems = menus.filter(menuItem => menuItem);
-    this.parseObjectProperties(this.menuItems, pathname);
-    this.menuItems = [...this.menuItems];
+    this.menuItems = menuItems.filter(menuItem => menuItem);
+    // this.parseObjectProperties(this.menuItems, pathname);
+    // this.menuItems = [...this.menuItems];
   }
 
   goToHome() {

@@ -21,6 +21,7 @@ import {ColDef, GetRowIdFunc, GetRowIdParams} from 'ag-grid-community';
 import {AgGridFn, autoSizeAllGrid} from 'src/app/common/function/lib';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {AuthService} from 'src/app/services/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-follow-up-customer-cycle',
@@ -40,7 +41,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
   public listDatas: any[] = [];
   public listDatasLoading: any[] = Array(20).fill(1).map((x, i) => i);
   public isLoading: boolean = false;
-  public fileName: string = 'Theo dõi doanh số khách hàng theo chu kỳ';
+  public fileName: string = '';
   public query: any = {
     retailerId: this.authService?.getRetailerId(),
     startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -106,12 +107,12 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
 
   isExpanded: boolean = true;
 
-  constructor(private authService: AuthService) { this.query.retailerId = this.authService?.getRetailerId()
+  constructor(private authService: AuthService) { this.query.retailerId = this.authService?.getRetailerId();
   }
 
   public getRowId: GetRowIdFunc = (params: GetRowIdParams) => {
     return params.data.customerId + params.data.customerName;
-  };
+  }
 
   initCols() {
     this.cols = [
@@ -119,8 +120,6 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
       {field: 'customerName', header: 'Khách hàng', typeField: 'text', rowGroup: true, width: 300},
       {field: 'revenue', header: 'Doanh thu', typeField: 'decimal', aggFunc: 'sum'},
     ];
-
-
     this.onInitGrid();
   }
 
@@ -216,11 +215,14 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
       this.query.endDate = new Date();
     }
     this.screenWidth = window.innerWidth;
-    this.itemsBreadcrumb = [
-      {label: 'Trang chủ', routerLink: '/home'},
-      {label: 'Quản trị khách hàng'},
-      {label: `2. ${this.fileName}`},
-    ];
+    const _route: any = this.route.data;
+    const titlePage = _route['_value'].title;
+    this.fileName = titlePage;
+    // this.itemsBreadcrumb = [
+    //   {label: 'Trang chủ', routerLink: '/home'},
+    //   {label: 'Quản trị khách hàng'},
+    //   {label: `2. ${this.fileName}`},
+    // ];
     this.getListBranch();
   }
 
@@ -376,6 +378,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
 
   private readonly unsubscribe$: Subject<void> = new Subject();
   private $spinner = inject(NgxSpinnerService);
+  private route = inject(ActivatedRoute);
   private $service = inject(customerManagementSystem);
   private $datepipe = inject(DatePipe);
   private $messageService = inject(MessageService);

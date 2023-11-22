@@ -2,14 +2,28 @@
     <section class="bread-crumb" >
         <div class="flex bet middle">
             <div class="md:col-8 sm:col-12 p-0">
-                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+<!--                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>-->
+              <h3>{{fileName}}</h3>
             </div>
-            <div class="md:col-4 sm:col-0 p-0 flex gap-2 justify-content-end align-items-center dropdown-branch">
+            <div class="md:col-4 sm:col-0 p-0 flex gap-2 justify-content-end align-items-center dropdown-branch"
+                 style="position: relative; top: -73px; right: 25px">
               <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-              <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"
-                [style]="{'margin-right': '20px'}"></p-button>
             </div>
         </div>
+      <div class="flex bet middle">
+        <div>
+          <input id="firstname5"   type="text"
+                 class="border-solid w-full col-7 px-3 py-2 surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Tên nhà cung cấp">
+        </div>
+        <div>
+                      <p-calendar placeholder="Từ ngày"
+                      panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"
+                      [appendTo]="'body'" [baseZIndex]="101"
+                      [monthNavigator]="true"
+                      [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
+                      name="endDate"></p-calendar>
+        </div>
+      </div>
     </section>
     <!-- this.organizeInfoService.setStocks(e.value); -->
     <p-divider type="solid"></p-divider>
@@ -24,36 +38,36 @@
         </div>
 </div>
 
-<p-sidebar [(visible)]="displayFilter" (onHide)="displayFilter = false" position="right" styleclass="w-30rem">
-    <ng-template pTemplate="header">
-        <div class="flex grid justify-content-end">
-            <button type="button" pButton pRipple icon="pi pi-search" label="Tìm kiếm" (click)="getLists(); displayFilter=false" class="p-button-secondary mr-1 p-button-sm"></button>
-            <!-- <button type="button" pButton pRipple icon="pi pi-times" label="Làm mới" (click)="refresh(); displayFilter=false" class="p-button-danger p-button-sm"></button>   -->
-        </div>
-    </ng-template>
-    <div class="p-fluid grid formgrid">
-        <div class="field col-12 md:col-12">
-            <label for="icon">Chi nhánh</label>
-            <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-        </div>
-        <div class="field col-12 md:col-12">
-            <label for="dateformat">Từ ngày</label>
-            <p-calendar placeholder="Từ ngày"
-                panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"
-                [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.startDate"
-                [monthNavigator]="true"
-                [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
-                name="startDate"></p-calendar>
-        </div>
+<!--<p-sidebar [(visible)]="displayFilter" (onHide)="displayFilter = false" position="right" styleclass="w-30rem">-->
+<!--    <ng-template pTemplate="header">-->
+<!--        <div class="flex grid justify-content-end">-->
+<!--            <button type="button" pButton pRipple icon="pi pi-search" label="Tìm kiếm" (click)="getLists(); displayFilter=false" class="p-button-secondary mr-1 p-button-sm"></button>-->
+<!--            &lt;!&ndash; <button type="button" pButton pRipple icon="pi pi-times" label="Làm mới" (click)="refresh(); displayFilter=false" class="p-button-danger p-button-sm"></button>   &ndash;&gt;-->
+<!--        </div>-->
+<!--    </ng-template>-->
+<!--    <div class="p-fluid grid formgrid">-->
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="icon">Chi nhánh</label>-->
+<!--            <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
+<!--        </div>-->
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="dateformat">Từ ngày</label>-->
+<!--            <p-calendar placeholder="Từ ngày"-->
+<!--                panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"-->
+<!--                [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.startDate"-->
+<!--                [monthNavigator]="true"-->
+<!--                [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"-->
+<!--                name="startDate"></p-calendar>-->
+<!--        </div>-->
 
-        <div class="field col-12 md:col-12">
-            <label for="icon">Đến ngày</label>
-            <p-calendar placeholder="Từ ngày"
-            panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"
-            [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.endDate"
-            [monthNavigator]="true"
-            [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
-            name="endDate"></p-calendar>
-        </div>
-    </div>
-</p-sidebar>
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="icon">Đến ngày</label>-->
+<!--            <p-calendar placeholder="Từ ngày"-->
+<!--            panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"-->
+<!--            [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.endDate"-->
+<!--            [monthNavigator]="true"-->
+<!--            [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"-->
+<!--            name="endDate"></p-calendar>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</p-sidebar>-->
