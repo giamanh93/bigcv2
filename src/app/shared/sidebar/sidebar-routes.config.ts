@@ -108,10 +108,19 @@ const menuItems = [
         {
           label: 'Khách hàng',
           items: [
-            { label: 'Chu kỳ khách hàng' },
-            { label: 'Chu kỳ doanh thu' },
-            { label: 'Chu kỳ sản phẩm' },
-            { label: 'Công nợ vượt định mức' },
+            {
+              label: 'Chu kỳ khách hàng',
+              routerLink: '/customer-mgmt-system/follow-up-customer-cycle',
+            },
+            {
+              label: 'Chu kỳ doanh thu',
+              routerLink: '/customer-mgmt-system/follow-order-value'
+            },
+            {
+              label: 'Chu kỳ sản phẩm',
+              routerLink: '/customer-mgmt-system/follow-up-customer-sales-product'
+            },
+            {label: 'Công nợ vượt định mức'},
           ]
         }
       ],
@@ -119,10 +128,10 @@ const menuItems = [
         {
           label: 'Sản phẩm',
           items: [
-            { label: 'Không đạt biên lợi nhuận' },
-            { label: 'Không có lãi' },
-            { label: 'Hỏng, hủy' },
-            { label: 'Giảm theo nhu cầu' },
+            {label: 'Không đạt biên lợi nhuận'},
+            {label: 'Không có lãi'},
+            {label: 'Hỏng, hủy'},
+            {label: 'Giảm theo nhu cầu'},
           ]
         }
       ],
@@ -130,8 +139,8 @@ const menuItems = [
         {
           label: 'Nhà cung cấp',
           items: [
-            { label: 'Có số lượng hàng hỏng, hủy' },
-            { label: 'Có công nợ đến kỳ' }
+            {label: 'Có số lượng hàng hỏng, hủy'},
+            {label: 'Có công nợ đến kỳ'}
           ]
         }
       ],
@@ -139,9 +148,9 @@ const menuItems = [
         {
           label: 'Tài chính',
           items: [
-            { label: 'Lệch quỹ tiền mặt quá định mức' },
-            { label: 'Lệch tiền chuyển về tài khoản' },
-            { label: 'Lẹch tiền chuyển về ngân hàng' },
+            {label: 'Lệch quỹ tiền mặt quá định mức'},
+            {label: 'Lệch tiền chuyển về tài khoản'},
+            {label: 'Lẹch tiền chuyển về ngân hàng'},
           ]
         }
       ]
@@ -155,11 +164,11 @@ const menuItems = [
         {
           label: '',
           items: [
-            { label: 'Đối soát dòng tiền với doanh số' },
-            { label: 'Đối soát thực trả nhà cung cấp' },
-            { label: 'Đối soát công nợ nhà cung cấp' },
-            { label: 'Kiểm soát công nợ khách hàng' },
-            { label: 'Công nợ nhà cung cấp theo sản phẩm' },
+            {label: 'Đối soát dòng tiền với doanh số'},
+            {label: 'Đối soát thực trả nhà cung cấp'},
+            {label: 'Đối soát công nợ nhà cung cấp'},
+            {label: 'Kiểm soát công nợ khách hàng'},
+            {label: 'Công nợ nhà cung cấp theo sản phẩm'},
           ]
         },
       ]
@@ -173,8 +182,8 @@ const menuItems = [
         {
           label: '',
           items: [
-            { label: 'Mở đóng quầy' },
-            { label: 'Đối soát' },
+            {label: 'Mở đóng quầy'},
+            {label: 'Đối soát'},
           ]
         },
       ]
