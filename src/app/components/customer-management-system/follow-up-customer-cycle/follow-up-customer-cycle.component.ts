@@ -33,8 +33,8 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
   itemsBreadcrumb: HrmBreadcrumb[] = [];
   screenWidth: number = 0;
   countRecord: CountRecord = {
-    totalRecord: 0,
-    currentRecordStart: 0,
+    totalRecord: 100,
+    currentRecordStart: 10,
     currentRecordEnd: 0
   };
   public listBranchs: Branch[] = [];
@@ -102,7 +102,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
   first: number = 1;
 
   loadjs = 0;
-  heightGrid = 0;
+  heightGrid = 300;
   displayFilter = false;
 
   isExpanded: boolean = true;
@@ -259,7 +259,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getLists();
   }
 
   search() {
@@ -313,7 +313,6 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
       if (b && b.clientHeight) {
         const totalHeight = b.clientHeight + c.clientHeight + 50;
         this.heightGrid = window.innerHeight - totalHeight;
-        console.log(this.heightGrid);
         this.$changeDetech.detectChanges();
       } else {
         this.loadjs = 0;

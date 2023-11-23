@@ -28,12 +28,18 @@
 <!--        </div>-->
 <!--    </ng-template>-->
 <!--</p-menubar>-->
-
-<p-megaMenu [model]="menuItems" styleClass="flex">
-  <ng-template pTemplate="start">
-    <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
-  </ng-template>
-<!--  <ng-template pTemplate="end">-->
-<!--    <input type="text" pInputText placeholder="Search" />-->
-<!--  </ng-template>-->
-</p-megaMenu>
+<div class="flex justify-content-between align-items-center nav-main">
+  <img src="assets/images/logo.svg" class="mr-2 logo" />
+  <div class="flex align-items-center gap-5">
+    <p-megaMenu [model]="menuItems"></p-megaMenu>
+    <div class="flex gap-2">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M19 37.3332C29.1252 37.3332 37.3334 29.1251 37.3334 18.9998C37.3334 8.87462 29.1252 0.666504 19 0.666504C8.8748 0.666504 0.666687 8.87462 0.666687 18.9998C0.666687 29.1251 8.8748 37.3332 19 37.3332ZM19.0001 6.1665C15.7094 6.1665 13.0418 8.83414 13.0418 12.1248C13.0418 15.4155 15.7094 18.0832 19.0001 18.0832C22.2908 18.0832 24.9584 15.4155 24.9584 12.1248C24.9584 8.83414 22.2908 6.1665 19.0001 6.1665ZM9.46678 27.6165C9.46678 23.6677 12.6679 20.4665 16.6168 20.4665H21.3834C25.3323 20.4665 28.5334 23.6677 28.5334 27.6165V28.2123C28.5334 29.1995 27.7332 29.9998 26.7459 29.9998H11.2543C10.2671 29.9998 9.46678 29.1995 9.46678 28.2123V27.6165Z" fill="#021126"/>
+      </svg>
+      <div class="profile">
+        <h3>0789125810</h3>
+        <p>TK Admin</p>
+      </div>
+    </div>
+  </div>
+</div>
