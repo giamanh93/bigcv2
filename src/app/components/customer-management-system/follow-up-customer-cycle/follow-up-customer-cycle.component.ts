@@ -205,6 +205,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
 
   ngOnInit(): void {
     this.onInitGrid();
+
     const filterDate = localStorage.hasOwnProperty('filterDate')
     && localStorage.getItem('filterDate') ? localStorage.getItem('filterDate') : null;
     if (filterDate) {
@@ -236,10 +237,10 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
           if (this.query.branchId === 0 && this.listBranchs.length > 0) {
             setTimeout(() => {
               this.query.branchId = this.listBranchs[2].branchId;
-              // this.getLists();
+              this.getLists();
             }, 10);
           } else {
-            // this.getLists();
+            this.getLists();
           }
           this.displayFilter = true;
         } else {
@@ -276,7 +277,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
     params.startDate = this.$datepipe.transform(this.query.startDate, 'yyyy-MM-dd');
     localStorage.setItem('filterDate', JSON.stringify({endDate: params.endDate, startDate: params.startDate}));
     const queryParams = queryString.stringify(params);
-    this.$service.getRevenueByCustomer(queryParams)
+    this.$service.getRevenueByCustomer('branchId=298477&endDate=2023-06-06&page=1&retailerId=717250&search=&size=20&startDate=2023-06-01')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
         if (results.success) {

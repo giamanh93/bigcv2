@@ -26,9 +26,10 @@ export class MenuBaoCaoComponent implements OnInit {
 
     this.itemsPanelMenu = [
       {
-        label: 'Khách hàng',
+        label: 'KHÁCH HÀNG',
         icon: 'pi pi-fw pi-file',
         routerLink: '/bao-cao/v1/customer-mgmt-system',
+        expanded: true,
         items: [
           {
             label: 'Chu Kỳ khách hàng',
@@ -46,88 +47,50 @@ export class MenuBaoCaoComponent implements OnInit {
         ]
       },
       {
-        label: 'Edit',
+        label: 'SẢN PHẨM',
         icon: 'pi pi-fw pi-pencil',
+        expanded: true,
         items: [
           {
-            label: 'Left',
-            icon: 'pi pi-fw pi-align-left'
+            label: 'Không đạt biên lợi nhuận',
           },
           {
-            label: 'Right',
-            icon: 'pi pi-fw pi-align-right'
+            label: 'Không có lãi',
           },
           {
-            label: 'Center',
-            icon: 'pi pi-fw pi-align-center'
+            label: 'Hỏng, hủy',
           },
           {
-            label: 'Justify',
-            icon: 'pi pi-fw pi-align-justify'
+            label: 'Giảm theo nhu cầu',
           }
         ]
       },
       {
-        label: 'Users',
+        label: 'NHÀ CUNG CẤP',
         icon: 'pi pi-fw pi-user',
+        expanded: true,
         items: [
           {
-            label: 'New',
-            icon: 'pi pi-fw pi-user-plus'
+            label: 'Có số lượng hàng hỏng, hủy',
           },
           {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-user-minus'
+            label: 'Có công nợ đến kỳ',
           },
-          {
-            label: 'Search',
-            icon: 'pi pi-fw pi-users',
-            items: [
-              {
-                label: 'Filter',
-                icon: 'pi pi-fw pi-filter',
-                items: [
-                  {
-                    label: 'Print',
-                    icon: 'pi pi-fw pi-print'
-                  }
-                ]
-              },
-              {
-                icon: 'pi pi-fw pi-bars',
-                label: 'List'
-              }
-            ]
-          }
         ]
       },
       {
-        label: 'Events',
+        label: 'TÀI CHÍNH',
         icon: 'pi pi-fw pi-calendar',
+        expanded: true,
         items: [
           {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              {
-                label: 'Save',
-                icon: 'pi pi-fw pi-calendar-plus'
-              },
-              {
-                label: 'Delete',
-                icon: 'pi pi-fw pi-calendar-minus'
-              }
-            ]
+            label: 'Lệch quỹ tiền mặt quá định mức',
           },
           {
-            label: 'Archieve',
-            icon: 'pi pi-fw pi-calendar-times',
-            items: [
-              {
-                label: 'Remove',
-                icon: 'pi pi-fw pi-calendar-minus'
-              }
-            ]
+            label: 'Lệch tiền chuyển về tài khoản',
+          },
+          {
+            label: 'Lệch tiền chuyển về ngân hàng',
           }
         ]
       }
