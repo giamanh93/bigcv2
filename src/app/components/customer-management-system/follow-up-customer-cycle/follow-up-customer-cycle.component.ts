@@ -102,7 +102,7 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
   first: number = 1;
 
   loadjs = 0;
-  heightGrid = 300;
+  heightGrid = 550;
   displayFilter = false;
 
   isExpanded: boolean = true;
@@ -307,18 +307,18 @@ export class FollowUpCustomerCycleComponent implements OnInit, AfterViewInit, On
   }
 
   ngAfterViewChecked(): void {
-    const b: any = document.querySelector('.sidebarBody1');
-    const c: any = document.querySelector('.breadcrumb');
-    this.loadjs++;
-    if (this.loadjs === 5) {
-      if (b && b.clientHeight) {
-        const totalHeight = b.clientHeight + c.clientHeight + 50;
-        this.heightGrid = window.innerHeight - totalHeight;
-        this.$changeDetech.detectChanges();
-      } else {
-        this.loadjs = 0;
-      }
-    }
+    // const b: any = document.querySelector('.sidebarBody1');
+    // const c: any = document.querySelector('.breadcrumb');
+    // this.loadjs++;
+    // if (this.loadjs === 5) {
+    //   if (b && b.clientHeight) {
+    //     const totalHeight = b.clientHeight + c.clientHeight + 50;
+    //     this.heightGrid = window.innerHeight - totalHeight;
+    //     this.$changeDetech.detectChanges();
+    //   } else {
+    //     this.loadjs = 0;
+    //   }
+    // }
   }
 
   expandAll(type: boolean = false) {

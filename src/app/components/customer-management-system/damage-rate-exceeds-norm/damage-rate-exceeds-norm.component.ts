@@ -1,15 +1,12 @@
 import {DatePipe} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
 import {
   Component,
   OnInit,
   inject,
   ChangeDetectorRef,
   AfterViewInit,
-  SimpleChanges,
-  OnChanges,
   HostListener,
-  AfterViewChecked, OnDestroy
+  OnDestroy, AfterViewChecked
 } from '@angular/core';
 import {MessageService} from 'primeng/api';
 import queryString from 'query-string';
@@ -17,18 +14,16 @@ import {Subject, takeUntil} from 'rxjs';
 import {HrmBreadcrumb} from 'src/app/common/components/hrm-breadcrumb/hrm-breadcrumb.component';
 import {Branch, CountRecord} from 'src/app/models/early-warning';
 import {customerManagementSystem} from 'src/app/services/customerManagementSystem.service';
-import {ColDef, GetRowIdFunc, GetRowIdParams} from 'ag-grid-community';
 import {AgGridFn, autoSizeAllGrid} from 'src/app/common/function/lib';
+import {ColDef, GetRowIdFunc, GetRowIdParams} from 'ag-grid-community';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {AuthService} from 'src/app/services/auth/auth.service';
-
 @Component({
-  selector: 'app-follow-up-customer-sales-product',
-  templateUrl: './follow-up-customer-sales-product.component.html',
-  styleUrls: ['./follow-up-customer-sales-product.component.scss']
+  selector: 'app-damage-rate-exceeds-norm',
+  templateUrl: './damage-rate-exceeds-norm.component.html',
+  styleUrls: ['./damage-rate-exceeds-norm.component.scss']
 })
-
-export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class DamageRateExceedsNormComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked {
   itemsBreadcrumb: HrmBreadcrumb[] = [];
   screenWidth: number = 0;
   countRecord: CountRecord = {
@@ -40,7 +35,8 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
   public listDatas: any[] = [];
   public listDatasLoading: any[] = Array(20).fill(1).map((x, i) => i);
   public isLoading: boolean = false;
-  public fileName = 'Theo dõi doanh số khách hàng theo sản phẩm';
+  public fileName: string = 'Theo dõi theo giá trị đơn hàng';
+  public columnDefs: ColDef[] = [];
   public query: any = {
     retailerId: this.authService?.getRetailerId(),
     startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -50,6 +46,8 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
     search: '',
     branchId: localStorage.hasOwnProperty('branchId') && localStorage.getItem('branchId') ? Number(localStorage.getItem('branchId')) : 0,
   };
+
+  detailCellRendererParams: any = null;
   public autoGroupColumnDef: ColDef = {
     minWidth: 300,
     cellRendererParams: {
@@ -62,36 +60,38 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
       },
     }
   };
-  public columnDefs: ColDef[] = [];
 
-  public cols: any[] = [
-    {field: 'customerId', header: '#', typeField: 'text', masterDetail: true, width: 150},
-    {field: 'customerName', header: 'Khách hàng', typeField: 'text'},
-    // { field: "productName", header: `Sản phầm`, typeField: 'text' },
-    {field: 'revenue', header: 'Doanh thu', typeField: 'decimal', aggFunc: 'sum', width: 150},
+  public cols = [
+    {field: 'productId', header: '#', typeField: 'text', masterDetail: true},
+    {field: 'productName', header: 'Sản phẩm', typeField: 'text', width: 300},
+    {field: 'supplierName', header: 'Nhà cung cấp', typeField: 'text'},
+    {field: 'purchaseQuantity', header: 'purchaseQuantity', typeField: 'decimal'},
+    {field: 'damagedQuantity', header: 'damagedQuantity', typeField: 'decimal'},
+    {field: 'ratio', header: 'ratio', typeField: 'text'},
+    {field: 'unit', header: 'Đơn vị', typeField: 'text'},
+    {field: 'transDate', header: 'transDate', typeField: 'text'},
+    {field: 'dataDate', header: 'dataDate', typeField: 'text'},
   ];
+
   public colsDetail: any[] = [
     {
-      field: 'productId',
-      header: '#',
+      field: 'purchaseDate',
+      header: 'Ngày hóa đơn',
       typeField: 'text',
-      masterDetail: true,
-      width: 150,
       headerClass: 'bg-primary-reverse',
       cellClass: ['bg-primary-reverse']
     },
-    {field: 'productName', header: `Sản phầm`, typeField: 'text', headerClass: 'bg-primary-reverse', cellClass: ['bg-primary-reverse']},
+    {field: 'staff', header: 'Nhân viên bán', typeField: 'text', headerClass: 'bg-primary-reverse', cellClass: ['bg-primary-reverse']},
+    {field: 'salePanel', header: 'Kênh bán', typeField: 'text', headerClass: 'bg-primary-reverse', cellClass: ['bg-primary-reverse']},
     {
       field: 'revenue',
       header: 'Doanh thu',
       typeField: 'decimal',
       aggFunc: 'sum',
-      width: 150,
       headerClass: 'bg-primary-reverse',
       cellClass: ['bg-primary-reverse']
-    },
+    }
   ];
-  detailCellRendererParams: any = {};
 
   first: number = 1;
 
@@ -101,32 +101,17 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
 
   isExpanded: boolean = true;
 
+
   constructor(private authService: AuthService) { this.query.retailerId = this.authService?.getRetailerId()
   }
 
   public getRowId: GetRowIdFunc = (params: GetRowIdParams) => {
-    return params.data.customerId + params.data.customerName;
+    return params.data.productId + params.data.productName;
   };
+
 
   ngAfterViewInit() {
     this.$changeDetech.detectChanges();
-  }
-
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.screenWidth = window.innerWidth;
-  }
-
-  refresh() {
-    this.query.startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-    this.query.endDate = new Date();
-    this.getLists();
   }
 
   onInitGrid() {
@@ -183,6 +168,24 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
     };
   }
 
+  refresh() {
+    this.query.startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    this.query.endDate = new Date();
+    this.query.period = 2;
+    this.getLists();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+  }
+
+
   ngOnInit(): void {
     this.onInitGrid();
     const filterDate = localStorage.hasOwnProperty('filterDate')
@@ -198,7 +201,7 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
     this.itemsBreadcrumb = [
       {label: 'Trang chủ', routerLink: '/home'},
       {label: 'Quản trị khách hàng'},
-      {label: `1. ${this.fileName}`},
+      {label: `3. ${this.fileName}`},
     ];
     this.getListBranch();
   }
@@ -240,10 +243,7 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
   }
 
   getLists() {
-    // this.$https.get('https://primeng.org/assets/showcase/data/customers-medium.json').subscribe((results: any) => {
-    //   this.listDatas = results.data ?? [];
-    //   this.isLoading = false;
-    // })
+    const startTime = new Date().getTime();
     this.listDatas = [];
     this.isLoading = true;
     const params = {...this.query};
@@ -251,11 +251,13 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
     params.startDate = this.$datepipe.transform(this.query.startDate, 'yyyy-MM-dd');
     localStorage.setItem('filterDate', JSON.stringify({endDate: params.endDate, startDate: params.startDate}));
     const queryParams = queryString.stringify(params);
-    this.$service.getRevenueByCustomer(queryParams)
+    this.$service.damageRateExceedsNorm(queryParams)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
+        console.log('API', (new Date().getTime() - startTime) / 1000);
         if (results.success) {
           this.listDatas = results.data.content ?? [];
+          console.log('render', (new Date().getTime() - startTime) / 1000);
           this.isLoading = false;
           this.fnCountRecord(results.data);
           this.expandAll(false);
@@ -268,7 +270,7 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
   }
 
   paginate(event: any) {
-    this.query.page = event.page + 1;
+    this.query.page = this.query.page > 1 ? event.page + 1 : 1;
     this.first = event.first;
     this.query.size = event.rows;
     this.getLists();
@@ -283,7 +285,6 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
   ngAfterViewChecked(): void {
     // const b: any = document.querySelector('.sidebarBody1');
     // const c: any = document.querySelector('.breadcrumb');
-    // // const e: any = document.querySelector(".paginator");
     // this.loadjs++;
     // if (this.loadjs === 5) {
     //   if (b && b.clientHeight) {
@@ -324,7 +325,7 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
     params.startDate = this.$datepipe.transform(this.query.startDate, 'yyyy-MM-dd');
     localStorage.setItem('filterDate', JSON.stringify({endDate: params.endDate, startDate: params.startDate}));
     const queryParams = queryString.stringify(params);
-    this.$service.getRevenueByCustomerDetail(queryParams)
+    this.$service.getCustomerRevenueByInvoiceCostDetail(queryParams)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(results => {
         if (results.success) {
@@ -342,6 +343,7 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
             // event.api.refreshServerSide({ route: customerId, purge: true })
             event.api.getDisplayedRowAtIndex(event.rowIndex)!.setExpanded(true);
           }, 0);
+
         } else {
           this.listDatas = [];
           this.isLoading = false;
@@ -350,9 +352,9 @@ export class FollowUpCustomerSalesProductComponent implements OnInit, AfterViewI
       });
   }
 
+  private $spinner = inject(NgxSpinnerService);
   private readonly unsubscribe$: Subject<void> = new Subject();
   private $service = inject(customerManagementSystem);
-  private $spinner = inject(NgxSpinnerService);
   private $datepipe = inject(DatePipe);
   private $messageService = inject(MessageService);
   private $changeDetech = inject(ChangeDetectorRef);

@@ -30,6 +30,11 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { FollowDebtCustomerComponent } from './follow-debt-customer/follow-debt-customer.component';
 import { DividerModule } from 'primeng/divider';
 import { SidebarModule } from 'primeng/sidebar';
+import { DebtCustomerReportsComponent } from './debt-customer-reports/debt-customer-reports.component';
+import { ProfitMarginReportComponent } from './profit-margin-report/profit-margin-report.component';
+import { UnProfitTableReportComponent } from './un-profit-table-report/un-profit-table-report.component';
+import { DamageRateExceedsNormComponent } from './damage-rate-exceeds-norm/damage-rate-exceeds-norm.component';
+import { DecreaseRevenueByCustomerComponent } from './decrease-revenue-by-customer/decrease-revenue-by-customer.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -53,7 +58,7 @@ import { SidebarModule } from 'primeng/sidebar';
         ListGridAngularModule,
         LoadingGridModule,
         AgGridModule
-        
+
     ],
     providers: [
         customerManagementSystem,
@@ -67,6 +72,11 @@ import { SidebarModule } from 'primeng/sidebar';
         , FollowFormShoppingComponent
         , FollowUpCustomerSalesAreaComponent
         , FollowDebtCustomerComponent
+        , DebtCustomerReportsComponent
+        , ProfitMarginReportComponent
+        , UnProfitTableReportComponent
+        , DamageRateExceedsNormComponent
+        , DecreaseRevenueByCustomerComponent
         ]
 })
 export class CustomerManagementSystemModule { }

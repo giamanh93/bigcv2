@@ -110,6 +110,59 @@ export class customerManagementSystem {
       );
   }
 
+  getDebtCustomerReports(query: string): Observable<Responses> {
+    return this.$http.get<Responses>(baseUrl + `/alert/v1/getDebtCustomerReports?` + query)
+      .pipe(
+        catchError(error => {
+          this.handleError(error);
+          return of(error.error);
+        })
+      );
+  }
+
+  getProfitMarginReports(query: string): Observable<Responses> {
+  return this.$http.get<Responses>(baseUrl + `/alert/v1/getProfitMarginReports?` + query)
+    .pipe(
+      catchError(error => {
+        this.handleError(error);
+        return of(error.error);
+      })
+    );
+  }
+
+  getUnprofitableReports(query: string): Observable<Responses> {
+    return this.$http.get<Responses>(baseUrl + `/alert/v1/getUnprofitableReports?` + query)
+      .pipe(
+        catchError(error => {
+          this.handleError(error);
+          return of(error.error);
+        })
+      );
+  }
+
+  damageRateExceedsNorm(query: string): Observable<Responses> {
+    return this.$http.get<Responses>(baseUrl + `/alert/v1/damageRateExceedsNorm?` + query)
+      .pipe(
+        catchError(error => {
+          this.handleError(error);
+          return of(error.error);
+        })
+      );
+  }
+
+  getDecreaseRevenueByCustomer(query: string): Observable<Responses> {
+    return this.$http.get<Responses>(baseUrl + `/alert/v1/getDecreaseRevenueByCustomer?` + query)
+      .pipe(
+        catchError(error => {
+          this.handleError(error);
+          return of(error.error);
+        })
+      );
+  }
+
+
+
+
   private $http = inject(HttpClient);
   private $messageService = inject(MessageService);
   private $errorService = inject(ErrorService);

@@ -6,6 +6,12 @@ import {financialControlSystemService} from '../../../services/financialControlS
 import {Branch} from '../../../models/early-warning';
 import {AuthService} from '../../../services/auth/auth.service';
 import {MenuItem} from 'primeng/api';
+import {ProfitMarginReportComponent} from '../../customer-management-system/profit-margin-report/profit-margin-report.component';
+import {UnProfitTableReportComponent} from '../../customer-management-system/un-profit-table-report/un-profit-table-report.component';
+import {DamageRateExceedsNormComponent} from '../../customer-management-system/damage-rate-exceeds-norm/damage-rate-exceeds-norm.component';
+import {
+  DecreaseRevenueByCustomerComponent
+} from '../../customer-management-system/decrease-revenue-by-customer/decrease-revenue-by-customer.component';
 
 @Component({
   selector: 'app-menu-bao-cao',
@@ -32,18 +38,21 @@ export class MenuBaoCaoComponent implements OnInit {
         expanded: true,
         items: [
           {
-            label: 'Chu Kỳ khách hàng',
-            routerLink: '/bao-cao/v1/customer-mgmt-system',
+            label: 'Chu kỳ khách hàng',
+            routerLink: '/bao-cao/v1/report/follow-up-customer-cycle',
           },
           {
             label: 'Chu kỳ doanh thu',
+            routerLink: '/bao-cao/v1/report/follow-order-value',
           },
           {
             label: 'Chu kỳ sản phẩm',
+            routerLink: '/bao-cao/v1/report/follow-up-customer-sales-product',
           },
           {
-            label: 'Công nợ và định mức',
-          }
+            label: 'Công nợ vượt định mức',
+            routerLink: '/bao-cao/v1/report/debt-customer-report',
+          },
         ]
       },
       {
@@ -53,15 +62,19 @@ export class MenuBaoCaoComponent implements OnInit {
         items: [
           {
             label: 'Không đạt biên lợi nhuận',
+            routerLink: '/bao-cao/v1/report/profit-margin-report',
           },
           {
             label: 'Không có lãi',
+            routerLink: '/bao-cao/v1/report/un-profit-table-report',
           },
           {
             label: 'Hỏng, hủy',
+            routerLink: '/bao-cao/v1/report/damage-rate-exceeds-norm',
           },
           {
-            label: 'Giảm theo nhu cầu',
+            label: 'Giảm theo chu kỳ',
+            routerLink: '/bao-cao/v1/report/decrease-revenue-by-customer',
           }
         ]
       },
