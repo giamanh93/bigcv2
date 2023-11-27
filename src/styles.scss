@@ -864,7 +864,7 @@ app-button-renderer{
     background: none;
     border: none;
     padding: 0px;
-    .p-megamenu-root-list 
+    .p-megamenu-root-list
     {
       & > .p-menuitem {
         & > .p-menuitem-link {
@@ -974,7 +974,7 @@ app-button-renderer{
             color: #006AFE !important;
             font-weight: 700;
           }
-          
+
         }
       }
     }
@@ -1084,6 +1084,27 @@ p-dropdown{
   .content{
     padding: 16px 24px;
 
+  }
+}
+.no-sidebar{
+  .title{
+    margin: 0px;
+    padding: 25px;
+    border-bottom: 1px solid #E6E7E9;
+    margin-bottom: 16px;
+    background: #fff;
+    border-radius: 8px;
+  }
+  .p-breadcrumb{
+    padding-bottom: 0px;
+  }
+  .content-main{
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #efefef;
+  }
+  .content{
+    padding: 25px;
   }
 }
 .filter{

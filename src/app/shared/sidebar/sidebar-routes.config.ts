@@ -167,11 +167,26 @@ export const menuItems = [
         {
           label: '',
           items: [
-            {label: 'Đối soát dòng tiền với doanh số'},
-            {label: 'Đối soát thực trả nhà cung cấp'},
-            {label: 'Đối soát công nợ nhà cung cấp'},
-            {label: 'Kiểm soát công nợ khách hàng'},
-            {label: 'Công nợ nhà cung cấp theo sản phẩm'},
+            {
+                label: 'Đối soát dòng tiền với doanh số'
+              , routerLink: '/financial-control-system/review-revenue-with-flow-of-money',
+            },
+            {
+                label: 'Đối soát thực trả nhà cung cấp'
+              , routerLink: '/financial-control-system/review-payment-with-supplier'
+            },
+            {
+                label: 'Đối soát công nợ nhà cung cấp'
+              ,  routerLink: '/financial-control-system/review-supplier-debt'
+            },
+            {
+                label: 'Kiểm soát công nợ khách hàng'
+              , routerLink: '/financial-control-system/customer-debt'
+            },
+            {
+                label: 'Công nợ nhà cung cấp theo sản phẩm'
+              , routerLink: '/financial-control-system/review-supplier-debt-by-product',
+            },
           ]
         },
       ]

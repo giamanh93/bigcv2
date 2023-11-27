@@ -136,7 +136,7 @@ export class ReviewPaymentWithSupplierComponent implements OnInit, AfterViewInit
   first: number = 1;
 
   loadjs = 0;
-  heightGrid = 0;
+  heightGrid = 550;
   displayFilter = false;
 
   isExpanded: boolean = true;
@@ -253,10 +253,10 @@ export class ReviewPaymentWithSupplierComponent implements OnInit, AfterViewInit
           if (this.query.branchId === 0 && this.listBranchs.length > 0) {
             setTimeout(() => {
               this.query.branchId = this.listBranchs[2].branchId;
-              // this.getLists();
+              this.getLists();
             }, 10);
           } else {
-            // this.getLists();
+            this.getLists();
           }
           this.displayFilter = true;
         } else {
@@ -276,7 +276,7 @@ export class ReviewPaymentWithSupplierComponent implements OnInit, AfterViewInit
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getLists();
   }
 
   getLists() {
@@ -321,20 +321,20 @@ export class ReviewPaymentWithSupplierComponent implements OnInit, AfterViewInit
   }
 
   ngAfterViewChecked(): void {
-    const b: any = document.querySelector('.sidebarBody1');
-    const c: any = document.querySelector('.breadcrumb');
-    // const e: any = document.querySelector(".paginator");
-    this.loadjs++;
-    if (this.loadjs === 5) {
-      if (b && b.clientHeight) {
-        const totalHeight = b.clientHeight + c.clientHeight + 50;
-        this.heightGrid = window.innerHeight - totalHeight;
-        console.log(this.heightGrid);
-        this.$changeDetech.detectChanges();
-      } else {
-        this.loadjs = 0;
-      }
-    }
+    // const b: any = document.querySelector('.sidebarBody1');
+    // const c: any = document.querySelector('.breadcrumb');
+    // // const e: any = document.querySelector(".paginator");
+    // this.loadjs++;
+    // if (this.loadjs === 5) {
+    //   if (b && b.clientHeight) {
+    //     const totalHeight = b.clientHeight + c.clientHeight + 50;
+    //     this.heightGrid = window.innerHeight - totalHeight;
+    //     console.log(this.heightGrid);
+    //     this.$changeDetech.detectChanges();
+    //   } else {
+    //     this.loadjs = 0;
+    //   }
+    // }
   }
 
   expandAll(type: boolean = false) {

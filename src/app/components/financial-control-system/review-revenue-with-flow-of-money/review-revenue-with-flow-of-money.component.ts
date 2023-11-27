@@ -155,7 +155,7 @@ export class ReviewRevenueWithFlowOfMoneyComponent implements OnInit, AfterViewI
   first: number = 1;
 
   loadjs = 0;
-  heightGrid = 0;
+  heightGrid = 550;
   displayFilter = false;
 
   isExpanded: boolean = true;
@@ -273,10 +273,10 @@ export class ReviewRevenueWithFlowOfMoneyComponent implements OnInit, AfterViewI
           if (this.query.branchId === 0 && this.listBranchs.length > 0) {
             setTimeout(() => {
               this.query.branchId = this.listBranchs[2].branchId;
-              // this.getLists();
+              this.getLists();
             }, 10);
           } else {
-            // this.getLists();
+            this.getLists();
           }
           this.displayFilter = true;
         } else {
@@ -296,7 +296,7 @@ export class ReviewRevenueWithFlowOfMoneyComponent implements OnInit, AfterViewI
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getLists();
   }
 
   getLists() {

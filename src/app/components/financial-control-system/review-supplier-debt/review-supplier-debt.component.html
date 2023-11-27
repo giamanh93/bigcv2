@@ -1,196 +1,291 @@
+<!--Thiết kế thiếu filter nhà cung cấp-->
 
-<div class="main-grid">
-    <section class="bread-crumb" >
-        <div class="flex bet middle">
-            <div class="md:col-8 sm:col-12 p-0">
-                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
-            </div>
-            <div class="md:col-4 sm:col-0 p-0 gap-2 flex justify-content-end align-items-center dropdown-branch">
-              <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-
-              <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"
-                [style]="{'margin-right': '20px'}"></p-button>
-            </div>
-        </div>
-    </section>
-    <!-- this.organizeInfoService.setStocks(e.value); -->
-    <p-divider type="solid"></p-divider>
-
-    <div class="card ">
-
-       <div class="table-default" #container>
-
-         <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'" [isShowTotalBottom]="true" [groupDefaultExpanded]="0"  [columnsWithAggregation]="['amount', 'paymentAmount', 'purchaseAmount', 'discountAmount', 'diff', 'purchaseDate']"
-                                 [listsData]="listDatas" [height]="heightGrid" [autoGroupColumnDef]="autoGroupColumnDef" [masterDetail]="true" (rowGroupOpenedCallback)="rowGroupOpenedCallback($event)"
-                                 [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" [getRowId]="getRowId"
-                                 [detailCellRendererParams]="detailCellRendererParams"></app-list-grid-angular>
-
-
-
-
-<!--        <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'" [isShowTotalBottom]="true"-->
-<!--        [groupDefaultExpanded]="0" [masterDetail]="true"-->
-<!--          [columnsWithAggregation]="['amount', 'paymentAmount', 'diff', 'purchaseDate']"-->
-<!--            [listsData]="listDatas" [height]="heightGrid" [autoGroupColumnDef]="autoGroupColumnDef"-->
-<!--             [groupDisplayType]="groupDisplayType" (rowGroupOpenedCallback)="rowGroupOpenedCallback($event)"-->
-<!--            [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" [getRowId]="getRowId"-->
-<!--            [detailCellRendererParams]="detailCellRendererParams"></app-list-grid-angular>-->
-            <app-loading-grid *ngIf="isLoading" [cols]="cols" [lists]="20"></app-loading-grid>
-        <!-- <p-table [value]="isLoading ? listDatasLoading : listDatas"  *ngIf="screenWidth<= 960" [columns]="cols"
-         [resizableColumns]="true" [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"
-          responsiveLayout="stack" [breakpoint]="'960px'"  styleClass="table-row  p-datatable-sm">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{ col.header }}
-                      </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product let-columns="columns">
-                <tr [pSelectableRow]="product">
-                    <ng-container *ngFor="let col of columns">
-                        <td *ngIf="col.typeField === 'text'">
-                            <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] }}
-                        </td>
-                        <td *ngIf="col.typeField === 'number'">
-                            <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] | number}}
-                        </td>
-                    </ng-container>
-                </tr>
-            </ng-template>
-        </p-table>
-        <p-table [value]="isLoading ? listDatasLoading : listDatas"  *ngIf="screenWidth> 960 && isLoading" [columns]="cols"
-        [resizableColumns]="true" [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"
-         responsiveLayout="stack" [breakpoint]="'960px'"  styleClass="table-row  p-datatable-sm">
-           <ng-template pTemplate="header" let-columns>
-               <tr>
-                <th *ngFor="let col of columns">
-                    {{ col.header }}
-                  </th>
-               </tr>
-           </ng-template>
-           <ng-template pTemplate="body" let-product let-columns="columns">
-               <tr [pSelectableRow]="product">
-                <ng-container *ngFor="let col of columns">
-                    <td *ngIf="col.typeField === 'text'">
-                        <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] }}
-                    </td>
-                    <td *ngIf="col.typeField === 'number'">
-                        <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] | number}}
-                    </td>
-                </ng-container>
-               </tr>
-           </ng-template>
-       </p-table>
-        <p-table  *ngIf="screenWidth> 960 && !isLoading" rowGroupMode="subheader" sortField="customer.customerName" id="my-table" [columns]="cols"
-        [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"
-          responsiveLayout="stack" [expandedRowKeys]="expandedRows"
-         groupRowsBy="customer.customerName" dataKey="customer.customerName"
-          sortMode="single" [value]="isLoading ? listDatasLoading : listDatas"
-            [resizableColumns]="true"  [breakpoint]="'960px'"
-             styleClass="table-row  p-datatable-sm">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{ col.header }}
-                      </th>
-                </tr>
-            </ng-template>
-            <ng-template *ngIf="!isLoading" pTemplate="groupheader" let-product let-rowIndex="rowIndex" let-expanded="expanded">
-                <tr>
-                    <td colspan="4">
-                        <button type="button" pButton pRipple [pRowToggler]="product" class="p-button-text td-button-dropdown p-button-rounded p-button-plain mr-2" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                        <span class="font-bold ml-2">{{product?.customer?.customerName}}</span>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="groupfooter" let-product>
-                <tr class="p-rowgroup-footer">
-                    <td colspan="4" style="text-align: left;font-weight: bold; ">Tổng tiền: {{calculateCustomerTotal(product.customer.customerName) | number}}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="rowexpansion" let-product let-columns="columns">
-                <tr [pSelectableRow]="product">
-                    <ng-container *ngFor="let col of columns">
-                        <td *ngIf="col.typeField === 'text'">
-                            {{ product[col.field] }}
-                        </td>
-                        <td *ngIf="col.typeField === 'number'">
-                            {{ product[col.field] | number}}
-                        </td>
-                    </ng-container>
-                </tr>
-
-            </ng-template>
-        </p-table> -->
-        <!-- <div class="paginator flex justify-content-end align-items-center" style="background-color: #fff;background-color: #fff;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        left: 0;">
-            <span>Từ {{ countRecord.currentRecordStart }} đến {{ countRecord.currentRecordEnd }} trên tổng số {{ countRecord.totalRecord }} kết quả</span>
-            <p-paginator [rows]="query.size" [totalRecords]="countRecord.totalRecord" [first]="first"
-                (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,40,60,100,200,{ showAll: 'ALL' }]">
-            </p-paginator>
-        </div> -->
-        </div>
-        </div>
-</div>
-
-<p-sidebar [(visible)]="displayFilter" (onHide)="displayFilter = false" position="right" styleclass="w-30rem">
-    <ng-template pTemplate="header">
-        <div class="flex grid justify-content-end">
-            <button type="button" pButton pRipple icon="pi pi-search" label="Tìm kiếm" (click)="getLists(); displayFilter=false" class="p-button-secondary mr-1 p-button-sm"></button>
-            <!-- <button type="button" pButton pRipple icon="pi pi-times" label="Làm mới" (click)="refresh(); displayFilter=false" class="p-button-danger p-button-sm"></button>   -->
-        </div>
-    </ng-template>
-    <div class="p-fluid grid formgrid">
-        <div class="field col-12 md:col-12">
-            <label for="icon">Chi nhánh</label>
-            <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
-        </div>
-        <div class="field col-12 md:col-12">
-            <label for="icon">Nhà cung cấp</label>
-            <p-autoComplete
-            field="supplierName"
-            placeholder="Tìm kiếm nhà cung cấp"
-            [dropdownAriaLabel]="'sadasd'"
-            [(ngModel)]="infoSupplier"
-            [showEmptyMessage]="true"
-            [emptyMessage]="'Không tìm thấy dữ liệu search'"
-            id="FullName"
-            [suggestions]="suppliers"
-            [lazy]="true"
-            [showClear]="true"
-            [appendTo]="'body'"
-            [style]="{'width':'100%'}"
-            [inputStyle]="{'width':'100%'}"
-            (onSelect)="changeSupplier()"
-            (onClear)="onClear()"
-            (completeMethod)="getListSupplier($event.query)"
-            ></p-autoComplete>
-
-
-
-        </div>
-        <div class="field col-12 md:col-12">
-            <label for="dateformat">Từ ngày</label>
-            <p-calendar placeholder="Từ ngày"
-                panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"
-                [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.startDate"
-                [monthNavigator]="true"
-                [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
-                name="startDate"></p-calendar>
-        </div>
-
-        <div class="field col-12 md:col-12">
-            <label for="icon">Đến ngày</label>
-            <p-calendar placeholder="Từ ngày"
-            panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"
-            [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.endDate"
-            [monthNavigator]="true"
-            [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"
-            name="endDate"></p-calendar>
-        </div>
+<div class="no-sidebar">
+  <section class="bread-crumb" >
+    <div class="flex bet middle">
+      <div class="md:col-8 sm:col-12 p-0">
+        <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>
+      </div>
     </div>
-</p-sidebar>
+  </section>
+  <div class="content-main">
+    <div style="position: relative; top: -54px; right: 25px">
+      <div class="md:col-4 sm:col-0 p-0 flex gap-2 justify-content-end align-items-center dropdown-branch" style="
+  float: right;
+">
+        <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>
+      </div>
+    </div>
+    <h3 class="title">
+      {{fileName}}
+    </h3>
+    <div class="content">
+      <div class="filter">
+        <div class="search col-6">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1958 13.8928C10.9284 14.8156 9.36777 15.36 7.68002 15.36C3.43846 15.36 0 11.9216 0 7.68002C0 3.43846 3.43846 0 7.68002 0C11.9216 0 15.36 3.43846 15.36 7.68002C15.36 9.36777 14.8156 10.9284 13.8928 12.1958L17.6485 15.9515C18.1172 16.4201 18.1172 17.1799 17.6485 17.6485C17.1799 18.1172 16.4201 18.1172 15.9515 17.6485L12.1958 13.8928ZM13.92 7.68002C13.92 11.1263 11.1263 13.92 7.68002 13.92C4.23376 13.92 1.44 11.1263 1.44 7.68002C1.44 4.23376 4.23376 1.44 7.68002 1.44C11.1263 1.44 13.92 4.23376 13.92 7.68002Z" fill="#67707D"/>
+          </svg>
+          <input placeholder="Nhập từ khóa để tìm kiếm">
+        </div>
+        <svg class="line-space" width="1" height="32" viewBox="0 0 1 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0.5" y1="1.68231e-08" x2="0.499998" y2="32" stroke="#E6E7E9"/>
+        </svg>
+        <div class="date col-6">
+          <label>Thời gian</label>
+          <div class="flex">
+            <p-calendar placeholder="Từ ngày"
+                        panelStyleClass="datepicker-default-only-icon"
+                        placeholder="Từ ngày (YYYY-MM-DD)"
+                        [appendTo]="'body'" [baseZIndex]="101"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true" inputId="navigators"
+                        dateFormat="yy-mm-dd"
+                        name="endDate">
+            </p-calendar>
+            <p-calendar placeholder="Đến ngày"
+                        panelStyleClass="datepicker-default-only-icon"
+                        placeholder="Từ ngày (YYYY-MM-DD)"
+                        [appendTo]="'body'" [baseZIndex]="101"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true" inputId="navigators"
+                        dateFormat="yy-mm-dd"
+                        name="endDate">
+            </p-calendar>
+          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.19434 3.75C9.19434 3.33579 8.85855 3 8.44434 3C8.03012 3 7.69434 3.33579 7.69434 3.75V5.95003C7.69434 6.36425 8.03012 6.70004 8.44434 6.70004C8.85855 6.70004 9.19434 6.36425 9.19434 5.95003V3.75ZM16.3057 3.75C16.3057 3.33579 15.9699 3 15.5557 3C15.1415 3 14.8057 3.33579 14.8057 3.75V5.95003C14.8057 6.36425 15.1415 6.70004 15.5557 6.70004C15.9699 6.70004 16.3057 6.36425 16.3057 5.95003V3.75ZM5.77778 4.84961H6.69434V5.95003C6.69434 6.91653 7.47784 7.70004 8.44434 7.70004C9.41083 7.70004 10.1943 6.91653 10.1943 5.95003V4.84961H13.8057V5.95003C13.8057 6.91653 14.5892 7.70004 15.5557 7.70004C16.5222 7.70004 17.3057 6.91653 17.3057 5.95003V4.84961H18.2222C19.542 4.84961 20.75 5.82938 20.75 7.19963V9.65039H3.25V7.19963C3.25 5.82938 4.458 4.84961 5.77778 4.84961ZM3.25 18.3997V11.1504H20.75V18.3997C20.75 19.77 19.542 20.7498 18.2222 20.7498H5.77778C4.458 20.7498 3.25 19.77 3.25 18.3997ZM7 13H9V15H7V13ZM11 13H13V15H11V13ZM17 13H15V15H17V13Z" fill="#021126"/>
+          </svg>
+
+        </div>
+      </div>
+      <div class="data-fill">
+        <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'" [isShowTotalBottom]="true" [groupDefaultExpanded]="0"  [columnsWithAggregation]="['amount', 'paymentAmount', 'purchaseAmount', 'discountAmount', 'diff', 'purchaseDate']"
+                                           [listsData]="listDatas" [height]="heightGrid" [autoGroupColumnDef]="autoGroupColumnDef" [masterDetail]="true" (rowGroupOpenedCallback)="rowGroupOpenedCallback($event)"
+                                           [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" [getRowId]="getRowId"
+                                           [detailCellRendererParams]="detailCellRendererParams"></app-list-grid-angular>
+                  <app-loading-grid *ngIf="isLoading" [cols]="cols" [lists]="20"></app-loading-grid>
+                  <div class="flex justify-content-between align-items-center">
+                    <p-button label="Xuất báo cáo"></p-button>
+                    <div class="paginator flex justify-content-end align-items-center" >
+                      <span>Từ {{ countRecord.currentRecordStart }} đến {{ countRecord.currentRecordEnd }} trên tổng số {{ countRecord.totalRecord }} kết quả</span>
+                      <p-paginator
+                        [rows]="query.size"
+                        [totalRecords]="countRecord.totalRecord"
+                        [first]="first"
+                        (onPageChange)="paginate($event)"
+                        [rowsPerPageOptions]="[20,40,60,100,200,{ showAll: 'ALL' }]">
+                      </p-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!--<div class="main-grid">-->
+<!--    <section class="bread-crumb" >-->
+<!--        <div class="flex bet middle">-->
+<!--            <div class="md:col-8 sm:col-12 p-0">-->
+<!--                <app-hrm-breadcrumb [items]="itemsBreadcrumb" ></app-hrm-breadcrumb>-->
+<!--            </div>-->
+<!--            <div class="md:col-4 sm:col-0 p-0 gap-2 flex justify-content-end align-items-center dropdown-branch">-->
+<!--              <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
+
+<!--              <p-button label="Tìm kiếm" icon="pi pi-sliders-h" (click)="displayFilter = !displayFilter" styleClass="p-button-outlined p-button-rounded p-button-secondary"-->
+<!--                [style]="{'margin-right': '20px'}"></p-button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; this.organizeInfoService.setStocks(e.value); &ndash;&gt;-->
+<!--    <p-divider type="solid"></p-divider>-->
+
+<!--    <div class="card ">-->
+
+<!--       <div class="table-default" #container>-->
+
+<!--         <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'" [isShowTotalBottom]="true" [groupDefaultExpanded]="0"  [columnsWithAggregation]="['amount', 'paymentAmount', 'purchaseAmount', 'discountAmount', 'diff', 'purchaseDate']"-->
+<!--                                 [listsData]="listDatas" [height]="heightGrid" [autoGroupColumnDef]="autoGroupColumnDef" [masterDetail]="true" (rowGroupOpenedCallback)="rowGroupOpenedCallback($event)"-->
+<!--                                 [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" [getRowId]="getRowId"-->
+<!--                                 [detailCellRendererParams]="detailCellRendererParams"></app-list-grid-angular>-->
+
+
+
+
+<!--&lt;!&ndash;        <app-list-grid-angular  *ngIf="!isLoading" [idGrid]="'my-table'" [isShowTotalBottom]="true"&ndash;&gt;-->
+<!--&lt;!&ndash;        [groupDefaultExpanded]="0" [masterDetail]="true"&ndash;&gt;-->
+<!--&lt;!&ndash;          [columnsWithAggregation]="['amount', 'paymentAmount', 'diff', 'purchaseDate']"&ndash;&gt;-->
+<!--&lt;!&ndash;            [listsData]="listDatas" [height]="heightGrid" [autoGroupColumnDef]="autoGroupColumnDef"&ndash;&gt;-->
+<!--&lt;!&ndash;             [groupDisplayType]="groupDisplayType" (rowGroupOpenedCallback)="rowGroupOpenedCallback($event)"&ndash;&gt;-->
+<!--&lt;!&ndash;            [columnDefs]="columnDefs" [getContextMenuItems]="getContextMenuItems" [getRowId]="getRowId"&ndash;&gt;-->
+<!--&lt;!&ndash;            [detailCellRendererParams]="detailCellRendererParams"></app-list-grid-angular>&ndash;&gt;-->
+<!--            <app-loading-grid *ngIf="isLoading" [cols]="cols" [lists]="20"></app-loading-grid>-->
+<!--        &lt;!&ndash; <p-table [value]="isLoading ? listDatasLoading : listDatas"  *ngIf="screenWidth<= 960" [columns]="cols"-->
+<!--         [resizableColumns]="true" [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"-->
+<!--          responsiveLayout="stack" [breakpoint]="'960px'"  styleClass="table-row  p-datatable-sm">-->
+<!--            <ng-template pTemplate="header" let-columns>-->
+<!--                <tr>-->
+<!--                    <th *ngFor="let col of columns">-->
+<!--                        {{ col.header }}-->
+<!--                      </th>-->
+<!--                </tr>-->
+<!--            </ng-template>-->
+<!--            <ng-template pTemplate="body" let-product let-columns="columns">-->
+<!--                <tr [pSelectableRow]="product">-->
+<!--                    <ng-container *ngFor="let col of columns">-->
+<!--                        <td *ngIf="col.typeField === 'text'">-->
+<!--                            <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] }}-->
+<!--                        </td>-->
+<!--                        <td *ngIf="col.typeField === 'number'">-->
+<!--                            <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] | number}}-->
+<!--                        </td>-->
+<!--                    </ng-container>-->
+<!--                </tr>-->
+<!--            </ng-template>-->
+<!--        </p-table>-->
+<!--        <p-table [value]="isLoading ? listDatasLoading : listDatas"  *ngIf="screenWidth> 960 && isLoading" [columns]="cols"-->
+<!--        [resizableColumns]="true" [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"-->
+<!--         responsiveLayout="stack" [breakpoint]="'960px'"  styleClass="table-row  p-datatable-sm">-->
+<!--           <ng-template pTemplate="header" let-columns>-->
+<!--               <tr>-->
+<!--                <th *ngFor="let col of columns">-->
+<!--                    {{ col.header }}-->
+<!--                  </th>-->
+<!--               </tr>-->
+<!--           </ng-template>-->
+<!--           <ng-template pTemplate="body" let-product let-columns="columns">-->
+<!--               <tr [pSelectableRow]="product">-->
+<!--                <ng-container *ngFor="let col of columns">-->
+<!--                    <td *ngIf="col.typeField === 'text'">-->
+<!--                        <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] }}-->
+<!--                    </td>-->
+<!--                    <td *ngIf="col.typeField === 'number'">-->
+<!--                        <span class="p-column-title">{{ col.header }}</span><p-skeleton *ngIf="isLoading"></p-skeleton> {{ product[col.field] | number}}-->
+<!--                    </td>-->
+<!--                </ng-container>-->
+<!--               </tr>-->
+<!--           </ng-template>-->
+<!--       </p-table>-->
+<!--        <p-table  *ngIf="screenWidth> 960 && !isLoading" rowGroupMode="subheader" sortField="customer.customerName" id="my-table" [columns]="cols"-->
+<!--        [scrollable]="screenWidth> 960" scrollHeight="{{heightGrid}}px"-->
+<!--          responsiveLayout="stack" [expandedRowKeys]="expandedRows"-->
+<!--         groupRowsBy="customer.customerName" dataKey="customer.customerName"-->
+<!--          sortMode="single" [value]="isLoading ? listDatasLoading : listDatas"-->
+<!--            [resizableColumns]="true"  [breakpoint]="'960px'"-->
+<!--             styleClass="table-row  p-datatable-sm">-->
+<!--            <ng-template pTemplate="header" let-columns>-->
+<!--                <tr>-->
+<!--                    <th *ngFor="let col of columns">-->
+<!--                        {{ col.header }}-->
+<!--                      </th>-->
+<!--                </tr>-->
+<!--            </ng-template>-->
+<!--            <ng-template *ngIf="!isLoading" pTemplate="groupheader" let-product let-rowIndex="rowIndex" let-expanded="expanded">-->
+<!--                <tr>-->
+<!--                    <td colspan="4">-->
+<!--                        <button type="button" pButton pRipple [pRowToggler]="product" class="p-button-text td-button-dropdown p-button-rounded p-button-plain mr-2" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>-->
+<!--                        <span class="font-bold ml-2">{{product?.customer?.customerName}}</span>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </ng-template>-->
+<!--            <ng-template pTemplate="groupfooter" let-product>-->
+<!--                <tr class="p-rowgroup-footer">-->
+<!--                    <td colspan="4" style="text-align: left;font-weight: bold; ">Tổng tiền: {{calculateCustomerTotal(product.customer.customerName) | number}}</td>-->
+<!--                </tr>-->
+<!--            </ng-template>-->
+<!--            <ng-template pTemplate="rowexpansion" let-product let-columns="columns">-->
+<!--                <tr [pSelectableRow]="product">-->
+<!--                    <ng-container *ngFor="let col of columns">-->
+<!--                        <td *ngIf="col.typeField === 'text'">-->
+<!--                            {{ product[col.field] }}-->
+<!--                        </td>-->
+<!--                        <td *ngIf="col.typeField === 'number'">-->
+<!--                            {{ product[col.field] | number}}-->
+<!--                        </td>-->
+<!--                    </ng-container>-->
+<!--                </tr>-->
+
+<!--            </ng-template>-->
+<!--        </p-table> &ndash;&gt;-->
+<!--        &lt;!&ndash; <div class="paginator flex justify-content-end align-items-center" style="background-color: #fff;background-color: #fff;-->
+<!--        position: fixed;-->
+<!--        bottom: 0;-->
+<!--        width: 100%;-->
+<!--        left: 0;">-->
+<!--            <span>Từ {{ countRecord.currentRecordStart }} đến {{ countRecord.currentRecordEnd }} trên tổng số {{ countRecord.totalRecord }} kết quả</span>-->
+<!--            <p-paginator [rows]="query.size" [totalRecords]="countRecord.totalRecord" [first]="first"-->
+<!--                (onPageChange)="paginate($event)" [rowsPerPageOptions]="[20,40,60,100,200,{ showAll: 'ALL' }]">-->
+<!--            </p-paginator>-->
+<!--        </div> &ndash;&gt;-->
+<!--        </div>-->
+<!--        </div>-->
+<!--</div>-->
+
+<!--<p-sidebar [(visible)]="displayFilter" (onHide)="displayFilter = false" position="right" styleclass="w-30rem">-->
+<!--    <ng-template pTemplate="header">-->
+<!--        <div class="flex grid justify-content-end">-->
+<!--            <button type="button" pButton pRipple icon="pi pi-search" label="Tìm kiếm" (click)="getLists(); displayFilter=false" class="p-button-secondary mr-1 p-button-sm"></button>-->
+<!--            &lt;!&ndash; <button type="button" pButton pRipple icon="pi pi-times" label="Làm mới" (click)="refresh(); displayFilter=false" class="p-button-danger p-button-sm"></button>   &ndash;&gt;-->
+<!--        </div>-->
+<!--    </ng-template>-->
+<!--    <div class="p-fluid grid formgrid">-->
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="icon">Chi nhánh</label>-->
+<!--            <p-dropdown [options]="listBranchs" [(ngModel)]="query.branchId" [autoDisplayFirst]="false" optionLabel="branchName" optionValue="branchId" (onChange)="changeBranch()" [appendTo]="'body'" [filter]="true" filterBy="branchName"></p-dropdown>-->
+<!--        </div>-->
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="icon">Nhà cung cấp</label>-->
+<!--            <p-autoComplete-->
+<!--            field="supplierName"-->
+<!--            placeholder="Tìm kiếm nhà cung cấp"-->
+<!--            [dropdownAriaLabel]="'sadasd'"-->
+<!--            [(ngModel)]="infoSupplier"-->
+<!--            [showEmptyMessage]="true"-->
+<!--            [emptyMessage]="'Không tìm thấy dữ liệu search'"-->
+<!--            id="FullName"-->
+<!--            [suggestions]="suppliers"-->
+<!--            [lazy]="true"-->
+<!--            [showClear]="true"-->
+<!--            [appendTo]="'body'"-->
+<!--            [style]="{'width':'100%'}"-->
+<!--            [inputStyle]="{'width':'100%'}"-->
+<!--            (onSelect)="changeSupplier()"-->
+<!--            (onClear)="onClear()"-->
+<!--            (completeMethod)="getListSupplier($event.query)"-->
+<!--            ></p-autoComplete>-->
+
+
+
+<!--        </div>-->
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="dateformat">Từ ngày</label>-->
+<!--            <p-calendar placeholder="Từ ngày"-->
+<!--                panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"-->
+<!--                [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.startDate"-->
+<!--                [monthNavigator]="true"-->
+<!--                [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"-->
+<!--                name="startDate"></p-calendar>-->
+<!--        </div>-->
+
+<!--        <div class="field col-12 md:col-12">-->
+<!--            <label for="icon">Đến ngày</label>-->
+<!--            <p-calendar placeholder="Từ ngày"-->
+<!--            panelStyleClass="datepicker-default-only-icon" placeholder="Từ ngày (YYYY-MM-DD)"-->
+<!--            [appendTo]="'body'" [baseZIndex]="101" [(ngModel)]="query.endDate"-->
+<!--            [monthNavigator]="true"-->
+<!--            [yearNavigator]="true" inputId="navigators" dateFormat="yy-mm-dd"-->
+<!--            name="endDate"></p-calendar>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</p-sidebar>-->

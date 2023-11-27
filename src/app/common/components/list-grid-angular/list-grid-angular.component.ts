@@ -376,7 +376,7 @@ export class ListGridAngularComponent implements OnInit, OnChanges {
     this.autoSizeAll(false);
     if (this.isShowTotalBottom) {
       const pinnedBottomData = this.generatePinnedBottomData();
-      this.gridApi.setPinnedBottomRowData([pinnedBottomData]);
+      this.gridApi.setPinnedTopRowData([pinnedBottomData]);
     }
     // let allColumnIds: any = [];
     // this.gridColumnApi.getAllColumns()

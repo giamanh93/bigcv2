@@ -41,7 +41,7 @@ export class ReviewSupplierDebtByProductComponent implements OnInit, AfterViewIn
   public listDatas: RevenueWithFlowOfMoney[] = [];
   public listDatasLoading: any[] = Array(20).fill(1).map((x, i) => i);
   public isLoading: boolean = false;
-  public fileName = 'Đối soát thực trả nhà cung cấp';
+  public fileName = 'Công nợ nhà cung cấp theo sản phẩm';
   public query: any = {
     retailerId: this.authService?.getRetailerId(),
     startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -134,7 +134,7 @@ export class ReviewSupplierDebtByProductComponent implements OnInit, AfterViewIn
   first: number = 1;
   infoProduct: any = null;
   loadjs = 0;
-  heightGrid = 0;
+  heightGrid = 550;
   displayFilter = false;
 
   isExpanded: boolean = true;
@@ -286,10 +286,10 @@ export class ReviewSupplierDebtByProductComponent implements OnInit, AfterViewIn
           if (this.query.branchId === 0 && this.listBranchs.length > 0) {
             setTimeout(() => {
               this.query.branchId = this.listBranchs[2].branchId;
-              // this.getLists();
+              this.getLists();
             }, 10);
           } else {
-            // this.getLists();
+            this.getLists();
           }
           this.displayFilter = true;
         } else {
@@ -309,7 +309,7 @@ export class ReviewSupplierDebtByProductComponent implements OnInit, AfterViewIn
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getLists();
   }
 
   getLists() {
@@ -362,20 +362,20 @@ export class ReviewSupplierDebtByProductComponent implements OnInit, AfterViewIn
   }
 
   ngAfterViewChecked(): void {
-    const b: any = document.querySelector('.sidebarBody1');
-    const c: any = document.querySelector('.breadcrumb');
-    // const e: any = document.querySelector(".paginator");
-    this.loadjs++;
-    if (this.loadjs === 5) {
-      if (b && b.clientHeight) {
-        const totalHeight = b.clientHeight + c.clientHeight + 50;
-        this.heightGrid = window.innerHeight - totalHeight;
-        console.log(this.heightGrid);
-        this.$changeDetech.detectChanges();
-      } else {
-        this.loadjs = 0;
-      }
-    }
+    // const b: any = document.querySelector('.sidebarBody1');
+    // const c: any = document.querySelector('.breadcrumb');
+    // // const e: any = document.querySelector(".paginator");
+    // this.loadjs++;
+    // if (this.loadjs === 5) {
+    //   if (b && b.clientHeight) {
+    //     const totalHeight = b.clientHeight + c.clientHeight + 50;
+    //     this.heightGrid = window.innerHeight - totalHeight;
+    //     console.log(this.heightGrid);
+    //     this.$changeDetech.detectChanges();
+    //   } else {
+    //     this.loadjs = 0;
+    //   }
+    // }
   }
 
   expandAll(type: boolean = false) {
