@@ -200,8 +200,8 @@ export const menuItems = [
         {
           label: '',
           items: [
-            {label: 'Mở đóng quầy'},
-            {label: 'Đối soát'},
+            {label: '1. Mở đóng quầy', routerLink: '/review/'},
+            {label: '2. Đối soát', routerLink: '/review/review-transfer-inday'},
           ]
         },
       ]

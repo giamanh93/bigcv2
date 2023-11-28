@@ -28,9 +28,12 @@ export class LoginComponent implements OnInit {
   //   retailer: 'ecofoods'
   // };
   model = {
-    userName: '0983732396',
-    password: 'Kiot@2024',
-    retailer: 'ecofoods'
+    // userName: '0983732396',
+    // password: 'Kiot@2024',
+    // retailer: 'ecofoods'
+    userName: '',
+    password: '',
+    retailer: ''
   };
   fields: FormlyFieldConfig[] = [];
 

@@ -177,7 +177,7 @@ export class ListGridAngularComponent implements OnInit, OnChanges {
   }
 
   CellClicked(event: any) {
-    // this.onCellClicked.emit(event);
+    this.onCellClicked.emit(event);
   }
 
   rowGroupOpened(event: any) {

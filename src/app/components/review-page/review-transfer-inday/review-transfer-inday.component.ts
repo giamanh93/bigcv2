@@ -137,7 +137,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       width: 110,
       masterDetail: false,
       // headerClass: 'bg-primary-reverse',
-      // cellClass: ['bg-primary-reverse']
+      cellClass: ['text-blue-600', 'cursor-pointer']
     },
     {
       field: 'invoiceDate',
@@ -210,7 +210,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
   gridColumnApi: any = null;
   first: number = 1;
   loadjs = 0;
-  heightGrid = 0;
+  heightGrid = 550;
   displayFilter = false;
   isExpanded: boolean = true;
   public linkBase64: string | ArrayBuffer | null = null;
@@ -254,6 +254,12 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.screenWidth = window.innerWidth;
+  }
+
+  onCellClicked(event) {
+    if (event.colDef.field === 'code') {
+      window.open(`https://ecofoods.kiotviet.vn/man/#/Invoices?Code=${event.value}`, '_blank');
+    }
   }
 
 
@@ -316,8 +322,8 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     setTimeout(() => {
-      this.gridApi.sizeColumnsToFit()
-    },500)
+      this.gridApi.sizeColumnsToFit();
+    }, 500);
   }
 
 
@@ -349,10 +355,10 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
           if (this.query.branchId === 0 && this.listBranchs.length > 0) {
             setTimeout(() => {
               this.query.branchId = this.listBranchs[2].branchId;
-              // this.getLists();
+              this.getLists();
             }, 10);
           } else {
-            // this.getLists();
+            this.getLists();
           }
         } else {
           this.listDatas = [];
@@ -371,7 +377,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       currentRecordStart: 0,
       currentRecordEnd: 0
     };
-    // this.getLists();
+    this.getLists();
   }
 
   getLists() {
@@ -432,7 +438,7 @@ export class ReviewTransferIndayComponent implements OnInit, OnDestroy, AfterVie
       'excelExport',
     ];
     return result;
-  };
+  }
 
   saveDate() {
     localStorage.setItem(LOCALKEY.DATETIME, this.checkDate.toString());

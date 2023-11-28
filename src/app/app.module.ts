@@ -35,6 +35,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import {DEFAULT_REFRESH_URL_BLACKLIST, REFRESH_URL_BLACKLIST} from './services/auth/url-blacklist';
 import { RxStompService } from './rx-stomp.service';
 import { rxStompServiceFactory } from './rx-stomp-service-factory';
+import { InvoiceService } from './services/invoice/invoice.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +72,7 @@ import { rxStompServiceFactory } from './rx-stomp-service-factory';
   providers: [
     MessageService,
     DatePipe,
+    InvoiceService,
     ConfirmationService,
     MessageService,
     AuthService,
