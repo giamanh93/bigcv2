@@ -871,6 +871,10 @@ app-button-renderer{
           background: none !important;
           outline: none;
           box-shadow: none;
+
+          &.bao-cao + .p-megamenu-panel{
+            transform: translateX(-50%) !important;
+          }
           .p-menuitem-text{
             font-size: 16px;
             font-family: 'Inter';
@@ -906,9 +910,31 @@ app-button-renderer{
       }
     }
     .p-megamenu-panel{
+      .p-megamenu-grid{
+        display: table;
+        &>div{
+          display: table-cell;
+        }
+      }
       .p-megamenu-submenu{
+        .p-megamenu-submenu-header{
+          padding-top: 0px;
+          padding-bottom: 0px;
+          &>span{
+            padding-top: 12px;
+            padding-bottom: 12px;
+            display: block;
+            &:empty{
+              display: none;
+            }
+          }
+        }
+        width: auto;
         .p-menuitem{
+          display: block;
           a{
+            display: block;
+            overflow: visible;
             &:hover{
               background: none;
                 .p-menuitem-text{
@@ -918,6 +944,7 @@ app-button-renderer{
             span{
               font-weight: 500;
               font-size: 16px;
+              text-wrap: nowrap;
             }
           }
         }

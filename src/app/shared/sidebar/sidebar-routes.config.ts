@@ -103,6 +103,8 @@ export const menuItems = [
   {
     label: 'Báo cáo',
     icon: 'pi pi-fw pi-calendar',
+    styleClass: 'bao-cao',
+    tabindex: 'tabindexffffffffffffffff',
     items: [
       [
         {
@@ -193,14 +195,16 @@ export const menuItems = [
     ]
   },
   {
-    label: 'Đối soát thu nhân',
+    label: 'Đối soát thu ngân',
     icon: 'pi pi-fw pi-cog',
     items: [
       [
         {
           label: '',
+          badgeStyleClass: 'hidden-header',
+          id:  'hidden-header',
           items: [
-            {label: '1. Mở đóng quầy', routerLink: '/review/'},
+            {label: '1. Mở đóng quầy', routerLink: '/review/dsdsdsd'},
             {label: '2. Đối soát', routerLink: '/review/review-transfer-inday'},
           ]
         },

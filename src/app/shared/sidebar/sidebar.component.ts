@@ -21,19 +21,19 @@ export class SidebarComponent implements OnInit {
     private auth: AuthService
   ) {
     this.userName = this.auth.getUserName();
-    router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((e: any) => {
-      const pathname = window.location.pathname;
-      if (this.menuItems.length > 0) {
-        this.parseObjectProperties(this.menuItems, e.url);
-        this.menuItems = [...this.menuItems];
-        localStorage.setItem('menuItems', JSON.stringify(this.menuItems));
-      } else {
-        this.menuItems = menus.filter(menuItem => menuItem);
-      }
-
-    });
+    // router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe((e: any) => {
+    //   const pathname = window.location.pathname;
+    //   if (this.menuItems.length > 0) {
+    //     this.parseObjectProperties(this.menuItems, e.url);
+    //     this.menuItems = [...this.menuItems];
+    //     localStorage.setItem('menuItems', JSON.stringify(this.menuItems));
+    //   } else {
+    //     this.menuItems = menus.filter(menuItem => menuItem);
+    //   }
+    //
+    // });
 
     this.items = [
       // {

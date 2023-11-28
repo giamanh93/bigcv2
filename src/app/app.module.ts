@@ -33,9 +33,8 @@ import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {GalleriaModule} from 'primeng/galleria';
 import { MegaMenuModule } from 'primeng/megamenu';
 import {DEFAULT_REFRESH_URL_BLACKLIST, REFRESH_URL_BLACKLIST} from './services/auth/url-blacklist';
-import { RxStompService } from './rx-stomp.service';
-import { rxStompServiceFactory } from './rx-stomp-service-factory';
 import { InvoiceService } from './services/invoice/invoice.service';
+import {NotFoundComponent} from './app-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +44,8 @@ import { InvoiceService } from './services/invoice/invoice.service';
     SidebarComponent,
     HomePageComponent,
     OurCustomerComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

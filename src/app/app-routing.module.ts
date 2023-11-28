@@ -10,6 +10,7 @@ import {OurCustomerComponent} from './pages/our-customer/our-customer.component'
 import {AboutUsComponent} from './pages/about-us/about-us.component';
 import {SyncRoutingModule} from './components/sync/sync-routing.module';
 import {ReviewPageModule} from './components/review-page/review-page.module';
+import {NotFoundComponent} from './app-not-found.component';
 
 @NgModule({
   imports: [
@@ -62,13 +63,14 @@ import {ReviewPageModule} from './components/review-page/review-page.module';
             path: 'order-purchase',
             loadChildren: () => import('../app/components/purchase-order/purchase-order.module').then(m => m.PurchaseOrderModule)
           },
+          { path: 'notfound', component: NotFoundComponent },
+          { path: '**', redirectTo: '/notfound' },
         ],  canActivate: [AuthGuardService]
         // ], canActivate: [AuthGuardService]
       },
       // { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
       // { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
-      // { path: 'notfound', component: NotfoundComponent },
-      // { path: '**', redirectTo: '/notfound' },
+
     ])
     // ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
   ],
